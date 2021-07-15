@@ -132,8 +132,8 @@ export default function Header() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
+        <IconButton aria-label="show 7 new mails" color="inherit">
+          <Badge badgeContent={7} color="secondary">
             <MailIcon />
           </Badge>
         </IconButton>
