@@ -18,13 +18,19 @@ const useStyles = makeStyles({
   },
 });
 
+const handleClick = async () => {
+  const requestToRPI = await fetch(`http://192.168.1.148:3001/api/rpi/all`)
+  const responseFromRPI = await requestToRPI.json()
+  console.log(responseFromRPI);
+}
+
 export default function MediaCard() {
   const classes = useStyles();
 
   return (
     <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
+      <CardActionArea onClick={() => handleClick()}>
+        <CardMedia 
           className={classes.media}
           image="https://berserkon.com/images/lamp-transparent-green-2.png"
           title="LED"
