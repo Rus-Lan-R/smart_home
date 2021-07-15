@@ -19,9 +19,7 @@ const useStyles = makeStyles({
 });
 
 const handleClick = async () => {
-  const requestToRPI = await fetch(`http://192.168.1.148:3001/api/rpi/all`)
-  const responseFromRPI = await requestToRPI.json()
-  console.log(responseFromRPI);
+  await fetch(`http://192.168.1.148:3001/api/rpi/all`)
 }
 
 export default function MediaCard() {
