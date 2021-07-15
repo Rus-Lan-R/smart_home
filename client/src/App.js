@@ -2,7 +2,7 @@
 function App() {
   return (
     <div >
-      privet oleg
+      privet oleg   
     </div>
   );
 }
