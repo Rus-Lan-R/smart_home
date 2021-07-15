@@ -1,7 +1,7 @@
 import React from "react";
 import { Paper, Grid, TextField, Button, FormControlLabel, Checkbox } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Face, Fingerprint } from "@material-ui/icons";
+import { Fingerprint } from "@material-ui/icons";
 import Container from "@material-ui/core/Container";
 import AlternateEmailIcon from "@material-ui/icons/AlternateEmail";
 import { useDispatch } from "react-redux";

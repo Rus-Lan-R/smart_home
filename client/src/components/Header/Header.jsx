@@ -215,27 +215,33 @@ export default function Header() {
 					</div>
 					<div className={classes.grow} />
 					<div className={classes.sectionDesktop}>
-						<MenuItem>
-							<Typography className={classes.title} variant="h6" noWrap>
-								<NavLink exact to="/auth/signup" className="nav-link" activeClassName="active">
-									Sign Up
-								</NavLink>
-							</Typography>
-						</MenuItem>
-						<MenuItem>
-							<Typography className={classes.title} variant="h6" noWrap>
-								<NavLink exact to="/auth/signin" className="nav-link" activeClassName="active">
-									Sign In
-								</NavLink>
-							</Typography>
-						</MenuItem>
-						<MenuItem>
-							<Typography className={classes.title} variant="h6" noWrap>
-								<NavLink exact to="/auth/signout" className="nav-link" activeClassName="active">
-									Sign Out
-								</NavLink>
-							</Typography>
-						</MenuItem>
+						{userName ? (
+							<MenuItem>
+								<Typography className={classes.title} variant="h6" noWrap>
+									<NavLink exact to="/auth/signout" className="nav-link" activeClassName="active">
+										Sign Out
+									</NavLink>
+								</Typography>
+							</MenuItem>
+						) : (
+							<>
+								<MenuItem>
+									<Typography className={classes.title} variant="h6" noWrap>
+										<NavLink exact to="/auth/signin" className="nav-link" activeClassName="active">
+											Sign In
+										</NavLink>
+									</Typography>
+								</MenuItem>
+								<MenuItem>
+									<Typography className={classes.title} variant="h6" noWrap>
+										<NavLink exact to="/auth/signup" className="nav-link" activeClassName="active">
+											Sign Up
+										</NavLink>
+									</Typography>
+								</MenuItem>
+							</>
+						)}
+
 						<IconButton aria-label="show 4 new mails" color="inherit">
 							<Badge badgeContent={4} color="secondary">
 								<MailIcon />

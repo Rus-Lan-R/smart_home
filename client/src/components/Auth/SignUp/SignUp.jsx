@@ -7,24 +7,6 @@ import AlternateEmailIcon from "@material-ui/icons/AlternateEmail";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../../redux/actions/user.action";
 
-// const styles = theme => ({
-//     margin: {
-//         margin: theme.spacing.unit * 2,
-//     },
-//     padding: {
-//         padding: theme.spacing.unit
-//     }
-// });
-
-// const styles = theme => ({
-//   margin: {
-//       margin: theme.spacing.unit * 2,
-//   },
-//   padding: {
-//       padding: theme.spacing.unit
-//   }
-// });
-
 const useStyles = makeStyles({
 	root: {
 		marginTop: "15%",

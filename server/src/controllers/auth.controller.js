@@ -19,7 +19,7 @@ const signUp = async (req, res) => {
 
 			req.session.user = {
 				id: newUser._id,
-				name: newUser.userName,
+				name: newUser.name,
 			};
 			console.log("SIGNUP req.session", req.session);
 
