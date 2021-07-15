@@ -10,7 +10,7 @@ const app = express();
 
 const PORT = process.env.PORT ?? 3001;
 
-// connect();
+connect();
 
 if (process.env.DEV) {
 	const morgan = require("morgan");
