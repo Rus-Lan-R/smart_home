@@ -10,7 +10,7 @@ const app = express();
 
 const PORT = process.env.PORT ?? 3001;
 
-connect();
+// connect();
 
 if (process.env.DEV) {
 	const morgan = require("morgan");
@@ -47,10 +47,6 @@ app.use(
 
 // APP'S ROUTES
 app.use("/api/auth", authRouter);
-app.get("/", (req,res)=> 
-{
-  res.json({"hello":"dsdf"})
-});
 
 app.listen(PORT, () => {
 	console.log("Server has been started on PORT ", PORT);
