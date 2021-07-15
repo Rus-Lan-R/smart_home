@@ -1,15 +1,13 @@
 import React from 'react';
-import Buttons from './components/Buttons/Buttons';
-import Header from "./components/Header/Header"
-
+import Header from './components/Header/Header';
+import Card from './components/Card/Card';
+import CardContainer from './components/CardContainer/CardContainer'
 function App() {
   return (
     <>
-   <Header/>
-   <Buttons />
-
-   </>
-   
+      <Header />
+      <CardContainer/>
+    </>
   );
 }
 
