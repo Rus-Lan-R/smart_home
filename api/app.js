@@ -1,10 +1,13 @@
 const express = require("express");
 const cors = require("cors");
-const gpio = require('rpi-gpio').promise
-const Gpio = require('onoff').Gpio
-let RED = new Gpio(17, 'out')
-let GREEN = new Gpio(27, 'out')
-let BLUE = new Gpio(22, 'out')
+const gpio = require("rpi-gpio").promise;
+const Gpio = require("onoff").Gpio;
+let RED = new Gpio(17, "out");
+let GREEN = new Gpio(27, "out");
+let BLUE = new Gpio(22, "out");
+
+const scannerRouter = require("./src/routers/networkScanner.routes");
+
 const app = express();
 
 function clearState() {
@@ -15,14 +18,11 @@ function clearState() {
 clearState()
 const PORT = process.env.PORT ?? 3001;
 
-app.use(
-    cors({
-        origin: true,
-        credentials: true,
-    }),
-);
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use("/api", scannerRouter);
 
 app.get("/api/rpi/:color", (req, res) => {
     switch (req.params.color) {
