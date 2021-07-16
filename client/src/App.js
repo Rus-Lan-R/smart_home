@@ -11,6 +11,7 @@ import CardContainer from "./components/CardContainer/CardContainer";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { checkAuth } from "./redux/actions/user.action";
+import DevicesList from "./components/DeviceConnection/DevicesList";
 function App() {
 	const dispatch = useDispatch();
 
@@ -23,10 +24,13 @@ function App() {
 			<Header />
 
 			<Switch>
+				<PrivateRoute exact path="/config">
+					<DevicesList />
+				</PrivateRoute>
 				<PrivateRoute exact path="/profile">
 					<div>tut tipo licniy kabinet</div>
 				</PrivateRoute>
-        <Route exact path="/">
+				<Route exact path="/">
 					<CardContainer />
 				</Route>
 				<Route exact path="/auth/signin">

@@ -59,7 +59,7 @@ const netList = require("network-list");
 // });
 
 const getDevicesIp = async (req, res) => {
-	netList.scanEach({}, (err, obj) => {
+	netList.scan({}, (err, obj) => {
 		if (obj.alive) {
 			console.log(obj);
 			res.json(obj);

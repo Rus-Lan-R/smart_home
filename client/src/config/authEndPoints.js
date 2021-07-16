@@ -5,8 +5,6 @@ export const signIn = () => `${host}/api/auth/signin`;
 export const signOut = () => `${host}/api/auth/signout`;
 export const checkAuth = () => `${host}/api/auth/check`;
 
-
-
 // export const signUp = () => `${host}/api/v1/auth/signup`
 // export const signIn = () => `${host}/api/v1/auth/signin`
 // export const signOut = () =>`${host}/api/v1/auth/signout`
