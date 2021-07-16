@@ -1,4 +1,6 @@
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 
 import React from "react";
 import Header from "./components/Header/Header";
@@ -12,6 +14,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { checkAuth } from "./redux/actions/user.action";
 function App() {
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -41,6 +44,7 @@ function App() {
 			</Switch>
 		</Router>
 	);
+
 }
 
 export default App;
