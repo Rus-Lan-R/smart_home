@@ -1,14 +1,6 @@
 import { DELETE_USER, SET_USER } from "../types/userTypes";
 import * as authEndPoints from "../../config/authEndPoints";
 
-// export const getUserFromServer = (id) => async (dispatch) => {
-// 	const response = await fetch(authEndPoints.getUser(id), { credentials: "include" });
-// 	if (response.status === 200) {
-// 		const currentUser = await response.json();
-// 		dispatch(setUser(currentUser));
-// 	}
-// };
-
 export const setUser = (user) => ({
 	type: SET_USER,
 	payload: user,

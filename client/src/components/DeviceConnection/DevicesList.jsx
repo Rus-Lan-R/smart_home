@@ -1,4 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+
+import Loader from "../Loader/Loader";
+import { useDispatch } from "react-redux";
+import { getIpDevices } from "../../redux/actions/scanningIP.action";
+
+import { Link } from "react-router-dom";
+
 import PropTypes from "prop-types";
 import { lighten, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -14,10 +22,8 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
 import FilterListIcon from "@material-ui/icons/FilterList";
-import * as apiRpiEndPoinst from "../../config/apiRpiEndPoinst";
+
 import Container from "@material-ui/core/Container";
 
 function descendingComparator(a, b, orderBy) {
@@ -164,20 +170,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function DevicesList() {
-	const [devices, setDevices] = useState([]);
+	const dispatch = useDispatch();
+
+	const loader = useSelector((state) => state.loader);
+
+	const devices = useSelector((state) => state.scanningIP);
+
 	useEffect(() => {
-		fetch(apiRpiEndPoinst.getDevices())
-			.then((response) => response.json())
-			.then((data) => setDevices(data))
-			.catch((err) => console.log(err));
+		dispatch(getIpDevices());
 	}, []);
 
+	console.log(devices);
 	const classes = useStyles();
 	const [order, setOrder] = React.useState("asc");
 	const [orderBy, setOrderBy] = React.useState("mac");
 	const [selected] = React.useState([]);
 	const [page, setPage] = React.useState(0);
-	const [dense, setDense] = React.useState(false);
+	const [dense] = React.useState(false);
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
 	const handleRequestSort = (event, property) => {
@@ -199,79 +208,81 @@ export default function DevicesList() {
 		setPage(0);
 	};
 
-	const handleChangeDense = (event) => {
-		setDense(event.target.checked);
-	};
-
 	const isSelected = (ip) => selected.indexOf(ip) !== -1;
 
 	const emptyRows = rowsPerPage - Math.min(rowsPerPage, devices.length - page * rowsPerPage);
 
 	return (
-		<Container wipth="75%">
-			<div className={classes.root}>
-				<Paper className={classes.paper}>
-					<EnhancedTableToolbar numSelected={selected.length} />
-					<TableContainer>
-						<Table
-							className={classes.table}
-							aria-labelledby="tableTitle"
-							size={dense ? "small" : "medium"}
-							aria-label="enhanced table"
-						>
-							<EnhancedTableHead
-								classes={classes}
-								numSelected={selected.length}
-								order={order}
-								orderBy={orderBy}
-								onRequestSort={handleRequestSort}
-								rowCount={devices.length}
-							/>
-							<TableBody>
-								{stableSort(devices, getComparator(order, orderBy))
-									.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-									.map((row, index) => {
-										const isItemSelected = isSelected(row.ip);
+		<>
+			{loader ? (
+				<Loader />
+			) : (
+				<Container wipth="75%">
+					<div className={classes.root}>
+						<Paper className={classes.paper}>
+							<EnhancedTableToolbar numSelected={selected.length} />
+							<TableContainer>
+								<Table
+									className={classes.table}
+									aria-labelledby="tableTitle"
+									size={dense ? "small" : "medium"}
+									aria-label="enhanced table"
+								>
+									<EnhancedTableHead
+										classes={classes}
+										numSelected={selected.length}
+										order={order}
+										orderBy={orderBy}
+										onRequestSort={handleRequestSort}
+										rowCount={devices.length}
+									/>
 
-										return (
-											<TableRow
-												hover
-												onClick={(event) => handleClick(event, row.ip)}
-												role="checkbox"
-												aria-checked={isItemSelected}
-												tabIndex={-1}
-												key={row.ip}
-												selected={isItemSelected}
-											>
-												<TableCell align="center">{row.vendor}</TableCell>
-												<TableCell align="center">{row.ip}</TableCell>
-												<TableCell align="center">{row.mac}</TableCell>
+									<TableBody>
+										{stableSort(devices, getComparator(order, orderBy))
+											.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+											.map((row, index) => {
+												const isItemSelected = isSelected(row.ip);
+
+												return (
+													<TableRow
+														hover
+														onClick={(event) => handleClick(event, row.ip)}
+														role="checkbox"
+														aria-checked={isItemSelected}
+														tabIndex={-1}
+														key={row.ip}
+														selected={isItemSelected}
+													>
+														<TableCell align="center">
+															<Link to="/config/add-device"> {row.vendor}</Link>
+														</TableCell>
+
+														<TableCell align="center">{row.ip}</TableCell>
+														<TableCell align="center">{row.mac}</TableCell>
+													</TableRow>
+												);
+											})}
+										{emptyRows > 0 && (
+											<TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+												<TableCell colSpan={6} />
 											</TableRow>
-										);
-									})}
-								{emptyRows > 0 && (
-									<TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-										<TableCell colSpan={6} />
-									</TableRow>
-								)}
-							</TableBody>
-						</Table>
-					</TableContainer>
-					<TablePagination
-						rowsPerPageOptions={[5, 10, 25]}
-						component="div"
-						count={devices.length}
-						rowsPerPage={rowsPerPage}
-						page={page}
-						onPageChange={handleChangePage}
-						onRowsPerPageChange={handleChangeRowsPerPage}
-					/>
-				</Paper>
-				<FormControlLabel
-					control={<Switch checked={dense} onChange={handleChangeDense} />}
-					label="Dense padding"
-				/>
-			</div>
-		</Container>
+										)}
+									</TableBody>
+								</Table>
+							</TableContainer>
+							<TablePagination
+								rowsPerPageOptions={[5, 10, 25, 50, 100]}
+								component="div"
+								count={devices.length}
+								rowsPerPage={rowsPerPage}
+								page={page}
+								onPageChange={handleChangePage}
+								onRowsPerPageChange={handleChangeRowsPerPage}
+							/>
+						</Paper>
+					</div>
+				</Container>
+			)}
+		</>
 	);
 }
