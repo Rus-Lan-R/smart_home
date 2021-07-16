@@ -47,9 +47,8 @@ app.use(
 
 // APP'S ROUTES
 app.use("/api/auth", authRouter);
-app.get("/", (req,res)=> 
-{
-  res.json({"hello":"dsdf"})
+app.get("/", (req, res) => {
+	res.json({ hello: "dsdf" });
 });
 
 app.listen(PORT, () => {
