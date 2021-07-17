@@ -13,44 +13,75 @@ const PORT = process.env.PORT ?? 3001;
 connect();
 
 if (process.env.DEV) {
-	const morgan = require("morgan");
-	app.use(morgan("dev"));
+  const morgan = require("morgan");
+  app.use(morgan("dev"));
 }
 
 app.set("cookieName", process.env.COOKIE_NAME);
 
 app.use(
-	cors({
-		origin: true,
-		credentials: true,
-	}),
+  cors({
+    origin: true,
+    credentials: true,
+  }),
 );
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(
-	session({
-		name: app.get("cookieName"),
-		secret: process.env.COOKIE_SECRET,
-		resave: false,
-		saveUninitialized: false,
-		store: MongoStore.create({
-			mongoUrl: dbConnectionURL,
-		}),
-		cookie: {
-			secure: false,
-			httpOnly: true,
-			maxAge: 1e3 * 86400, // COOKIE'S LIFETIME — 1 DAY
-		},
-	}),
+  session({
+    name: app.get("cookieName"),
+    secret: process.env.COOKIE_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: dbConnectionURL,
+    }),
+    cookie: {
+      secure: false,
+      httpOnly: true,
+      maxAge: 1e3 * 86400, // COOKIE'S LIFETIME — 1 DAY
+    },
+  }),
 );
 
 // APP'S ROUTES
 app.use("/api/auth", authRouter);
-app.get("/", (req, res) => {
-	res.json({ hello: "dsdf" });
+
+
+app.get("/scenario/:userId", async (req, res) => {
+  const { userId } = req.params
+  const allUserScenarios = await Scenario.find({ user: userId })
+  res.json(allUserScenarios)
+})
+
+app.get("/:userId/:roomId", async (req, res) => {
+  const { userId, roomId } = req.params
+  const allRoomDevices = await Device.find({ user: userId, room: roomId })
+  res.json(allRoomDevices)
+
 });
 
+app.get("/userRooms", async (req, res) => {
+  const userId = req.session.user.id
+  const allUserRooms = await Room.find({ user: userId })
+  res.json(allUserRooms)
+
+});
+
+app.post('/addRoom', async (req, res) => {
+  console.log('======>', req.session)
+  const userId = req.session.user.id
+  const { room } = req.body;
+  await Room.create({ room: room, user: userId })
+    .then((newRoom) => {
+      res.json(newRoom)
+    })
+    .catch((err) => res.sendStatus(403));
+})
+
+
+
 app.listen(PORT, () => {
-	console.log("Server has been started on PORT ", PORT);
+  console.log("Server has been started on PORT ", PORT);
 });
