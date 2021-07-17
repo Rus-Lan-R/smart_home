@@ -2,24 +2,30 @@ const bcrypt = require("bcrypt");
 const userModel = require("../models/user.model");
 
 const signUp = async (req, res) => {
-	const { userName, password, email } = req.body;
+	console.log("SIGNUP req.body", req.body);
+	const { userName, userPassword, userEmail } = req.body;
 
-	if (userName && password && email) {
+	if (userName && userPassword && userEmail) {
 		try {
-			const hashPassword = await bcrypt.hash(password, 11);
+			const hashPassword = await bcrypt.hash(userPassword, 8);
+			console.log(hashPassword);
+
 			const newUser = await userModel.create({
 				name: userName,
 				password: hashPassword,
-				email,
+				email: userEmail,
 			});
+			console.log("db");
 
 			req.session.user = {
 				id: newUser._id,
-				name: newUser.userName,
+				name: newUser.name,
 			};
+			console.log("SIGNUP req.session", req.session);
 
 			return res.json({ _id: newUser._id, name: newUser.name });
 		} catch (error) {
+			console.log(error);
 			return res.sendStatus(500);
 		}
 	}
@@ -28,16 +34,20 @@ const signUp = async (req, res) => {
 };
 
 const signIn = async (req, res) => {
-	const { password, email } = req.body;
+	const { userPassword, userEmail } = req.body;
 
-	if (password && email) {
+	console.log("SIGNIN req.body  --> ", req.body);
+
+	if (userPassword && userEmail) {
 		try {
-			const currentUser = await userModel.findOne({ email });
-			if (currentUser && (await bcrypt.compare(password, currentUser.password))) {
+			const currentUser = await userModel.findOne({ email: userEmail });
+
+			if (currentUser && (await bcrypt.compare(userPassword, currentUser.password))) {
 				req.session.user = {
 					id: currentUser._id,
 					name: currentUser.name,
 				};
+				console.log("SIGNIN req.session --> ", req.session);
 				return res.json({
 					_id: currentUser._id,
 					name: currentUser.name,
@@ -45,6 +55,7 @@ const signIn = async (req, res) => {
 			}
 			return res.sendStatus(401);
 		} catch (error) {
+			console.log(error);
 			return res.sendStatus(500);
 		}
 	}
