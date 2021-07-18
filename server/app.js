@@ -5,6 +5,7 @@ const cors = require("cors");
 const MongoStore = require("connect-mongo");
 const { dbConnectionURL, connect } = require("./src/config/db");
 const authRouter = require("./src/routes/auth.routes");
+const deviceRouter = require("./src/routes/device.routes");
 const Room = require("./src/models/room.model");
 
 const app = express();
@@ -59,6 +60,7 @@ app.post("/addRoom", async (req, res) => {
 });
 
 app.use("/api/auth", authRouter);
+app.use("/api/devices", deviceRouter);
 
 app.get("/scenario/:userId", async (req, res) => {
 	const { userId } = req.params;
