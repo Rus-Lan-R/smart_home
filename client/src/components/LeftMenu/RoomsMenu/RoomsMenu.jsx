@@ -17,7 +17,7 @@ export default function RoomsMenu() {
     <div className="row my-5">
       {items.map((el) => (
         <div key={el._id} className="col-4">
-          <Link onClick={() => dispatch(getDevices(el._id))} to={`/home/${el.room}`}>
+          <Link onClick={() => dispatch(getDevices(el._id))} to={`/userRooms/${el.room}`}>
             <span>{el.room}</span>
           </Link>
         </div>

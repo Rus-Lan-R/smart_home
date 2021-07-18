@@ -2,20 +2,19 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getDevices } from "../../../redux/actions/devices.action";
 import Device from "../Device/Device"
-import { useParams } from "react-router-dom"
 
 
 
-export default function Devices() {
+export default function Devices(room) {
   const list = useSelector((state) => state.devices.items);
-  const userId = useSelector((state) => state.users._id)
-  const roomId = useSelector((state) => state.rooms._id)
+  console.log(room)
+  // const roomName = useSelector((state) => state.rooms.room)
   const dispatch = useDispatch();
 
 
   useEffect(() => {
-    dispatch(getDevices(userId, roomId));
-  }, [roomId]);
+    dispatch(getDevices(room));
+  }, [room]);
 
   return (
     <div className="row my-5">

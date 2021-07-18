@@ -29,7 +29,7 @@ function App() {
   return (
     <Router>
       <Header />
-      {/* <LeftMenu /> */}
+      <LeftMenu />
       <Switch>
         <PrivateRoute exact path="/config">
           <DevicesList />
@@ -49,7 +49,7 @@ function App() {
         <Route exact path="/auth/signout">
           <SignOut />
         </Route>
-        <Route exact path="/home/room">
+        <Route exact path="/userRooms/:roomName">
           <RoomContainer />
         </Route>
         <Route exact path="/home">
