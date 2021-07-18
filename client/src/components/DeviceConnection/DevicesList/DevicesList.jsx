@@ -17,10 +17,9 @@ import {
 
 import React from "react";
 import { useSelector } from "react-redux";
+import Loader from "../../Loader/Loader";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import Loader from "../../Loader/Loader";
-
 import { lighten, makeStyles } from "@material-ui/core/styles";
 import FilterListIcon from "@material-ui/icons/FilterList";
 
@@ -95,7 +94,7 @@ EnhancedTableHead.propTypes = {
 	classes: PropTypes.object.isRequired,
 	numSelected: PropTypes.number.isRequired,
 	onRequestSort: PropTypes.func.isRequired,
-	onSelectAllClick: PropTypes.func.isRequired,
+
 	order: PropTypes.oneOf(["asc", "desc"]).isRequired,
 	orderBy: PropTypes.string.isRequired,
 	rowCount: PropTypes.number.isRequired,

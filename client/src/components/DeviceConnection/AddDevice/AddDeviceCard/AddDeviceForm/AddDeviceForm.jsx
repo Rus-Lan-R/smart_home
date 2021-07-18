@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Container, MenuItem, Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import * as devicesEndPoinst from "../../../../../config/devicesEndPoints";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -26,16 +27,27 @@ export default function AddDeviceForm({ vendor, ip, port }) {
 	const classes = useStyles();
 
 	const [currentRoom, setCurrentRoom] = useState("");
+	const [currentRoomID, setCurrentRoomID] = useState("");
 
 	const handleChange = (event) => {
 		setCurrentRoom(event.target.value);
 	};
 
-	const handleSubmit = (event) => {
-		setCurrentRoom(event.target.value);
+	const handleSubmit = async (event) => {
 		event.preventDefault();
-		const payload = Object.fromEntries(new FormData(event.target));
-		console.log(payload);
+		const body = Object.fromEntries(new FormData(event.target));
+
+		const responseAddDevice = await fetch(devicesEndPoinst.userDevices(), {
+			method: "POST",
+			credentials: "include",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ ...body, room: currentRoomID, ip, port }),
+		});
+		if (responseAddDevice.ok) {
+			console.log("device added");
+		}
 		// dispatch();
 	};
 
@@ -63,7 +75,7 @@ export default function AddDeviceForm({ vendor, ip, port }) {
 							required
 						>
 							{roomsList.map((el) => (
-								<MenuItem key={el.room} value={el.room}>
+								<MenuItem key={el._id} value={el.room} onClick={() => setCurrentRoomID(el._id)}>
 									{el.room}
 								</MenuItem>
 							))}
