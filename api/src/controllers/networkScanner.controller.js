@@ -1,7 +1,7 @@
 const netList = require("network-list");
 const fetch = require("node-fetch");
 const nodePortScanner = require("node-port-scanner");
-const Devices = require("../../../server/src/models/device.model");
+// const Devices = require("../../../server/src/models/device.model");
 
 const getDevicesIp = async (req, res) => {
 	try {
