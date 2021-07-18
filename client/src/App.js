@@ -1,33 +1,25 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { checkAuth } from "./redux/actions/user.action";
+import ScannigDevices from "./components/DeviceConnection/ScannigDevices/ScannigDevices";
+
+import AddDeviceCard from "./components/DeviceConnection/AddDevice/AddDeviceCard/AddDeviceCard";
 import Header from "./components/Header/Header";
 import PrivateRoute from "./components/Auth/PrivateRouter/PrivateRouter";
 import SignIn from "./components/Auth/SignIn/SignIn";
 import SignUp from "./components/Auth/SignUp/SignUp";
 import SignOut from "./components/Auth/SignOut/SignOut";
 import CardContainer from "./components/CardContainer/CardContainer";
-
-// import LeftMenu from "./components/LeftMenu/LeftMenu";
-// import DevicesList from "./components/DeviceConnection/DevicesList";
-// import RoomContainer from "./components/RoomContainer/RoomContainer";
-// import HomeContainer from "./components/HomeContainer/HomeContainer";
 import AddRoom from "./components/AddRoom/AddRoom";
-
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { checkAuth } from "./redux/actions/user.action";
-import ScannigDevices from "./components/DeviceConnection/ScannigDevices/ScannigDevices";
-
-import AddDeviceCard from "./components/DeviceConnection/AddDevice/AddDeviceCard/AddDeviceCard";
-
-import { CurrentDeviceIpContextProvider } from "./context/currentDeviceIpContext";
 
 function App() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(checkAuth());
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
@@ -36,15 +28,11 @@ function App() {
 			{/* <LeftMenu /> */}
 			<Switch>
 				<PrivateRoute exact path="/config">
-					<CurrentDeviceIpContextProvider>
-						<ScannigDevices />
-					</CurrentDeviceIpContextProvider>
+					<ScannigDevices />
 				</PrivateRoute>
 
-				<PrivateRoute exact path="/config/add-device">
-					<CurrentDeviceIpContextProvider>
-						<AddDeviceCard />
-					</CurrentDeviceIpContextProvider>
+				<PrivateRoute exact path="/config/add-device/:deviceID">
+					<AddDeviceCard />
 				</PrivateRoute>
 
 				<PrivateRoute exact path="/profile">

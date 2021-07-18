@@ -5,6 +5,7 @@ const cors = require("cors");
 const MongoStore = require("connect-mongo");
 const { dbConnectionURL, connect } = require("./src/config/db");
 const authRouter = require("./src/routes/auth.routes");
+const deviceRouter = require("./src/routes/device.routes");
 const Room = require("./src/models/room.model");
 
 const app = express();
@@ -17,37 +18,6 @@ if (process.env.DEV) {
 	const morgan = require("morgan");
 	app.use(morgan("dev"));
 }
-
-const Evilscan = require("evilscan");
-
-const options = {
-	target: "192.168.1.186",
-	port: "0-65534",
-	status: "O", // Timeout, Refused, Open, Unreachable
-	banner: true,
-};
-
-new Evilscan(options, (err, scan) => {
-	if (err) {
-		console.log(err);
-		return;
-	}
-
-	scan.on("result", (data) => {
-		// fired when item is matching options
-		console.log(data);
-	});
-
-	scan.on("error", (err) => {
-		throw new Error(data.toString());
-	});
-
-	scan.on("done", () => {
-		// finished !
-	});
-
-	scan.run();
-});
 
 app.set("cookieName", process.env.COOKIE_NAME);
 
@@ -90,6 +60,7 @@ app.post("/addRoom", async (req, res) => {
 });
 
 app.use("/api/auth", authRouter);
+app.use("/api/devices", deviceRouter);
 
 
 app.get("/scenario/", async (req, res) => {
