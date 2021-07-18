@@ -5,6 +5,7 @@ const Gpio = require("onoff").Gpio;
 let RED = new Gpio(17, "out");
 let GREEN = new Gpio(27, "out");
 let BLUE = new Gpio(22, "out");
+const Evilscan = require("evilscan");
 
 const scannerRouter = require("./src/routers/networkScanner.routes");
 
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use("/api", scannerRouter);
 
 app.get("/api/rpi/:color", (req, res) => {
+    console.log('Z nen');
     switch (req.params.color) {
         case "red":
             RED.read().then(value => RED.write(value ^ 1))
@@ -35,12 +37,14 @@ app.get("/api/rpi/:color", (req, res) => {
         case "green":
             GREEN.read().then(value => GREEN.write(value ^ 1))
             break;
-        case "all":
-            clearState()
-            break;
+
     }
     res.json({})
 })
+
+
+
+
 
 app.listen(PORT, () => {
     console.log("Server has been started on PORT ", PORT);
