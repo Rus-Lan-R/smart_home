@@ -1,14 +1,19 @@
 const netList = require("network-list");
 const fetch = require("node-fetch");
 const nodePortScanner = require("node-port-scanner");
+const Devices = require("../../../server/src/models/device.model");
 
 const getDevicesIp = async (req, res) => {
-	console.log("start scan ");
-	netList.scan({}, (err, arr) => {
-		let allDevices = arr.filter((el) => el.alive);
-		console.log("send devices");
-		res.json(allDevices);
-	});
+	try {
+		console.log("start scan ");
+		netList.scan({}, (err, arr) => {
+			let allDevices = arr.filter((el) => el.alive);
+			console.log("send devices");
+			res.json(allDevices);
+		});
+	} catch (error) {
+		res.sendStatus(500);
+	}
 };
 
 const getOpenPorts = async (req, res) => {
