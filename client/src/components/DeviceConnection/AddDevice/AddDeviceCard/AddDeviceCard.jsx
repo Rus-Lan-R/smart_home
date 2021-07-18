@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { useCurrentDeviceIpContext } from "../../../../context/currentDeviceIpContext";
 import Container from "@material-ui/core/Container";
 import * as apiRpiEndPoinst from "../../../../config/apiRpiEndPoinst";
 
@@ -29,7 +30,23 @@ const useStyles = makeStyles({
 export default function AddDeviceCard() {
 	const classes = useStyles();
 
-	const [port, setPort] = useState("");
+	const { deviceID } = useParams();
+	const currentDevice = useSelector((state) => state.scanningIP.find((el) => el.mac === deviceID));
+
+	const [ports, setPort] = useState([]);
+	// const [statusConnect, setStatusConnect] = useState(false);
+
+	const connecttoDevice = async (ip, port) => {
+		const responseConnect = await fetch(apiRpiEndPoinst.connectDevice(), {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ ip, port }),
+		});
+
+		console.log(responseConnect.ok);
+	};
 
 	useEffect(() => {
 		fetch(apiRpiEndPoinst.getPorts(), {
@@ -37,30 +54,40 @@ export default function AddDeviceCard() {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ ip: deviceIP.ip }),
+			body: JSON.stringify({ ip: currentDevice.ip }),
 		})
 			.then((response) => response.json())
 			.then((ports) => setPort(ports));
 	}, []);
 
-	const { deviceIP, setDeviceIP } = useCurrentDeviceIpContext();
-
+	console.log(ports);
 	return (
 		<Container width="50%">
 			<Card className={classes.root}>
 				<CardContent>
 					<Typography variant="h5" component="h2">
-						{deviceIP.vendor}
+						{currentDevice.vendor}
 					</Typography>
 					<Typography className={classes.title} color="textSecondary" gutterBottom>
-						{deviceIP.ip}
+						{currentDevice.ip}
 					</Typography>
 					<Typography className={classes.title} color="textSecondary" gutterBottom>
-						{deviceIP.mac}
+						{currentDevice.mac}
+					</Typography>
+					<Typography className={classes.title} color="textSecondary" gutterBottom>
+						Open Ports
 					</Typography>
 				</CardContent>
 				<CardActions>
-					<Button size="small">Connect</Button>
+					{ports.map((el, index) => (
+						<Button
+							key="{index}"
+							size="small"
+							onClick={() => connecttoDevice(currentDevice.ip, el)}
+						>
+							Connect to PORT:{el}
+						</Button>
+					))}
 				</CardActions>
 			</Card>
 		</Container>

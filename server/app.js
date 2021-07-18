@@ -18,37 +18,6 @@ if (process.env.DEV) {
 	app.use(morgan("dev"));
 }
 
-const Evilscan = require("evilscan");
-
-const options = {
-	target: "192.168.1.186",
-	port: "0-65534",
-	status: "O", // Timeout, Refused, Open, Unreachable
-	banner: true,
-};
-
-new Evilscan(options, (err, scan) => {
-	if (err) {
-		console.log(err);
-		return;
-	}
-
-	scan.on("result", (data) => {
-		// fired when item is matching options
-		console.log(data);
-	});
-
-	scan.on("error", (err) => {
-		throw new Error(data.toString());
-	});
-
-	scan.on("done", () => {
-		// finished !
-	});
-
-	scan.run();
-});
-
 app.set("cookieName", process.env.COOKIE_NAME);
 
 app.use(

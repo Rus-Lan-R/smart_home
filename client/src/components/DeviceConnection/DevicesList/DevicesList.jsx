@@ -205,18 +205,6 @@ export default function DevicesList() {
 
 	const emptyRows = rowsPerPage - Math.min(rowsPerPage, devices.length - page * rowsPerPage);
 
-	const connect = async (ip) => {
-		const responseConnect = await fetch(apiRpiEndPoinst.connectDevice(), {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ ip }),
-		});
-
-		console.log(responseConnect.ok);
-	};
-
 	return (
 		<>
 			{loader ? (
@@ -253,14 +241,14 @@ export default function DevicesList() {
 														hover
 														key={row.ip}
 														// onClick={(event) => setDeviceIP(row)}
-														onClick={(event) => connect(row.ip)}
+														// onClick={() => setDeviceIP(index)}
 														role="checkbox"
 														aria-checked={isItemSelected}
 														tabIndex={-1}
 														selected={isItemSelected}
 													>
 														<TableCell align="center">
-															<Link to="/config/add-device"> {row.vendor}</Link>
+															<Link to={`/config/add-device/${row.mac}`}> {row.vendor}</Link>
 														</TableCell>
 
 														<TableCell align="center">{row.ip}</TableCell>

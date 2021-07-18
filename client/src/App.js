@@ -41,7 +41,7 @@ function App() {
 					</CurrentDeviceIpContextProvider>
 				</PrivateRoute>
 
-				<PrivateRoute exact path="/config/add-device">
+				<PrivateRoute exact path="/config/add-device/:deviceID">
 					<CurrentDeviceIpContextProvider>
 						<AddDeviceCard />
 					</CurrentDeviceIpContextProvider>
