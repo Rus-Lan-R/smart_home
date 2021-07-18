@@ -29,7 +29,7 @@ function App() {
   return (
     <Router>
       <Header />
-      <LeftMenu />
+      {/* <LeftMenu /> */}
       <Switch>
         <PrivateRoute exact path="/config">
           <DevicesList />

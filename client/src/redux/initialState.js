@@ -1,8 +1,8 @@
 const initState = {
   user: null,
-  scanningIP: [],
+  scanningIP: [],  
   loader: false,
-  rooms: {
+  rooms: { 
     items: [],
     isLoading: false,
     error: null,

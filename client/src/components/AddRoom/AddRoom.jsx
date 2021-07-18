@@ -9,21 +9,20 @@ export default function AddRoom() {
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
-
     e.preventDefault();
-    console.log(window.localStorage)
-
     fetch(`${process.env.REACT_APP_API_URL}/addRoom`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({
         room: input.getValue(),
       }),
     })
       .then((response) => response.json())
       .then((newRoom) => {
+        console.log(newRoom);
         dispatch(addRoom(newRoom));
         input.clear();
       });

@@ -19,16 +19,14 @@ export const getRoomsError = (err) => ({
 
 export const addRoom = (newRoom) => ({
   type: ROOM_ADD,
-  payload: {
-    newRoom,
-  },
+  payload: { newRoom },
 });
 
-export const getRooms = (userId) => async (dispatch) => {
+export const getRooms = () => async (dispatch) => {
   dispatch(getRoomsStart());
 
   try {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/${userId}`);
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/userRooms`);
     const result = await response.json();
     dispatch(getRoomsSuccess(result));
   } catch (err) {

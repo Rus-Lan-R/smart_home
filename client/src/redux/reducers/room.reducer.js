@@ -21,7 +21,8 @@ export default function roomReducer(state = {}, action) {
     }
     case ROOM_ADD: {
       const { newRoom } = payload;
-      return [...state, newRoom];
+      console.log(state)
+      return { items: [...state.items, newRoom] };
     }
 
     default: {
