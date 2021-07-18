@@ -17,6 +17,37 @@ if (process.env.DEV) {
 	app.use(morgan("dev"));
 }
 
+const Evilscan = require("evilscan");
+
+const options = {
+	target: "192.168.1.186",
+	port: "0-65534",
+	status: "O", // Timeout, Refused, Open, Unreachable
+	banner: true,
+};
+
+new Evilscan(options, (err, scan) => {
+	if (err) {
+		console.log(err);
+		return;
+	}
+
+	scan.on("result", (data) => {
+		// fired when item is matching options
+		console.log(data);
+	});
+
+	scan.on("error", (err) => {
+		throw new Error(data.toString());
+	});
+
+	scan.on("done", () => {
+		// finished !
+	});
+
+	scan.run();
+});
+
 app.set("cookieName", process.env.COOKIE_NAME);
 
 app.use(
@@ -40,16 +71,17 @@ app.use(
 		cookie: {
 			secure: false,
 			httpOnly: true,
-			maxAge: 1e3 * 86400, // COOKIE'S LIFETIME — 1 DAY
+			maxAge: 1e3 * 86400,
 		},
 	}),
 );
 
-// APP'S ROUTES
-app.use("/api/auth", authRouter);
-app.get("/", (req, res) => {
-	res.json({ hello: "dsdf" });
+app.use((req, res, next) => {
+	console.log("req session ---> ", req.session);
+	next();
 });
+
+app.use("/api/auth", authRouter);
 
 app.listen(PORT, () => {
 	console.log("Server has been started on PORT ", PORT);

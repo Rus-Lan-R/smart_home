@@ -1,4 +1,4 @@
-import { DELETE_USER, SET_USER } from "../types/userTypes";
+import { SET_USER } from "../types/userTypes";
 import * as authEndPoints from "../../config/authEndPoints";
 
 export const setUser = (user) => ({
@@ -82,5 +82,5 @@ export const checkAuth = () => async (dispatch) => {
 };
 
 export const deleteUser = () => ({
-	type: DELETE_USER,
+	type: "DELETE",
 });

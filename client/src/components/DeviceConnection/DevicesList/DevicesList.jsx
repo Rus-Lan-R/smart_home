@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { connect, useSelector } from "react-redux";
+import * as apiRpiEndPoinst from "../../../config/apiRpiEndPoinst";
 
-import Loader from "../Loader/Loader";
-import { useDispatch } from "react-redux";
-import { getIpDevices } from "../../redux/actions/scanningIP.action";
+import Loader from "../../Loader/Loader";
 
 import { Link } from "react-router-dom";
 
@@ -25,6 +24,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import FilterListIcon from "@material-ui/icons/FilterList";
 
 import Container from "@material-ui/core/Container";
+import { useCurrentDeviceIpContext } from "../../../context/currentDeviceIpContext";
 
 function descendingComparator(a, b, orderBy) {
 	if (b[orderBy] < a[orderBy]) {
@@ -170,17 +170,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function DevicesList() {
-	const dispatch = useDispatch();
-
 	const loader = useSelector((state) => state.loader);
 
 	const devices = useSelector((state) => state.scanningIP);
 
-	useEffect(() => {
-		dispatch(getIpDevices());
-	}, []);
+	const { deviceIP, setDeviceIP } = useCurrentDeviceIpContext();
 
-	console.log(devices);
 	const classes = useStyles();
 	const [order, setOrder] = React.useState("asc");
 	const [orderBy, setOrderBy] = React.useState("mac");
@@ -195,9 +190,7 @@ export default function DevicesList() {
 		setOrderBy(property);
 	};
 
-	const handleClick = (event, ip) => {
-		console.log(ip);
-	};
+	const handleClick = (event, currenDevice) => {};
 
 	const handleChangePage = (event, newPage) => {
 		setPage(newPage);
@@ -212,12 +205,24 @@ export default function DevicesList() {
 
 	const emptyRows = rowsPerPage - Math.min(rowsPerPage, devices.length - page * rowsPerPage);
 
+	const connect = async (ip) => {
+		const responseConnect = await fetch(apiRpiEndPoinst.connectDevice(), {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ ip }),
+		});
+
+		console.log(responseConnect.ok);
+	};
+
 	return (
 		<>
 			{loader ? (
 				<Loader />
 			) : (
-				<Container wipth="75%">
+				<Container width="75%">
 					<div className={classes.root}>
 						<Paper className={classes.paper}>
 							<EnhancedTableToolbar numSelected={selected.length} />
@@ -246,11 +251,12 @@ export default function DevicesList() {
 												return (
 													<TableRow
 														hover
-														onClick={(event) => handleClick(event, row.ip)}
+														key={row.ip}
+														// onClick={(event) => setDeviceIP(row)}
+														onClick={(event) => connect(row.ip)}
 														role="checkbox"
 														aria-checked={isItemSelected}
 														tabIndex={-1}
-														key={row.ip}
 														selected={isItemSelected}
 													>
 														<TableCell align="center">

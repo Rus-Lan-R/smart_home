@@ -11,7 +11,12 @@ import CardContainer from "./components/CardContainer/CardContainer";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { checkAuth } from "./redux/actions/user.action";
-import DevicesList from "./components/DeviceConnection/DevicesList";
+import ScannigDevices from "./components/DeviceConnection/ScannigDevices/ScannigDevices";
+
+import AddDeviceCard from "./components/DeviceConnection/AddDevice/AddDeviceCard/AddDeviceCard";
+
+import { CurrentDeviceIpContextProvider } from "./context/currentDeviceIpContext";
+
 function App() {
 	const dispatch = useDispatch();
 
@@ -25,7 +30,14 @@ function App() {
 
 			<Switch>
 				<PrivateRoute exact path="/config">
-					<DevicesList />
+					<CurrentDeviceIpContextProvider>
+						<ScannigDevices />
+					</CurrentDeviceIpContextProvider>
+				</PrivateRoute>
+				<PrivateRoute exact path="/config/add-device">
+					<CurrentDeviceIpContextProvider>
+						<AddDeviceCard />
+					</CurrentDeviceIpContextProvider>
 				</PrivateRoute>
 				<PrivateRoute exact path="/profile">
 					<div>tut tipo licniy kabinet</div>
