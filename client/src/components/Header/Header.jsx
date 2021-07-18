@@ -16,6 +16,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import VoiceRecognitionButton from "../Buttons/VoiceRecognitionButton";
 
 const useStyles = makeStyles((theme) => ({
 	grow: {
@@ -225,6 +226,9 @@ export default function Header() {
 							</MenuItem>
 						) : (
 							<>
+                <MenuItem>
+									<VoiceRecognitionButton/>
+								</MenuItem>
 								<MenuItem>
 									<Typography className={classes.title} variant="h6" noWrap>
 										<NavLink exact to="/auth/signin" className="nav-link" activeClassName="active">
