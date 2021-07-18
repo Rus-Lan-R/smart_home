@@ -1,0 +1,47 @@
+{
+  "name": "extract-domain",
+  "version": "2.3.3",
+  "description": "Extract domain name from URL",
+  "source": "index.js",
+  "main": "dist/extract-domain.js",
+  "exports": "./dist/extract-domain.modern.js",
+  "module": "dist/extract-domain.module.js",
+  "unpkg": "dist/extract-domain.umd.js",
+  "author": "Bjarne Oeverli",
+  "license": "MIT",
+  "scripts": {
+    "build": "npm run pretty && microbundle",
+    "test": "mocha -R spec index.test.js",
+    "pretty": "prettier --tab-width=4 --print-width=100 --single-quote --trailing-comma=es5 --write *.js *.js",
+    "benchmark": "node benchmark.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bjarneo/extract-domain.git"
+  },
+  "homepage": "https://github.com/bjarneo/extract-domain",
+  "bugs": {
+    "url": "https://github.com/bjarneo/extract-domain/issues"
+  },
+  "keywords": [
+    "extract",
+    "domain",
+    "name",
+    "parse",
+    "get",
+    "fetch",
+    "string",
+    "url",
+    "browser",
+    "node"
+  ],
+  "devDependencies": {
+    "microbundle": "^0.13.0",
+    "mocha": "^8.3.2",
+    "nanobench": "^1.0.3",
+    "prettier": "^1.11.1"
+  },
+  "optionalDependencies": {
+    "psl": "^1.8.0"
+  }
+}
