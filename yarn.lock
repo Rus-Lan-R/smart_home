@@ -2,3 +2,26 @@
 # yarn lockfile v1
 
 
+"async@^3.2.0":
+  "integrity" "sha512-TR2mEZFVOj2pLStYxLht7TyfuRzaydfpxr3k9RpHIzMgw7A64dzsdqCxH1WJyQdoe8T10nDXd9wnEigmiuHIZw=="
+  "resolved" "https://registry.npmjs.org/async/-/async-3.2.0.tgz"
+  "version" "3.2.0"
+
+"evilscan@^1.8.0":
+  "integrity" "sha512-nbXI1yIZUcbrlQ4wMJV/KLYzIPlrhzFDEt7ivtPmRVk/Lw+l0h4ADrNrCze68QZmk5E/MoBCS/9GV/ss0F9Giw=="
+  "resolved" "https://registry.npmjs.org/evilscan/-/evilscan-1.8.0.tgz"
+  "version" "1.8.0"
+  dependencies:
+    "async" "^3.2.0"
+    "minimist2" "^1.0.2"
+    "qjobs" "^1.2.0"
+
+"minimist2@^1.0.2":
+  "integrity" "sha1-d1B3ZshLClCVLziuGSAWw5LQUkY="
+  "resolved" "https://registry.npmjs.org/minimist2/-/minimist2-1.0.2.tgz"
+  "version" "1.0.2"
+
+"qjobs@^1.2.0":
+  "integrity" "sha512-8YOJEHtxpySA3fFDyCRxA+UUV+fA+rTWnuWvylOK/NCjhY+b4ocCtmu8TtsWb+mYeU+GCHf/S66KZF/AsteKHg=="
+  "resolved" "https://registry.npmjs.org/qjobs/-/qjobs-1.2.0.tgz"
+  "version" "1.2.0"
