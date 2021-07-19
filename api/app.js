@@ -41,9 +41,6 @@ app.get("/api/rpi/:color", (req, res) => {
 	res.json({});
 });
 
-
-
-
 app.listen(PORT, () => {
     console.log("Server has been started on PORT ", PORT);
 });
