@@ -20,7 +20,7 @@ export const signUp = (payload, history) => async (dispatch) => {
 			const user = await response.json();
 			console.log(user);
 			dispatch(setUser(user));
-			history.replace("/");
+			history.replace("/home");
 		} else {
 			history.replace("/signup");
 		}
@@ -44,7 +44,8 @@ export const signIn = (payload, history, from) => async (dispatch) => {
 			const user = await response.json();
 			console.log(user);
 			dispatch(setUser(user));
-			history.replace(from);
+			history.replace("/home");
+			// history.replace(from);
 		} else {
 			history.replace("/signin");
 		}

@@ -239,7 +239,7 @@ export default function DevicesList() {
 														selected={isItemSelected}
 													>
 														<TableCell align="center">
-															<Link to={`/config/add-device/${row.mac}`}> {row.vendor}</Link>
+															<Link to={`/home/config/add-device/${row.mac}`}> {row.vendor}</Link>
 														</TableCell>
 
 														<TableCell align="center">{row.ip}</TableCell>
