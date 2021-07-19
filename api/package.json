@@ -1,0 +1,28 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "evilscan": "^1.8.0",
+    "express": "^4.17.1",
+    "gpio": "^0.2.10",
+    "network-list": "^1.1.5",
+    "node-fetch": "^2.6.1",
+    "node-port-scanner": "^3.0.1",
+    "onoff": "^6.0.3",
+    "rpi-gpio": "^2.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  },
+  "description": ""
+}
