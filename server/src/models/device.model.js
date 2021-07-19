@@ -32,6 +32,10 @@ const DeviceSchema = Schema({
 	apiURL: {
 		type: String,
 	},
+	apiHUB: {
+		type: String,
+		default: "http://192.168.1.148:3001/api/refetch",
+	},
 });
 
 module.exports = model("Device", DeviceSchema);

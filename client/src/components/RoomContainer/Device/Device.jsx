@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { deviceChangeStatus } from "../../../redux/actions/devices.action";
 
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
@@ -20,26 +23,28 @@ const useStyles = makeStyles({
 	},
 });
 
-export default function Device({ _id, device, status, picture }) {
-	const [isActive, setActive] = useState(status);
-	// const devices = useSelector((state) => state.devices);
-	// const dispatch = useDispatch();
+export default function Device({ _id, device, picture, apiURL }) {
+	const dispatch = useDispatch();
+	const currentDevice = useSelector((state) => state.devices.items.find((el) => el._id === _id));
 
-	const handleClick = () => {
-		setActive(!isActive);
-		// const deviceCopy = devices.slice();
-		// deviceCopy[id].isActive = !deviceCopy[id].isActive;
-		// dispatch(changeActiveDevice(deviceCopy))
+	const handleClick = (id, status) => {
+		dispatch(deviceChangeStatus({ id, status, apiURL }));
 	};
 	const classes = useStyles();
+
+	console.log("state device", currentDevice);
 
 	return (
 		<Card key={_id} className={classes.root}>
 			<CardActionArea>
-				<CardMedia className={classes.media} image={picture} title="Contemplative Reptile" />
+				<CardMedia
+					className={classes.media}
+					image={currentDevice.picture}
+					title="Contemplative Reptile"
+				/>
 				<CardContent>
 					<Typography gutterBottom variant="h5" component="h2">
-						{device}
+						{currentDevice.device}
 					</Typography>
 					<Typography variant="body2" color="textSecondary" component="p">
 						Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
@@ -48,8 +53,12 @@ export default function Device({ _id, device, status, picture }) {
 				</CardContent>
 			</CardActionArea>
 			<CardActions>
-				<Button size="small" color="primary" onClick={handleClick}>
-					{isActive ? "Off" : "On"}
+				<Button
+					size="small"
+					color="primary"
+					onClick={() => handleClick(currentDevice._id, currentDevice.status)}
+				>
+					{currentDevice.status ? "Off" : "On"}
 				</Button>
 				<Button size="small" color="primary">
 					Remove

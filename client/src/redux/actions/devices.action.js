@@ -2,6 +2,7 @@ import {
 	DEVICES_LOADING_START,
 	DEVICES_GET_SUCCESS,
 	DEVICES_LOADING_ERROR,
+	DEVICES_CHANGE_STATUS,
 } from "../types/devices.types";
 
 export const getDevicesStart = () => ({
@@ -30,5 +31,30 @@ export const getDevices = (roomID) => async (dispatch) => {
 		dispatch(getDevicesSuccess(result));
 	} catch (err) {
 		dispatch(getDevicesError(err));
+	}
+};
+
+export const updateDevice = (device) => ({
+	type: DEVICES_CHANGE_STATUS,
+	payload: device,
+});
+
+export const deviceChangeStatus = (deviceID, currentStatus) => async (dispatch) => {
+	dispatch(getDevicesStart());
+	try {
+		const responseChangeStatus = await fetch(`${process.env.REACT_APP_API_URL}/api/devices`, {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			credentials: "include",
+			body: JSON.stringify(deviceID, currentStatus),
+		});
+		const updatedDevice = await responseChangeStatus.json();
+		console.log(updatedDevice);
+
+		dispatch(updateDevice(updatedDevice));
+	} catch (error) {
+		dispatch(getDevicesError(error));
 	}
 };
