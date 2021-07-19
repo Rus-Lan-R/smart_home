@@ -14,7 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import SendIcon from "@material-ui/icons/Send";
 
 export default function LeftMenuRoomsList() {
-	const rooms = useSelector((state) => state.rooms.items);
+	const rooms = useSelector((state) => state.rooms?.items);
 
 	const dispatch = useDispatch();
 
