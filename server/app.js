@@ -51,7 +51,7 @@ app.use(
 app.use("/api/auth", authRouter);
 app.use("/api/room", roomRouter);
 app.use("/api/devices", deviceRouter);
-app.get("/api/scenario/", scenarioRouter);
+app.get("/api/scenario", scenarioRouter);
 
 app.listen(PORT, () => {
   console.log("Server has been started on PORT ", PORT);
