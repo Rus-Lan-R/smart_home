@@ -7,9 +7,9 @@ export default function AddRoom() {
 
 	const dispatch = useDispatch();
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		fetch(`${process.env.REACT_APP_API_URL}/addRoom`, {
+		const responseAddRoom = await fetch(`${process.env.REACT_APP_API_URL}/api/room`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -18,12 +18,11 @@ export default function AddRoom() {
 			body: JSON.stringify({
 				room: input.getValue(),
 			}),
-		})
-			.then((response) => response.json())
-			.then((newRoom) => {
-				dispatch(addRoom(newRoom));
-				input.clear();
-			});
+		});
+		const newRoom = await responseAddRoom.json();
+
+		dispatch(addRoom(newRoom));
+		input.clear();
 	};
 
 	return (
