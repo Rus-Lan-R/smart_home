@@ -11,10 +11,11 @@ const BodyRouter = () => {
 	return (
 		<Router>
 			<Switch>
-				<PrivateRoute exact path="/rooms/devices">
-					<div>jsdhf</div>
+				<PrivateRoute exact path="/rooms/:roomName">
+					<div>test</div>
 					<DevicesList />
 				</PrivateRoute>
+
 				<PrivateRoute exact path="/config">
 					<ScannigDevices />
 				</PrivateRoute>
@@ -23,7 +24,7 @@ const BodyRouter = () => {
 					<AddDeviceCard />
 				</PrivateRoute>
 
-				<PrivateRoute exact path="/addRoom">
+				<PrivateRoute exact path="/addRoom/">
 					<AddRoom />
 				</PrivateRoute>
 			</Switch>
