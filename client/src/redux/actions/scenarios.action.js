@@ -20,7 +20,9 @@ export const getScenarios = () => async (dispatch) => {
   dispatch(getScenariosStart());
 
   try {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/scenario/`);
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/scenario/`, {
+      credentials: 'include'
+    });
     const result = await response.json();
     dispatch(getScenariosSuccess(result));
   } catch (err) {

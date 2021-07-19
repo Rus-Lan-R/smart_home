@@ -26,7 +26,9 @@ function App() {
 	return (
 		<Router>
 			<Header />
-			<LeftMenu />
+			{/* <PrivateRoute> */}
+			{/* <LeftMenu /> */}
+			{/* </PrivateRoute> */}
 			<Switch>
 				<PrivateRoute exact path="/config">
 					<ScannigDevices />
@@ -40,9 +42,10 @@ function App() {
 					<div>tut tipo licniy kabinet</div>
 				</PrivateRoute>
 
-				<Route exact path="/">
+				<PrivateRoute exact path="/">
+					<LeftMenu />
 					<CardContainer />
-				</Route>
+				</PrivateRoute>
 
 				<Route exact path="/auth/signin">
 					<SignIn />
