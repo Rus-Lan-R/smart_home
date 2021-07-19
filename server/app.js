@@ -62,16 +62,20 @@ app.post("/addRoom", async (req, res) => {
 app.use("/api/auth", authRouter);
 app.use("/api/devices", deviceRouter);
 
-app.get("/scenario/:userId", async (req, res) => {
-	const { userId } = req.params;
-	const allUserScenarios = await Scenario.find({ user: userId });
-	res.json(allUserScenarios);
-});
 
-app.get("/:userId/:roomId", async (req, res) => {
-	const { userId, roomId } = req.params;
-	const allRoomDevices = await Device.find({ user: userId, room: roomId });
-	res.json(allRoomDevices);
+app.get("/scenario/", async (req, res) => {
+  const userId = req.session.user.id
+  const allUserScenarios = await Scenario.find({ user: userId })
+  res.json(allUserScenarios)
+})
+
+app.get("/userRooms/:roomName", async (req, res) => {
+  const { roomName } = req.params
+  const userId = req.session.user.id
+  const roomId = await Room.find({ room: roomName })
+  const allRoomDevices = await Device.find({ user: userId, room: roomId })
+  res.json(allRoomDevices)
+
 });
 
 app.get("/userRooms", async (req, res) => {

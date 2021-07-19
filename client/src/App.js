@@ -13,6 +13,7 @@ import SignUp from "./components/Auth/SignUp/SignUp";
 import SignOut from "./components/Auth/SignOut/SignOut";
 import CardContainer from "./components/CardContainer/CardContainer";
 import AddRoom from "./components/AddRoom/AddRoom";
+import LeftMenu from "./components/LeftMenu/LeftMenu";
 
 function App() {
 	const dispatch = useDispatch();
@@ -25,7 +26,7 @@ function App() {
 	return (
 		<Router>
 			<Header />
-			{/* <LeftMenu /> */}
+			<LeftMenu />
 			<Switch>
 				<PrivateRoute exact path="/config">
 					<ScannigDevices />
