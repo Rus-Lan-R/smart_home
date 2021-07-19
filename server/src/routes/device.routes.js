@@ -1,6 +1,6 @@
 const { Router } = require("express");
-const { getUserDevices, addUserDevice } = require("../controllers/device.controller");
 const deviceRouter = Router();
+const { getUserDevices, addUserDevice } = require("../controllers/device.controller");
 
 deviceRouter.route("/").get(getUserDevices).post(addUserDevice);
 
