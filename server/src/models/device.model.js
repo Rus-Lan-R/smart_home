@@ -1,6 +1,4 @@
 const { Schema, model } = require("mongoose");
-const User = require("./user.model");
-const Room = require("./room.model");
 
 const DeviceSchema = Schema({
 	device: {

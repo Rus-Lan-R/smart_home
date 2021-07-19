@@ -16,11 +16,13 @@ export const getScenariosError = (err) => ({
   payload: err,
 });
 
-export const getScenarios = (userId) => async (dispatch) => {
+export const getScenarios = () => async (dispatch) => {
   dispatch(getScenariosStart());
 
   try {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/scenario/${userId}`);
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/scenario/`, {
+      credentials: 'include'
+    });
     const result = await response.json();
     dispatch(getScenariosSuccess(result));
   } catch (err) {

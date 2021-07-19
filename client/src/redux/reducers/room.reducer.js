@@ -22,7 +22,10 @@ export default function roomReducer(state = {}, action) {
 			const { newRoom } = payload;
 			return { items: [...state.items, newRoom] };
 		}
-		// items: [...state.items, newRoom]
+		case "DELETE": {
+			return [];
+		}
+
 		default: {
 			return state;
 		}

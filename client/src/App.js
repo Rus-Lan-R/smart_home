@@ -13,6 +13,7 @@ import SignUp from "./components/Auth/SignUp/SignUp";
 import SignOut from "./components/Auth/SignOut/SignOut";
 import CardContainer from "./components/CardContainer/CardContainer";
 import AddRoom from "./components/AddRoom/AddRoom";
+import LeftMenu from "./components/LeftMenu/LeftMenu";
 
 function App() {
 	const dispatch = useDispatch();
@@ -25,7 +26,9 @@ function App() {
 	return (
 		<Router>
 			<Header />
+			{/* <PrivateRoute> */}
 			{/* <LeftMenu /> */}
+			{/* </PrivateRoute> */}
 			<Switch>
 				<PrivateRoute exact path="/config">
 					<ScannigDevices />
@@ -39,9 +42,10 @@ function App() {
 					<div>tut tipo licniy kabinet</div>
 				</PrivateRoute>
 
-				<Route exact path="/">
+				<PrivateRoute exact path="/">
+					<LeftMenu />
 					<CardContainer />
-				</Route>
+				</PrivateRoute>
 
 				<Route exact path="/auth/signin">
 					<SignIn />
