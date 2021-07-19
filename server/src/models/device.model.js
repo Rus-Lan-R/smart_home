@@ -35,5 +35,4 @@ const DeviceSchema = Schema({
 		type: String,
 	},
 });
-
 module.exports = model("Device", DeviceSchema);
