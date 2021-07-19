@@ -1,11 +1,20 @@
+import {
+	Container,
+	Paper,
+	Grid,
+	TextField,
+	Button,
+	FormControlLabel,
+	Checkbox,
+} from "@material-ui/core";
 import React from "react";
-import { Paper, Grid, TextField, Button, FormControlLabel, Checkbox } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { Fingerprint } from "@material-ui/icons";
-import Container from "@material-ui/core/Container";
-import AlternateEmailIcon from "@material-ui/icons/AlternateEmail";
+import { useHistory, useLocation } from "react-router";
 import { useDispatch } from "react-redux";
 import { signIn } from "../../../redux/actions/user.action";
+
+import { makeStyles } from "@material-ui/core/styles";
+import { Fingerprint } from "@material-ui/icons";
+import AlternateEmailIcon from "@material-ui/icons/AlternateEmail";
 
 const useStyles = makeStyles({
 	root: {
@@ -16,12 +25,16 @@ const useStyles = makeStyles({
 const SignIn = () => {
 	const classes = useStyles();
 
+	let history = useHistory();
+	let location = useLocation();
+	let { from } = location.state || { from: { pathname: "/" } };
+
 	const dispatch = useDispatch();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const payload = Object.fromEntries(new FormData(e.target));
-		dispatch(signIn(payload));
+		dispatch(signIn(payload, history, from));
 	};
 	return (
 		<Container maxWidth="sm" className={classes.root}>

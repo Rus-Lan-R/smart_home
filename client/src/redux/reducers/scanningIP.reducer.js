@@ -1,14 +1,17 @@
 import { SET_DEVICES_IP } from "../types/scanningIP.types";
 
-const sacannigIPReducer = (state = [], action) => {
+const scanningIPReducer = (state = [], action) => {
 	switch (action.type) {
 		case SET_DEVICES_IP:
 			console.log(action.payload);
 			return action.payload;
+
+		case "DELETE":
+			return [];
 
 		default:
 			return state;
 	}
 };
 
-export default sacannigIPReducer;
+export default scanningIPReducer;

@@ -1,11 +1,13 @@
 import React from "react";
+import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import { signUp } from "../../../redux/actions/user.action";
+
 import { Paper, Grid, TextField, Button, FormControlLabel, Checkbox } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Face, Fingerprint } from "@material-ui/icons";
 import Container from "@material-ui/core/Container";
 import AlternateEmailIcon from "@material-ui/icons/AlternateEmail";
-import { useDispatch } from "react-redux";
-import { signUp } from "../../../redux/actions/user.action";
 
 const useStyles = makeStyles({
 	root: {
@@ -18,10 +20,12 @@ const SignUp = () => {
 
 	const dispatch = useDispatch();
 
+	let history = useHistory();
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const payload = Object.fromEntries(new FormData(e.target));
-		dispatch(signUp(payload));
+		dispatch(signUp(payload, history));
 	};
 	return (
 		<Container maxWidth="sm" className={classes.root}>

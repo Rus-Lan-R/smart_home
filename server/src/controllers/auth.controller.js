@@ -64,7 +64,6 @@ const signIn = async (req, res) => {
 };
 
 const signOut = async (req, res) => {
-	console.log("LOGOUT", req.session);
 	req.session.destroy((err) => {
 		if (err) return res.sendStatus(500);
 		res.clearCookie(req.app.get("cookieName"));
@@ -76,7 +75,6 @@ const signOut = async (req, res) => {
 const checkAuth = async (req, res) => {
 	try {
 		const user = await userModel.findById(req.session.user.id, { password: 0 });
-		console.log("back", user);
 		return res.json(user);
 	} catch (error) {
 		return res.sendStatus(500);
