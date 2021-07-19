@@ -13,52 +13,53 @@ import SignUp from "./components/Auth/SignUp/SignUp";
 import SignOut from "./components/Auth/SignOut/SignOut";
 import CardContainer from "./components/CardContainer/CardContainer";
 import AddRoom from "./components/AddRoom/AddRoom";
+import LeftMenu from "./components/LeftMenu/LeftMenu"
 
 function App() {
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(checkAuth());
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+  useEffect(() => {
+    dispatch(checkAuth());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-	return (
-		<Router>
-			<Header />
-			{/* <LeftMenu /> */}
-			<Switch>
-				<PrivateRoute exact path="/config">
-					<ScannigDevices />
-				</PrivateRoute>
+  return (
+    <Router>
+      <Header />
+      <Switch>
+        <PrivateRoute exact path="/config">
+          <ScannigDevices />
+        </PrivateRoute>
 
-				<PrivateRoute exact path="/config/add-device/:deviceID">
-					<AddDeviceCard />
-				</PrivateRoute>
+        <PrivateRoute exact path="/config/add-device/:deviceID">
+          <AddDeviceCard />
+        </PrivateRoute>
 
-				<PrivateRoute exact path="/profile">
-					<div>tut tipo licniy kabinet</div>
-				</PrivateRoute>
+        <PrivateRoute exact path="/profile">
+          <div>tut tipo licniy kabinet</div>
+        </PrivateRoute>
 
-				<Route exact path="/">
-					<CardContainer />
-				</Route>
+        <PrivateRoute exact path="/">
+          <LeftMenu />
+          <CardContainer />
+        </PrivateRoute>
 
-				<Route exact path="/auth/signin">
-					<SignIn />
-				</Route>
+        <Route exact path="/auth/signin">
+          <SignIn />
+        </Route>
 
-				<Route exact path="/auth/signup">
-					<SignUp />
-				</Route>
-				<Route exact path="/auth/signout">
-					<SignOut />
-				</Route>
-				<Route exact path="/addRoom">
-					<AddRoom />
-				</Route>
-			</Switch>
-		</Router>
-	);
+        <Route exact path="/auth/signup">
+          <SignUp />
+        </Route>
+        <Route exact path="/auth/signout">
+          <SignOut />
+        </Route>
+        <Route exact path="/addRoom">
+          <AddRoom />
+        </Route>
+      </Switch>
+    </Router>
+  );
 }
 
 export default App;

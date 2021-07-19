@@ -20,7 +20,9 @@ export const getDevices = (roomName) => async (dispatch) => {
   dispatch(getDevicesStart());
 
   try {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/userRooms/${roomName}`);
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/userRooms/${roomName}`, {
+      credentials: 'include'
+    });
     const result = await response.json();
     dispatch(getDevicesSuccess(result));
   } catch (err) {
