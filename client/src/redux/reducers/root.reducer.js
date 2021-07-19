@@ -7,11 +7,11 @@ import roomReducer from "./room.reducer";
 import scenarioReducer from "./scenario.reducer";
 
 const reducer = combineReducers({
+	rooms: roomReducer,
+	devices: deviceReducer,
 	user: userReducer,
 	scanningIP: sacannigIPReducer,
 	loader: loaderReducer,
-	devices: deviceReducer,
-	rooms: roomReducer,
 	scenarios: scenarioReducer,
 });
 
