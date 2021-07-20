@@ -18,7 +18,7 @@ export const signUp = (payload, history) => async (dispatch) => {
 		});
 		if (response.status === 200) {
 			const user = await response.json();
-			console.log(user);
+			
 			dispatch(setUser(user));
 			history.replace("/home");
 		} else {
@@ -42,7 +42,7 @@ export const signIn = (payload, history, from) => async (dispatch) => {
 
 		if (response.status === 200) {
 			const user = await response.json();
-			console.log(user);
+			
 			dispatch(setUser(user));
 			history.replace("/home");
 			// history.replace(from);
@@ -56,7 +56,7 @@ export const signIn = (payload, history, from) => async (dispatch) => {
 
 export const signOut = () => async (dispatch) => {
 	try {
-		console.log("out");
+		
 		const response = await fetch(authEndPoints.signOut(), {
 			credentials: "include",
 		});

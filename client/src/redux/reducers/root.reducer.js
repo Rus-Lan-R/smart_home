@@ -5,6 +5,7 @@ import sacannigIPReducer from "./scanningIP.reducer";
 import deviceReducer from "./device.reducer";
 import roomReducer from "./room.reducer";
 import scenarioReducer from "./scenario.reducer";
+import sensorsReducer from "./sensors.reducer";
 
 const reducer = combineReducers({
 	rooms: roomReducer,
@@ -13,6 +14,7 @@ const reducer = combineReducers({
 	scanningIP: sacannigIPReducer,
 	loader: loaderReducer,
 	scenarios: scenarioReducer,
+	sensors: sensorsReducer,
 });
 
 export default reducer;

@@ -5,9 +5,7 @@ import { enableLoader, disableLoader } from "./loader.action";
 export const getIpDevices = () => async (dispatch) => {
 	try {
 		dispatch(enableLoader());
-		console.log("send fetch");
 		const responseGetIp = await fetch(apiRpiEndPoinst.getDevices());
-		console.log("response");
 		if (responseGetIp.ok) {
 			const scanningIP = await responseGetIp.json();
 			dispatch(setDevicesIp(scanningIP));

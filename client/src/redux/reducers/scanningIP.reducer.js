@@ -3,7 +3,6 @@ import { SET_DEVICES_IP } from "../types/scanningIP.types";
 const scanningIPReducer = (state = [], action) => {
 	switch (action.type) {
 		case SET_DEVICES_IP:
-			console.log(action.payload);
 			return action.payload;
 
 		case "DELETE":
