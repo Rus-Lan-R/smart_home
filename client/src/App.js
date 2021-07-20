@@ -19,56 +19,58 @@ import PrivateRoute from "./components/Auth/PrivateRouter/PrivateRouter";
 import AddRoom from "./components/AddRoom/AddRoom";
 import DevicesList from "./components/RoomContainer/DeviceList/DeviceList";
 import LeftMenuRoomsList from "./components/LeftMenu/LeftMenuRoomsList/LeftMenuRoomsList";
+import HomeContainer from "./components/HomeContainer/HomeContainer"
 function App() {
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(checkAuth());
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+  useEffect(() => {
+    dispatch(checkAuth());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-	return (
-		<Router>
-			<Header />
+  return (
+    <Router>
+      <Header />
 
-			<Route exact path="/auth/signin">
-				<SignIn />
-			</Route>
-			<Route exact path="/auth/signup">
-				<SignUp />
-			</Route>
-			<Route exact path="/auth/signout">
-				<SignOut />
-			</Route>
+      <Route exact path="/auth/signin">
+        <SignIn />
+      </Route>
+      <Route exact path="/auth/signup">
+        <SignUp />
+      </Route>
+      <Route exact path="/auth/signout">
+        <SignOut />
+      </Route>
 
-			<Switch>
-				<Route path="/home">
-					<Grid container spacing={4}>
-						<Grid item xs>
-							<LeftMenuRoomsList />
-						</Grid>
-						<Grid item xs={9}>
-							<PrivateRoute exact path="/home/addRoom/">
-								<AddRoom />
-							</PrivateRoute>
+      <Switch>
+        <PrivateRoute path="/home">
+          <Grid container spacing={4}>
+            <Grid item xs>
+              <LeftMenuRoomsList />
+              <HomeContainer />
+            </Grid>
+            <Grid item xs={9}>
+              <PrivateRoute exact path="/home/addRoom/">
+                <AddRoom />
+              </PrivateRoute>
 
-							<PrivateRoute exact path="/home/config">
-								<ScannigDevices />
-							</PrivateRoute>
+              <PrivateRoute exact path="/home/config">
+                <ScannigDevices />
+              </PrivateRoute>
 
-							<PrivateRoute exact path="/home/config/add-device/:deviceID">
-								<AddDeviceCard />
-							</PrivateRoute>
+              <PrivateRoute exact path="/home/config/add-device/:deviceID">
+                <AddDeviceCard />
+              </PrivateRoute>
 
-							<PrivateRoute exact path="/home/rooms/:roomName">
-								<DevicesList />
-							</PrivateRoute>
-						</Grid>
-					</Grid>
-				</Route>
-			</Switch>
-		</Router>
-	);
+              <PrivateRoute exact path="/home/rooms/:roomName">
+                <DevicesList />
+              </PrivateRoute>
+            </Grid>
+          </Grid>
+        </PrivateRoute>
+      </Switch>
+    </Router>
+  );
 }
 
 export default App;
