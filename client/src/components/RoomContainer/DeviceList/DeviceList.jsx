@@ -31,21 +31,22 @@ const useStyles = makeStyles({
 	media: {
 		height: 140,
 	},
+	pos: {
+		marginBottom: 12,
+	},
 });
 
 export default function DevicesList() {
 	const devices = useSelector((state) => state.devices.items);
 	const sensors = useSelector((state) => state.sensors.items);
 
-	console.log("state  -->> ", devices);
-
 	const { roomName } = useParams();
-
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(getDevices(roomName));
 		dispatch(getSensors(roomName));
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [roomName]);
 
@@ -71,6 +72,12 @@ export default function DevicesList() {
 							<CardContent>
 								<Typography gutterBottom variant="h5" component="h2">
 									{el.device}
+								</Typography>
+								<Typography className={classes.pos} color="textSecondary">
+									Expendet Power - {el.expendedPower} Wt/h
+								</Typography>
+								<Typography className={classes.pos} color="textSecondary">
+									Time Working - {+(el.timeWorking / 3600).toFixed(4)} h
 								</Typography>
 							</CardContent>
 						</CardActionArea>

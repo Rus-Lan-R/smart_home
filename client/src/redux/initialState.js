@@ -12,6 +12,11 @@ const initState = {
 		isLoading: false,
 		error: null,
 	},
+	allDevices: {
+		items: [],
+		isLoading: false,
+		error: null,
+	},
 	sensors: {
 		items: [],
 		isLoading: false,
