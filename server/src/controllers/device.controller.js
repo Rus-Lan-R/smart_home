@@ -17,7 +17,7 @@ const getPowerConsumption = async (req, res) => {
 		const allDevices = await Devices.find({ user: req.session.user.id });
 
 		const homePowerConsumption = +allDevices
-			.reduce((acc, el) => acc + el.powerConsumption, 0)
+			.reduce((acc, el) => acc + el.expendedPower, 0)
 			.toFixed(2);
 
 		res.json(homePowerConsumption);

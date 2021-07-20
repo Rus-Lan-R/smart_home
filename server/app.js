@@ -55,7 +55,7 @@ app.use(sessionParser);
 app.use("/api/auth", authRouter);
 app.use("/api/room", roomRouter);
 app.use("/api/devices", deviceRouter);
-app.get("/api/scenario", scenarioRouter);
+app.use("/api/scenario", scenarioRouter);
 app.use("/api/sensors", sensorRouter);
 
 app.listen(PORT, () => {

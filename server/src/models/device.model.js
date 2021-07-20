@@ -22,8 +22,8 @@ const DeviceSchema = Schema({
 		required: true,
 	},
 	status: {
-		type: Boolean,
-		default: false,
+		type: String,
+		default: "off",
 	},
 	picture: {
 		type: String,

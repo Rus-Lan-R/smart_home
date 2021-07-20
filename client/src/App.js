@@ -44,12 +44,14 @@ function App() {
 
 			<Switch>
 				<PrivateRoute path="/home">
-					<Grid container spacing={4}>
-						<Grid item xs>
+					<Grid container>
+						<Grid item xs={3}>
 							<LeftMenuRoomsList />
-							<HomeContainer />
 						</Grid>
 						<Grid item xs={9}>
+							<PrivateRoute exact path="/home">
+								<HomeContainer />
+							</PrivateRoute>
 							<PrivateRoute exact path="/home/addRoom/">
 								<AddRoom />
 							</PrivateRoute>
