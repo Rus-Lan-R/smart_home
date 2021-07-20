@@ -25,7 +25,7 @@ export default function LeftMenuRoomsList() {
 	return (
 		<>
 			{rooms.map((el) => (
-				<Paper style={{ margin: "10px", maxWidth: "270px" }} key={el._id}>
+				<Paper style={{ margin: "10px"}} key={el._id}>
 					<MenuList>
 						<MenuItem>
 							<ListItemIcon>

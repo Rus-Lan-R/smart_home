@@ -11,7 +11,7 @@ export default function ScenarioList() {
   const [isActive, setIsActive] = useState(false)
   const items = [
     {
-      name: "Elbrus party",
+      name: "Ruslik party",
       status: true
     },
     {
@@ -26,7 +26,7 @@ export default function ScenarioList() {
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/scenario`)
       .then((response) => response.json())
-      .then((data) => setIsActive(data));
+      // .then((data) => setIsActive(data));
   }, []);
 
 
