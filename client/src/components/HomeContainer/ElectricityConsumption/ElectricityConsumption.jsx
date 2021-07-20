@@ -12,7 +12,7 @@ const ElectricityConsumption = () => {
 			.catch((err) => console.log(err));
 	}, []);
 
-	return <div>Power Consumptions - {powerConsumptions}</div>;
+	return <div>Power Consumptions - {powerConsumptions} Wt</div>;
 };
 
 export default ElectricityConsumption;
