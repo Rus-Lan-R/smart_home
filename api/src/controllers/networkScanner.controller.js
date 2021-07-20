@@ -44,40 +44,26 @@ const connectDevice = async (req, res) => {
 		res.sendStatus(500);
 	}
 };
-
-const getOpenPorts = async (req, res) => {
-	console.log(req.body)
+const refetch = async(req, res) => {
+	console.log("sajd")
 	try {
-		const allPorts = await nodePortScanner(req.body.ip, [80, 3000, 3001])
-		console.log(allPorts)
-		res.json(allPorts.ports.open)
-	} catch (error) {
-		res.sendStatus(500)
-
-	}
-
-}
-
-const connectDevice = async (req, res) => {
-	console.log(req.body)
-	try {
-		const responseConnect = await fetch(`http://${req.body.ip}:${req.body.port}/api/connect`)
-		// console.log(responseConnect.ok)
-		const statusResponse = await responseConnect.status
-		console.log(statusResponse)
-		if (responseConnect.ok) {
+		console.log(req.body)
+		const responseSwitch = await fetch(req.body.api)
+		if(responseSwitch.ok){
 			res.sendStatus(200)
-		} else {
-			res.sendStatus(404)
+		}else{
+			res.sendStatus(500)
 		}
 	} catch (error) {
-		console.log(error)
 		res.sendStatus(500)
 	}
+
 }
+
 
 module.exports = {
 	getDevicesIp,
 	getOpenPorts,
 	connectDevice,
+	refetch
 };

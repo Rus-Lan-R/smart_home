@@ -1,13 +1,23 @@
 const express = require("express");
 const cors = require("cors");
-const gpio = require("rpi-gpio").promise;
+const http = require("http")
+const WebSocket = require("ws")
+// const gpio = require("rpi-gpio").promise;
 const Gpio = require("onoff").Gpio;
 let RED = new Gpio(17, "out");
 let GREEN = new Gpio(27, "out");
 let BLUE = new Gpio(22, "out");
+const moveSensor = new Gpio(26, "in", "rising", { debounceTimeout: 10 })
 const scannerRouter = require("./src/routers/networkScanner.routes");
+const fetch = require("node-fetch");
 
 const app = express();
+
+
+const morgan = require("morgan");
+// const GPIO = require("rpi-gpio");
+app.use(morgan("dev"))
+
 
 function clearState() {
 	RED.read().then(() => RED.write(1));
@@ -40,7 +50,17 @@ app.get("/api/rpi/:color", (req, res) => {
 	}
 	res.json({});
 });
+moveSensor.watch((err, value)=> {
+	err && console.log(err)
+	 fetch("http://192.168.1.90:3001/api/sensor").then((request)=> console.log(request.ok)).catch((err)=>console.log(err))
+
+	console.log("sensor",value)
+})
+
+
+
+
 
 app.listen(PORT, () => {
-    console.log("Server has been started on PORT ", PORT);
+	console.log("Server has been started on PORT ", PORT);
 });

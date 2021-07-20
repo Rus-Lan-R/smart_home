@@ -19,7 +19,8 @@
     "node-fetch": "^2.6.1",
     "node-port-scanner": "^3.0.1",
     "onoff": "^6.0.3",
-    "rpi-gpio": "^2.1.7"
+    "rpi-gpio": "^2.1.7",
+    "ws": "^7.5.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
