@@ -1,4 +1,4 @@
-import ScenarioList from "../ScenarioList/ScenarioList"
+import ScenarioList from "./ScenarioList/ScenarioList"
 export default function HomeContainer() {
   return (
   <> 
