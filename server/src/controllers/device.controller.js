@@ -80,10 +80,3 @@ const changeStatus = async (req, res) => {
 };
 
 module.exports = { getUserDevices, addUserDevice, changeStatus };
-// const responseSwich = await fetch(updatedDevice.apiHUB, {
-//   method: "POST",
-//   headers: {
-//     "Content-Type": "application/json",
-//   },
-//   body: JSON.stringify({ api }),
-// });
