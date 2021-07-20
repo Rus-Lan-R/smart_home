@@ -4,7 +4,7 @@ const Rooms = require("../models/room.model");
 const addUserRoom = async (req, res) => {
   try {
     console.log("addUser req.body", req.body);
-    const userId = req.session.user.id;
+    const userId = req.session.user?.id;
     // const { room } = req.body;
 
     const newRoom = await Rooms.create({ room: req.body.room, user: userId });

@@ -7,7 +7,7 @@ const { dbConnectionURL, connect } = require("./src/config/db");
 const authRouter = require("./src/routes/auth.routes");
 const deviceRouter = require("./src/routes/device.routes");
 const roomRouter = require("./src/routes/room.routes.js");
-const scenarioRouter = require("./src/routes/scenario.routes")
+const scenarioRouter = require("./src/routes/scenario.routes.js")
 const sensorRouter = require("./src/routes/sensor.routes.js");
 
 const app = express();
@@ -52,7 +52,7 @@ app.use(
 app.use("/api/auth", authRouter);
 app.use("/api/room", roomRouter);
 app.use("/api/devices", deviceRouter);
-app.get("/api/scenario", scenarioRouter);
+app.use("/api/scenario", scenarioRouter);
 app.use("/api/sensors", sensorRouter);
 
 app.listen(PORT, () => {
