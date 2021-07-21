@@ -19,6 +19,7 @@ import PrivateRoute from "./components/Auth/PrivateRouter/PrivateRouter";
 import AddRoom from "./components/AddRoom/AddRoom";
 import DevicesList from "./components/RoomContainer/DeviceList/DeviceList";
 import LeftMenuRoomsList from "./components/LeftMenu/LeftMenuRoomsList/LeftMenuRoomsList";
+import HomeContainer from "./components/HomeContainer/HomeContainer";
 function App() {
 	const dispatch = useDispatch();
 
@@ -42,12 +43,15 @@ function App() {
 			</Route>
 
 			<Switch>
-				<Route path="/home">
-					<Grid container spacing={4}>
-						<Grid item xs>
+				<PrivateRoute path="/home">
+					<Grid container>
+						<Grid item xs={3}>
 							<LeftMenuRoomsList />
 						</Grid>
 						<Grid item xs={9}>
+							<PrivateRoute exact path="/home">
+								<HomeContainer />
+							</PrivateRoute>
 							<PrivateRoute exact path="/home/addRoom/">
 								<AddRoom />
 							</PrivateRoute>
@@ -65,7 +69,7 @@ function App() {
 							</PrivateRoute>
 						</Grid>
 					</Grid>
-				</Route>
+				</PrivateRoute>
 			</Switch>
 		</Router>
 	);

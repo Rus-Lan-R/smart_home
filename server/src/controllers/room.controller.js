@@ -7,8 +7,7 @@ const addUserRoom = async (req, res) => {
 		const userId = req.session.user.id;
 		// const { room } = req.body;
 
-		const newRoom = await Rooms.create({ room: req.body.room, user: userId }, { new: true });
-		connsole.log(newRoom);
+		const newRoom = await Rooms.create({ room: req.body.room, user: userId });
 		res.json(newRoom);
 	} catch (error) {
 		console.log(error);
