@@ -30,26 +30,45 @@ const addUserDevice = async (req, res) => {
 	console.log(req.body);
 	let path = null;
 	let powerConsumption = 0;
-	switch (req.body.device.toLowerCase()) {
-		case "socket":
+	switch (req.body.deviceSpecific) {
+		case "Lamp":
 			path = "/api/esp/lamp/";
-			powerConsumption = +(Math.random() * (400 - 50) + 50).toFixed(2);
-			break;
-		case "lamp":
-			path = "/api/esp/relay/";
 			powerConsumption = +(Math.random() * (200 - 50) + 50).toFixed(2);
 
 			break;
-		case "heater":
+		case "Heater":
 			powerConsumption = +(Math.random() * (700 - 100) + 100).toFixed(2);
 
 			path = "/api/esp/led/";
+
+			break;
+		case "Socket":
+			path = "/api/esp/relay/";
+			powerConsumption = +(Math.random() * (400 - 50) + 50).toFixed(2);
+			break;
+		case "LED Strip":
+			powerConsumption = +(Math.random() * (700 - 100) + 100).toFixed(2);
+
+			path = "/api/esp/led/";
+
+			break;
+		case "Boiler":
+			powerConsumption = +(Math.random() * (700 - 100) + 100).toFixed(2);
+
+			path = "/api/esp/boiler/";
+
+			break;
+		case "Fun":
+			powerConsumption = +(Math.random() * (700 - 100) + 100).toFixed(2);
+
+			path = "/api/esp/fun/";
 
 			break;
 		default:
 			break;
 	}
 	const apiURL = `http://${req.body.ip}:${req.body.port}${path}`;
+	console.log(apiURL);
 	try {
 		console.log(req.session);
 		console.log(powerConsumption);
