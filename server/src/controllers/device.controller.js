@@ -48,7 +48,7 @@ const addUserDevice = async (req, res) => {
 		case "LED Strip":
 			powerConsumption = +(Math.random() * (700 - 100) + 100).toFixed(2);
 
-			path = "/api/esp/led/";
+			path = "/api/esp/ledStrip/";
 
 			break;
 		case "Boiler":
