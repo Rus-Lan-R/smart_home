@@ -1,6 +1,22 @@
 const { Schema, model } = require("mongoose");
 
 const DeviceSchema = Schema({
+	powerConsumption: {
+		type: Number,
+		default: 0,
+	},
+	expendedPower: {
+		type: Number,
+		default: 0,
+	},
+	timeWorking: {
+		type: Number,
+		default: 0,
+	},
+	startWorkingTime: {
+		type: Number,
+		default: 0,
+	},
 	device: {
 		type: String,
 		required: true,

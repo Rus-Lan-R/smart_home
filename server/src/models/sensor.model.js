@@ -14,7 +14,8 @@ const SensorSchema = Schema({
 		default: false,
 	},
 	value: {
-		type: String,
+		type: Number,
+		default: 0,
 	},
 	room: {
 		type: Schema.Types.ObjectId,

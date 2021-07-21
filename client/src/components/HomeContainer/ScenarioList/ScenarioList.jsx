@@ -3,40 +3,41 @@
 // import { useState, useEffect } from "react";
 import Scenario from "../Scenario/Scenario";
 
-import React from 'react';
-import Carousel from 'react-material-ui-carousel'
+import React from "react";
+import Carousel from "react-material-ui-carousel";
 
 export default function ScenarioList() {
-  // const items = useSelector((state) => state.scenarios.items);
-  const items = [
+	// const items = useSelector((state) => state.scenarios.items);
+	const items = [
+		{
+			name: "Ruslik party",
+			status: false,
+		},
+		{
+			name: "I'm in home",
+			status: false,
+		},
+		{
+			name: "I'm not home",
+			status: false,
+		},
     {
-      name: "Ruslik party",
-      status: false
-    },
-    {
-      name: "I'm in home",
-      status: false
-    },
-    {
-      name: "I'm not home",
+      name: "Order 66",
       status: false
     }
-  ]
+	];
 
+	// const dispatch = useDispatch();
 
+	// useEffect(() => {
+	//   dispatch(getScenarios());
+	// }, []);
 
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(getScenarios());
-  // }, []);
-
-  return (
-    <Carousel>
-      {
-        items.map( (item, i) => <Scenario key={i} item={item}/> )
-      }
-    </Carousel>      
-  ) 
+	return (
+		<Carousel>
+			{items.map((item, i) => (
+				<Scenario key={i} item={item} />
+			))}
+		</Carousel>
+	);
 }
-

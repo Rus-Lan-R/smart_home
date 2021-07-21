@@ -8,17 +8,18 @@ export default function Scenario({item}) {
 const [isActive, setIsActive] = useState(false)
 const dispatch = useDispatch();
 
-const handleClick =(nameScenario) => {
-      dispatch(selectScenario( {nameScenario}));
+const handleClick =(nameScenario, isActive) => {
+      dispatch(selectScenario( {nameScenario, isActive}));
+      setIsActive(!isActive)
 }
 
     return (
       <Paper>
             <h2>{item.name}</h2>
-            <p>{isActive? 'started':''}</p>
+            <p>{isActive? 'Started':''}</p>
             <img src={`/${item.picture}`} alt={item.picture} />
-            <Button className="CheckButton" onClick={() => handleClick(item.name)}>
-                Start
+            <Button className="CheckButton" onClick={() => handleClick(item.name, isActive)}>
+            {isActive? "Stop" : "Start"}
             </Button>
         </Paper>
     )
