@@ -17,18 +17,20 @@ const statusScenario = async (req, res) => {
     const userId = req.session.user.id
     console.log("req.body====>>>", req.body)
     console.log("userId", userId)
-    let action = "off";
-    req.body.isActive ? action = "on" : action = "off";
+    let action = null;
+    const currentStatus = req.body.isActive
+    currentStatus ? action = "off" : action = "on";
     switch (req.body.nameScenario.toLowerCase()) {
       case "ruslik party":
         //включить ленту
         break;
       case "i'm in home":
         //включить свет
-        await Devices.updateMany({ user: userId, device: "Lamp" }, { status: true }, { new: true })
+        await Devices.updateMany({ user: userId, device: "Lamp", status: currentStatus }, { status: !currentStatus }, { new: true })
         const allUserOffLamps = await Devices.find({ user: userId, device: "Lamp" })
         allUserLamps.forEach(async (device) => {
           const api = `${device.apiURL}${action}`
+          console.log(api)
           const responseSwitch = await fetch("http://192.168.1.148:3001/api/refetch", {
             method: "POST",
             headers: {
@@ -41,7 +43,7 @@ const statusScenario = async (req, res) => {
         break;
       case "i'm not home":
         //выключить свет
-        await Devices.updateMany({ user: userId, device: "Lamp" }, { status: true }, { new: true })
+        await Devices.updateMany({ user: userId, device: "Lamp", status: currentStatus }, { status: !currentStatus }, { new: true })
         const allUserOnLamps = await Devices.find({ user: userId, device: "Lamp" })
         allUserLamps.forEach(async (device) => {
           const api = `${device.apiURL}${action}`
@@ -58,7 +60,7 @@ const statusScenario = async (req, res) => {
       default:
         break;
     }
-    res.sendStatus(200);
+    res.json(!currentStatus);
   } catch (error) {
     res.sendStatus(500);
   }
