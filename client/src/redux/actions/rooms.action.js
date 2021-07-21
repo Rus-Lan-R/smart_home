@@ -3,6 +3,7 @@ import {
 	ROOMS_GET_SUCCESS,
 	ROOMS_LOADING_ERROR,
 	ROOM_ADD,
+  ROOM_MARKER_UPDATE,
 } from "../types/rooms.types";
 
 export const getRoomsStart = () => ({
@@ -16,6 +17,29 @@ export const getRoomsError = (err) => ({
 	type: ROOMS_LOADING_ERROR,
 	payload: err,
 });
+
+export const updateRoomMarker = (updatedMarker) => ({
+	type: ROOM_MARKER_UPDATE,
+  payload: {updatedMarker},
+});
+
+export const changeStatusOfRoomMarker = (updatedMarker) => async (dispatch) =>{
+  dispatch(updateRoomMarker(updatedMarker))
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/api/markers`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: "include",
+    body: JSON.stringify(
+      updatedMarker
+    ),
+  });
+  const result = await response.json();
+  console.log(result);
+};
+
+
 
 export const addRoom = (newRoom) => ({
 	type: ROOM_ADD,

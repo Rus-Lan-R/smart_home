@@ -9,6 +9,7 @@ const deviceRouter = require("./src/routes/device.routes");
 const roomRouter = require("./src/routes/room.routes.js");
 const scenarioRouter = require("./src/routes/scenario.routes")
 const sensorRouter = require("./src/routes/sensor.routes.js");
+const markerRouter = require("./src/routes/marker.routes.js");
 
 const app = express();
 
@@ -54,6 +55,7 @@ app.use("/api/room", roomRouter);
 app.use("/api/devices", deviceRouter);
 app.get("/api/scenario", scenarioRouter);
 app.use("/api/sensors", sensorRouter);
+app.use("/api/markers", markerRouter);
 
 app.listen(PORT, () => {
   console.log("Server has been started on PORT ", PORT);

@@ -27,6 +27,7 @@ const VoiceRecognitionButton = () => {
 
   useEffect(() => {
     handleListen();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMicOn]);
 
   const handleListen = () => {

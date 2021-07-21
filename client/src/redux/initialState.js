@@ -16,6 +16,11 @@ const initState = {
     items: [],
     isLoading: false,
     error: null,
+  },
+  currentMarker: {
+    items: {},
+    isLoading: false,
+    error: null,
   }
 };
 
