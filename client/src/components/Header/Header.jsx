@@ -187,7 +187,7 @@ export default function Header() {
 			aria-labelledby="alert-dialog-slide-title"
 			aria-describedby="alert-dialog-slide-description"
 		>
-			<DialogTitle id="alert-dialog-slide-title">{"Anuthtorized Person"}</DialogTitle>
+			<DialogTitle id="alert-dialog-slide-title">{"Anauthtorized Person"}</DialogTitle>
 			<DialogContent>
 				<img width="100%" height="100%" src="http://localhost:3000/alert.jpeg" alt="..img"></img>
 				<DialogContentText id="alert-dialog-slide-description">

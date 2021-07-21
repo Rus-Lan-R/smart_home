@@ -2,6 +2,7 @@ import Button from "@material-ui/core/Button";
 import { useDispatch, useSelector } from "react-redux";
 import DevicesList from "../DevicesList/DevicesList";
 import { getIpDevices, clearScaningDevices } from "../../../redux/actions/scanningIP.action";
+import Grid from "@material-ui/core/Grid";
 
 const ScannigDevices = () => {
 	const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const ScannigDevices = () => {
 	return (
 		<>
 			{loader ? (
-				<Button onClick={handleStop} variant="outlined" color="primary">
+				<Button onClick={handleStop} variant="outlined" color="secondary">
 					Stop Devices Scanning
 				</Button>
 			) : (
