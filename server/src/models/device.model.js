@@ -21,7 +21,7 @@ const DeviceSchema = Schema({
 		type: String,
 		required: true,
 	},
-  deviceSpecific: {
+	deviceSpecific: {
 		type: String,
 		required: true,
 	},

@@ -1,11 +1,14 @@
-import ScenarioList from "./ScenarioList/ScenarioList";
-import ElectricityConsumption from "./ElectricityConsumption/ElectricityConsumption";
+import ScenarioList from "./ScenarioList/ScenarioList"
+import HousePlan from "./HousePlan/HousePlan"
+import VoiceRecognitionButton from '../Buttons/VoiceRecognitionButton';
 export default function HomeContainer() {
-	return (
-		<>
-			<ScenarioList />
-			{/* <HousePlan />*/}
-			<ElectricityConsumption />
-		</>
-	);
+  return (
+  <> 
+<ScenarioList />
+<VoiceRecognitionButton/>
+<HousePlan />
+{/* 
+<ElectricityConsumption />   */}
+</>
+  )
 }

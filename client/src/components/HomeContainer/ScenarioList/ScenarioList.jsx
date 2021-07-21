@@ -21,6 +21,10 @@ export default function ScenarioList() {
 			name: "I'm not home",
 			status: false,
 		},
+    {
+      name: "Order 66",
+      status: false
+    }
 	];
 
 	// const dispatch = useDispatch();
