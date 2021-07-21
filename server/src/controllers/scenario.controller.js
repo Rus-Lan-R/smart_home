@@ -24,8 +24,8 @@ const statusScenario = async (req, res) => {
       break;
     case "i'm in home":
       //включить свет
-      await Devices.updateMany({ user: userId, name: "lamp" }, { status: true })
-      const allUserLamps = await Devices.find({ user: userId, device: "lamp" })
+      const allUserLamps = await Devices.updateMany({ user: userId, name: "lamp" }, { status: true }, { new: true })
+      // await Devices.find({ user: userId, device: "lamp" })
 
       console.log("allUserLamps", allUserLamps)
       allUserLamps.forEach(async (device) => {
