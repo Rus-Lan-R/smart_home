@@ -27,23 +27,40 @@ const getPowerConsumption = async (req, res) => {
 };
 
 const addUserDevice = async (req, res) => {
-	console.log(req.body);
 	let path = null;
 	let powerConsumption = 0;
-	switch (req.body.device.toLowerCase()) {
-		case "socket":
+	switch (req.body.deviceSpecific) {
+		case "Lamp":
 			path = "/api/esp/lamp/";
-			powerConsumption = +(Math.random() * (400 - 50) + 50).toFixed(2);
-			break;
-		case "lamp":
-			path = "/api/esp/relay/";
 			powerConsumption = +(Math.random() * (200 - 50) + 50).toFixed(2);
 
 			break;
-		case "heater":
+		case "Heater":
 			powerConsumption = +(Math.random() * (700 - 100) + 100).toFixed(2);
 
 			path = "/api/esp/led/";
+
+			break;
+		case "Socket":
+			path = "/api/esp/relay/";
+			powerConsumption = +(Math.random() * (400 - 50) + 50).toFixed(2);
+			break;
+		case "LED Strip":
+			powerConsumption = +(Math.random() * (700 - 100) + 100).toFixed(2);
+
+			path = "/api/esp/ledStrip/";
+
+			break;
+		case "Boiler":
+			powerConsumption = +(Math.random() * (700 - 100) + 100).toFixed(2);
+
+			path = "/api/esp/boiler/";
+
+			break;
+		case "Fun":
+			powerConsumption = +(Math.random() * (700 - 100) + 100).toFixed(2);
+
+			path = "/api/esp/fun/";
 
 			break;
 		default:
@@ -51,8 +68,6 @@ const addUserDevice = async (req, res) => {
 	}
 	const apiURL = `http://${req.body.ip}:${req.body.port}${path}`;
 	try {
-		console.log(req.session);
-		console.log(powerConsumption);
 		const newDevice = await Devices.create({
 			...req.body,
 			apiURL,
@@ -64,7 +79,6 @@ const addUserDevice = async (req, res) => {
 			{ $push: { devices: newDevice._id } },
 			{ new: true },
 		);
-		console.log(room);
 		res.sendStatus(200);
 	} catch (error) {
 		console.log(error);
@@ -79,7 +93,6 @@ const changeStatus = async (req, res) => {
 			user: req.session.user.id,
 			status: true,
 		});
-		console.log(prevStateDevice);
 		let updatedDevice;
 		if (prevStateDevice) {
 			const timeAfterOn = +(new Date().getTime() / 1000 - prevStateDevice.startWorkingTime).toFixed(
@@ -111,7 +124,6 @@ const changeStatus = async (req, res) => {
 			);
 		}
 
-		console.log(updatedDevice.apiHUB);
 		let action = null;
 		if (updatedDevice.status) {
 			action = "on";
@@ -119,7 +131,6 @@ const changeStatus = async (req, res) => {
 			action = "off";
 		}
 		const api = `${updatedDevice.apiURL}${action}`;
-		console.log("esp", api);
 
 		const responseSwich = await fetch("http://192.168.1.148:3001/api/refetch", {
 			method: "POST",
@@ -129,7 +140,6 @@ const changeStatus = async (req, res) => {
 			body: JSON.stringify({ api }),
 		});
 
-		console.log(responseSwich.ok);
 		if (responseSwich.ok) {
 			res.json(updatedDevice);
 		} else {

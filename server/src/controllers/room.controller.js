@@ -3,10 +3,7 @@ const Rooms = require("../models/room.model");
 
 const addUserRoom = async (req, res) => {
 	try {
-		console.log("addUser req.body", req.body);
 		const userId = req.session.user.id;
-		// const { room } = req.body;
-
 		const newRoom = await Rooms.create({ room: req.body.room, user: userId });
 		res.json(newRoom);
 	} catch (error) {
@@ -19,7 +16,6 @@ const getUserRooms = async (req, res) => {
 	try {
 		const userId = req.session.user.id;
 		const allUserRooms = await Rooms.find({ user: userId });
-		console.log(allUserRooms);
 		res.json(allUserRooms);
 	} catch (error) {
 		res.sendStatus(500);

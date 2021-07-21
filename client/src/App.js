@@ -17,6 +17,7 @@ import AddDeviceCard from "./components/DeviceConnection/AddDevice/AddDeviceCard
 import PrivateRoute from "./components/Auth/PrivateRouter/PrivateRouter";
 
 import AddRoom from "./components/AddRoom/AddRoom";
+import AlertDialog from "./components/Header/AlertDialog/AlertDialog";
 import DevicesList from "./components/RoomContainer/DeviceList/DeviceList";
 import LeftMenuRoomsList from "./components/LeftMenu/LeftMenuRoomsList/LeftMenuRoomsList";
 import HomeContainer from "./components/HomeContainer/HomeContainer";

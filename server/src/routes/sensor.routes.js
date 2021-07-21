@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const sensorRouter = Router();
 const {
-	getUserSensors,
+	getUserSensorsValue,
 	addUserSensors,
 	getSensorValueMovement,
 	setSensorValueMovement,
@@ -10,7 +10,7 @@ const {
 	switchSensor,
 } = require("../controllers/sensor.controller");
 
-sensorRouter.route("/").get(getUserSensors).post(addUserSensors).put(switchSensor);
+sensorRouter.route("/").patch(getUserSensorsValue).post(addUserSensors).put(switchSensor);
 sensorRouter
 	.route("/movement")
 	.get(getSensorValueMovement)

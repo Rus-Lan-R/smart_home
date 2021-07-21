@@ -22,7 +22,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { lighten, makeStyles } from "@material-ui/core/styles";
 import FilterListIcon from "@material-ui/icons/FilterList";
-
+import LinearProgressBar from "../LinearProgressBar/LinearProgressBar";
 function descendingComparator(a, b, orderBy) {
 	if (b[orderBy] < a[orderBy]) {
 		return -1;
@@ -177,7 +177,7 @@ export default function DevicesList() {
 	const [selected] = React.useState([]);
 	const [page, setPage] = React.useState(0);
 	const [dense] = React.useState(false);
-	const [rowsPerPage, setRowsPerPage] = React.useState(5);
+	const [rowsPerPage, setRowsPerPage] = React.useState(15);
 
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === "asc";
@@ -200,74 +200,71 @@ export default function DevicesList() {
 
 	return (
 		<>
-			{loader ? (
-				<Loader />
-			) : (
-				<Container width="75%">
-					<div className={classes.root}>
-						<Paper className={classes.paper}>
-							<EnhancedTableToolbar numSelected={selected.length} />
-							<TableContainer>
-								<Table
-									className={classes.table}
-									aria-labelledby="tableTitle"
-									size={dense ? "small" : "medium"}
-									aria-label="enhanced table"
-								>
-									<EnhancedTableHead
-										classes={classes}
-										numSelected={selected.length}
-										order={order}
-										orderBy={orderBy}
-										onRequestSort={handleRequestSort}
-										rowCount={devices.length}
-									/>
+			{loader ? <LinearProgressBar /> : <></>}
+			<Container width="75%">
+				<div className={classes.root}>
+					<Paper className={classes.paper}>
+						<EnhancedTableToolbar numSelected={selected.length} />
+						<TableContainer>
+							<Table
+								className={classes.table}
+								aria-labelledby="tableTitle"
+								size={dense ? "small" : "medium"}
+								aria-label="enhanced table"
+							>
+								<EnhancedTableHead
+									classes={classes}
+									numSelected={selected.length}
+									order={order}
+									orderBy={orderBy}
+									onRequestSort={handleRequestSort}
+									rowCount={devices.length}
+								/>
 
-									<TableBody>
-										{stableSort(devices, getComparator(order, orderBy))
-											.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-											.map((row, index) => {
-												const isItemSelected = isSelected(row.ip);
+								<TableBody>
+									{stableSort(devices, getComparator(order, orderBy))
+										.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+										.map((row, index) => {
+											const isItemSelected = isSelected(row.ip);
 
-												return (
-													<TableRow
-														hover
-														key={row.ip}
-														role="checkbox"
-														aria-checked={isItemSelected}
-														tabIndex={-1}
-														selected={isItemSelected}
-													>
-														<TableCell align="center">
-															<Link to={`/home/config/add-device/${row.mac}`}> {row.vendor}</Link>
-														</TableCell>
+											return (
+												<TableRow
+													hover
+													key={row.ip}
+													role="checkbox"
+													aria-checked={isItemSelected}
+													tabIndex={-1}
+													selected={isItemSelected}
+												>
+													<TableCell align="center">
+														<Link to={`/home/config/add-device/${row.mac}`}> {row.vendor}</Link>
+													</TableCell>
 
-														<TableCell align="center">{row.ip}</TableCell>
-														<TableCell align="center">{row.mac}</TableCell>
-													</TableRow>
-												);
-											})}
-										{emptyRows > 0 && (
-											<TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-												<TableCell colSpan={6} />
-											</TableRow>
-										)}
-									</TableBody>
-								</Table>
-							</TableContainer>
-							<TablePagination
-								rowsPerPageOptions={[5, 10, 25, 50, 100]}
-								component="div"
-								count={devices.length}
-								rowsPerPage={rowsPerPage}
-								page={page}
-								onPageChange={handleChangePage}
-								onRowsPerPageChange={handleChangeRowsPerPage}
-							/>
-						</Paper>
-					</div>
-				</Container>
-			)}
+													<TableCell align="center">{row.ip}</TableCell>
+													<TableCell align="center">{row.mac}</TableCell>
+												</TableRow>
+											);
+										})}
+									{emptyRows > 0 && (
+										<TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+											<TableCell colSpan={6} />
+										</TableRow>
+									)}
+								</TableBody>
+							</Table>
+						</TableContainer>
+						<TablePagination
+							rowsPerPageOptions={[10, 15, 25, 50, 100]}
+							component="div"
+							count={devices.length}
+							rowsPerPage={rowsPerPage}
+							page={page}
+							onPageChange={handleChangePage}
+							onRowsPerPageChange={handleChangeRowsPerPage}
+						/>
+					</Paper>
+				</div>
+			</Container>
 		</>
 	);
 }

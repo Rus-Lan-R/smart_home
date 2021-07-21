@@ -26,7 +26,7 @@ export default function deviceReducer(state = {}, action) {
 				return el;
 			});
 
-			return { ...state, items: updatedDevices, isLoading: false, error: null };
+			return { items: updatedDevices, isLoading: false, error: null };
 		}
 		case "DELETE": {
 			return { items: [] };

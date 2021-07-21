@@ -1,16 +1,35 @@
 import Button from "@material-ui/core/Button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DevicesList from "../DevicesList/DevicesList";
-import { getIpDevices } from "../../../redux/actions/scanningIP.action";
+import { getIpDevices, clearScaningDevices } from "../../../redux/actions/scanningIP.action";
+import Grid from "@material-ui/core/Grid";
 
 const ScannigDevices = () => {
 	const dispatch = useDispatch();
 
+	const handleStart = () => {
+		dispatch(getIpDevices());
+		dispatch(clearScaningDevices());
+	};
+
+	const handleStop = () => {
+		dispatch(getIpDevices({ stop: true }));
+	};
+
+	const loader = useSelector((state) => state.loader);
+
 	return (
 		<>
-			<Button onClick={() => dispatch(getIpDevices())} variant="outlined" color="primary">
-				Scan Devices
-			</Button>
+			{loader ? (
+				<Button onClick={handleStop} variant="outlined" color="secondary">
+					Stop Devices Scanning
+				</Button>
+			) : (
+				<Button onClick={handleStart} variant="outlined" color="primary">
+					Start Devices Scanning
+				</Button>
+			)}
+
 			<DevicesList />
 		</>
 	);

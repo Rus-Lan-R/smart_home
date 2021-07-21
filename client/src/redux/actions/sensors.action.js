@@ -106,3 +106,25 @@ export const resetMotionSensor = (sensorID) => async (dispatch) => {
 		dispatch(getSensorsError(error));
 	}
 };
+
+// export const checkSensors = (room) => async(dispatch) => {
+//   dispatch(getSensorsStart());
+//   try {
+// 		const responseResetMotionSensor = await fetch(
+// 			`${process.env.REACT_APP_API_URL}/api/sensors`,
+// 			{
+// 				method: "PATCH",
+// 				headers: {
+// 					"Content-Type": "application/json",
+// 				},
+// 				credentials: "include",
+// 				body: JSON.stringify({ room }),
+// 			},
+// 		);
+// 		const updatedSensor = await responseResetMotionSensor.json();
+
+// 		dispatch(updateSensorValue(updatedSensor));
+// 	} catch (error) {
+// 		dispatch(getSensorsError(error));
+// 	}
+// }
