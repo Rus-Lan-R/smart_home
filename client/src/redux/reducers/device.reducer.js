@@ -21,12 +21,12 @@ export default function deviceReducer(state = {}, action) {
 		case DEVICES_CHANGE_STATUS: {
 			const updatedDevices = state.items.map((el) => {
 				if (el._id === payload._id) {
-					el.status = payload.status;
+					el = payload;
 				}
 				return el;
 			});
 
-			return { ...state, items: updatedDevices, isLoading: false, error: null };
+			return { items: updatedDevices, isLoading: false, error: null };
 		}
 		case "DELETE": {
 			return { items: [] };

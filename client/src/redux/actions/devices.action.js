@@ -51,6 +51,7 @@ export const deviceChangeStatus = (deviceID, currentStatus) => async (dispatch) 
 			body: JSON.stringify(deviceID, currentStatus),
 		});
 		const updatedDevice = await responseChangeStatus.json();
+
 		dispatch(updateDevice(updatedDevice));
 	} catch (error) {
 		dispatch(getDevicesError(error));

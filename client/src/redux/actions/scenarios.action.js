@@ -29,3 +29,16 @@ export const getScenarios = () => async (dispatch) => {
     dispatch(getScenariosError(err));
   }
 };
+
+export const selectScenario = (scenario) => async (dispatch) => {
+  const responseChangeStatus = await fetch(`${process.env.REACT_APP_API_URL}/api/scenario`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify(scenario),
+  });
+  const statusScenario = await responseChangeStatus.json();
+  console.log(statusScenario)
+}

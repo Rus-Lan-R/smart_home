@@ -7,8 +7,8 @@ const ScenarioSchema = Schema({
     required: true,
   },
   status: {
-    type: String,
-    required: true,
+    type: Boolean,
+    default: false,
   },
   user: {
     type: Schema.Types.ObjectId, ref: 'User',
