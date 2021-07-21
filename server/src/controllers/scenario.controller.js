@@ -28,7 +28,7 @@ const statusScenario = async (req, res) => {
         //включить свет
         await Devices.updateMany({ user: userId, device: "Lamp", status: currentStatus }, { status: !currentStatus }, { new: true })
         const allUserOffLamps = await Devices.find({ user: userId, device: "Lamp" })
-        allUserLamps.forEach(async (device) => {
+        allUserOffLamps.forEach(async (device) => {
           const api = `${device.apiURL}${action}`
           console.log(api)
           const responseSwitch = await fetch("http://192.168.1.148:3001/api/refetch", {
@@ -45,7 +45,7 @@ const statusScenario = async (req, res) => {
         //выключить свет
         await Devices.updateMany({ user: userId, device: "Lamp", status: currentStatus }, { status: !currentStatus }, { new: true })
         const allUserOnLamps = await Devices.find({ user: userId, device: "Lamp" })
-        allUserLamps.forEach(async (device) => {
+        allUserOnLamps.forEach(async (device) => {
           const api = `${device.apiURL}${action}`
           const responseSwitch = await fetch("http://192.168.1.148:3001/api/refetch", {
             method: "POST",
