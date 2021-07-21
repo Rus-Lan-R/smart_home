@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getDevices } from "../../../redux/actions/devices.action";
 import {
@@ -49,6 +49,16 @@ export default function DevicesList() {
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [roomName]);
+
+	useEffect(() => {
+		let interval = setInterval(() => {
+			dispatch(getDevices(roomName));
+			dispatch(getSensors(roomName));
+		}, 10000);
+		return () => {
+			clearInterval(interval);
+		};
+	});
 
 	const handleClickDevice = (id, status) => {
 		dispatch(deviceChangeStatus({ id, status }));

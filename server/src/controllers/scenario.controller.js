@@ -15,8 +15,6 @@ const getScenarios = async (req, res) => {
 const statusScenario = async (req, res) => {
 	try {
 		const userId = req.session.user.id;
-		console.log("req.body====>>>", req.body);
-		console.log("userId", userId);
 		let action = null;
 		const currentStatus = req.body.isActive;
 		currentStatus ? (action = "off") : (action = "on");
@@ -34,7 +32,6 @@ const statusScenario = async (req, res) => {
 				const allUserOffLamps = await Devices.find({ user: userId, device: "Lamp" });
 				allUserOffLamps.forEach(async (device) => {
 					const api = `${device.apiURL}${action}`;
-					console.log(api);
 					const responseSwitch = await fetch("http://192.168.1.148:3001/api/refetch", {
 						method: "POST",
 						headers: {

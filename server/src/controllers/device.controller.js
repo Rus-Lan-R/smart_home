@@ -27,7 +27,6 @@ const getPowerConsumption = async (req, res) => {
 };
 
 const addUserDevice = async (req, res) => {
-	console.log(req.body);
 	let path = null;
 	let powerConsumption = 0;
 	switch (req.body.deviceSpecific) {
@@ -68,10 +67,7 @@ const addUserDevice = async (req, res) => {
 			break;
 	}
 	const apiURL = `http://${req.body.ip}:${req.body.port}${path}`;
-	console.log(apiURL);
 	try {
-		console.log(req.session);
-		console.log(powerConsumption);
 		const newDevice = await Devices.create({
 			...req.body,
 			apiURL,
@@ -83,7 +79,6 @@ const addUserDevice = async (req, res) => {
 			{ $push: { devices: newDevice._id } },
 			{ new: true },
 		);
-		console.log(room);
 		res.sendStatus(200);
 	} catch (error) {
 		console.log(error);
@@ -98,7 +93,6 @@ const changeStatus = async (req, res) => {
 			user: req.session.user.id,
 			status: true,
 		});
-		console.log(prevStateDevice);
 		let updatedDevice;
 		if (prevStateDevice) {
 			const timeAfterOn = +(new Date().getTime() / 1000 - prevStateDevice.startWorkingTime).toFixed(
@@ -130,7 +124,6 @@ const changeStatus = async (req, res) => {
 			);
 		}
 
-		console.log(updatedDevice.apiHUB);
 		let action = null;
 		if (updatedDevice.status) {
 			action = "on";
@@ -138,7 +131,6 @@ const changeStatus = async (req, res) => {
 			action = "off";
 		}
 		const api = `${updatedDevice.apiURL}${action}`;
-		console.log("esp", api);
 
 		const responseSwich = await fetch("http://192.168.1.148:3001/api/refetch", {
 			method: "POST",
@@ -148,7 +140,6 @@ const changeStatus = async (req, res) => {
 			body: JSON.stringify({ api }),
 		});
 
-		console.log(responseSwich.ok);
 		if (responseSwich.ok) {
 			res.json(updatedDevice);
 		} else {

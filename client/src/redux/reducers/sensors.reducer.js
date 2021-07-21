@@ -27,7 +27,8 @@ export default function deviceReducer(state = {}, action) {
 				return el;
 			});
 
-			return { ...state, items: updatedSensors, isLoading: false, error: null };
+			return { items: updatedSensors, isLoading: false, error: null };
+			// return { ...state, items: updatedSensors, isLoading: false, error: null };
 		}
 		case SENSORS_CHANGE_VALUE: {
 			const updatedSensors = state.items.map((el) => {
@@ -37,7 +38,8 @@ export default function deviceReducer(state = {}, action) {
 				return el;
 			});
 
-			return { ...state, items: updatedSensors, isLoading: false, error: null };
+			return { items: updatedSensors, isLoading: false, error: null };
+			// return { ...state, items: updatedSensors, isLoading: false, error: null };
 		}
 		case "DELETE": {
 			return { items: [] };

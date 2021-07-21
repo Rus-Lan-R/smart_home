@@ -94,14 +94,6 @@ export default function AddDeviceForm({ vendor, ip, port }) {
 				<form className={classes.root} onSubmit={handleSubmit}>
 					<div>
 						<TextField
-							id="standard-basic"
-							label="Device name"
-							name="device"
-							className={clsx(classes.margin, classes.textField)}
-							required
-						/>
-
-						<TextField
 							id="standard-select-currency"
 							name="room"
 							select
@@ -109,7 +101,7 @@ export default function AddDeviceForm({ vendor, ip, port }) {
 							value={currentTypeDevice}
 							onChange={(event) => setCurrentTypeDevice(event.target.value)}
 							className={clsx(classes.margin, classes.textField)}
-							helperText="Please select room"
+							helperText="Please select device type"
 							required
 						>
 							{typeDevice.map((el) => (
@@ -119,24 +111,6 @@ export default function AddDeviceForm({ vendor, ip, port }) {
 									onClick={() => setCurrentTypeDevice(el.type)}
 								>
 									{el.type}
-								</MenuItem>
-							))}
-						</TextField>
-
-						<TextField
-							id="standard-select-currency"
-							name="room"
-							select
-							label="Select"
-							value={currentRoom}
-							onChange={(event) => setCurrentRoom(event.target.value)}
-							className={clsx(classes.margin, classes.textField)}
-							helperText="Please select room"
-							required
-						>
-							{roomsList.map((el) => (
-								<MenuItem key={el._id} value={el.room} onClick={() => setCurrentRoomID(el._id)}>
-									{el.room}
 								</MenuItem>
 							))}
 						</TextField>
@@ -186,6 +160,32 @@ export default function AddDeviceForm({ vendor, ip, port }) {
 								))}
 							</TextField>
 						)}
+
+						<TextField
+							id="standard-basic"
+							label="Device name"
+							name="device"
+							className={clsx(classes.margin, classes.textField)}
+							required
+						/>
+
+						<TextField
+							id="standard-select-currency"
+							name="room"
+							select
+							label="Select"
+							value={currentRoom}
+							onChange={(event) => setCurrentRoom(event.target.value)}
+							className={clsx(classes.margin, classes.textField)}
+							helperText="Please select room"
+							required
+						>
+							{roomsList.map((el) => (
+								<MenuItem key={el._id} value={el.room} onClick={() => setCurrentRoomID(el._id)}>
+									{el.room}
+								</MenuItem>
+							))}
+						</TextField>
 					</div>
 					<Button
 						type="submit"
