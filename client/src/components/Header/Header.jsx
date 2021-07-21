@@ -14,6 +14,9 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import HomeIcon from "@material-ui/icons/Home";
+import NoEncryptionIcon from "@material-ui/icons/NoEncryption";
+import LockIcon from "@material-ui/icons/Lock";
 
 const useStyles = makeStyles((theme) => ({
 	grow: {
@@ -47,6 +50,11 @@ export default function Header() {
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+	const security = useSelector((state) =>
+		state.sensors.items.find((el) => el.sensorType === "Motion Sensor"),
+	);
+	const securityStatus = useSelector((state) => state.sensors.items?.status);
 
 	const isMenuOpen = Boolean(anchorEl);
 	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -156,7 +164,7 @@ export default function Header() {
 						color="inherit"
 						aria-label="open drawer"
 					>
-						<MenuIcon />
+						<HomeIcon />
 					</IconButton>
 					<Typography className={classes.title} variant="h6" noWrap>
 						{userName ? userName : "Smart Home"}
@@ -164,18 +172,33 @@ export default function Header() {
 					<div className={classes.grow} />
 					<div className={classes.sectionDesktop}>
 						{userName ? (
-							<MenuItem>
-              <IconButton aria-label="show 17 new notifications" color="inherit">
-							<Badge badgeContent={17} color="secondary">
-								<NotificationsIcon />
-							</Badge>
-						</IconButton>
-								<Typography className={classes.title} variant="h6" noWrap>
-									<NavLink exact to="/auth/signout" className="nav-link" activeClassName="active">
-										Sign Out
-									</NavLink>
-								</Typography>
-							</MenuItem>
+							<>
+								{securityStatus ? (
+									<IconButton color="inherit">
+										<Badge badgeContent={0} color="secondary">
+											<LockIcon />
+										</Badge>
+									</IconButton>
+								) : (
+									<IconButton color="inherit">
+										<Badge badgeContent={0} color="secondary">
+											<NoEncryptionIcon />
+										</Badge>
+									</IconButton>
+								)}
+								<IconButton color="inherit">
+									<Badge badgeContent={security?.value} color="secondary">
+										<NotificationsIcon />
+									</Badge>
+								</IconButton>
+								<MenuItem>
+									<Typography className={classes.title} variant="h6" noWrap>
+										<NavLink exact to="/auth/signout" className="nav-link" activeClassName="active">
+											Sign Out
+										</NavLink>
+									</Typography>
+								</MenuItem>
+							</>
 						) : (
 							<>
 								<MenuItem>
@@ -193,7 +216,7 @@ export default function Header() {
 									</Typography>
 								</MenuItem>
 							</>
-						)}						
+						)}
 					</div>
 					<div className={classes.sectionMobile}>
 						<IconButton

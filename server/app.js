@@ -9,14 +9,20 @@ const deviceRouter = require("./src/routes/device.routes");
 const roomRouter = require("./src/routes/room.routes.js");
 const scenarioRouter = require("./src/routes/scenario.routes");
 const sensorRouter = require("./src/routes/sensor.routes.js");
-const http = require("http");
-const WebSocket = require("ws");
 const app = express();
 
 const PORT = process.env.PORT ?? 3001;
 
 connect();
-const map = new Map();
+
+// const netList = require("network-list");
+
+// netList.scan({ ip: "192.168.1", min: 1, max: 50 }, (err, arr) => {
+// 	let arrAllDevice = arr.filter((el) => el.alive).sort();
+// 	console.log(arrAllDevice);
+// });
+
+// console.log("finish");
 
 if (process.env.DEV) {
 	const morgan = require("morgan");
