@@ -24,6 +24,20 @@ const getUserSensorsValue = async (req, res) => {
 	// 	res.sendStatus(500);
 	// }
 };
+const getAllUserSensors = async (req, res) => {
+  try {
+    console.log("Znen");
+		const allDevices = await Sensors.find({ user: req.session.user.id });
+		// const homePowerConsumption = +allDevices
+		// 	.reduce((acc, el) => acc + el.expendedPower, 0)
+		// 	.toFixed(2);
+		res.json(allDevices);
+	} catch (error) {
+		res.sendStatus(500);
+	}
+}
+
+
 const addUserSensors = async (req, res) => {
 	try {
 		const { device: sensorName, currentTypeSensor: sensorType, room, picture } = req.body;
@@ -122,4 +136,5 @@ module.exports = {
 	resetSensorValue,
 	getUserRoomSensors,
 	switchSensor,
+  getAllUserSensors
 };

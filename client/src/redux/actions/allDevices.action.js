@@ -18,9 +18,10 @@ export const getAllDevicesError = (err) => ({
 
 export const getAllDevices = () => async (dispatch) => {
 	dispatch(getAllDevicesStart());
+   console.log(' тут');
 
 	try {
-		const response = await fetch(`${process.env.REACT_APP_API_URL}/api/devices`, {
+		const response = await fetch(`${process.env.REACT_APP_API_URL}/api/sensors/all`, {
 			credentials: "include",
 		});
 		const result = await response.json();

@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import { useState, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
+import Microphone from '../../img/kisspng-microphone-cartoon-performance-cartoon-broadcast-microphone-5a80f676da7540.0756230515184011428948.png'
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -295,7 +296,7 @@ const VoiceRecognitionButton = () => {
         setIsMicOn(!isMicOn);
       }}
     >
-      <Avatar src={'http://www.wpsimplesponsorships.com/wp-content/uploads/2019/05/cropped-icon-256x256.png'} />
+      <Avatar src={Microphone} />
     </Button>
   );
 };
