@@ -1,4 +1,10 @@
 import React from "react";
+<<<<<<< HEAD
+=======
+// import Link from "react-dom";
+import Link from "@material-ui/core/Link";
+
+>>>>>>> c87d86dc45514f8c462c84ec3e1d69353def016e
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -16,6 +22,10 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
+	root: {
+		...theme.typography,
+		color: "white",
+	},
 	grow: {
 		flexGrow: 1,
 	},
@@ -28,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 		[theme.breakpoints.up("sm")]: {
 			display: "block",
 		},
+		color: "white",
 	},
 	sectionDesktop: {
 		display: "none",
@@ -98,9 +109,9 @@ export default function Header() {
 		>
 			<MenuItem>
 				<Typography className={classes.title} variant="h6" noWrap>
-					<NavLink exact to="/auth/signup" className="nav-link" activeClassName="active">
+					<Link exact to="/auth/signup" className="nav-link" activeClassName="active">
 						Sign Up
-					</NavLink>
+					</Link>
 				</Typography>
 			</MenuItem>
 			<MenuItem>
@@ -156,6 +167,10 @@ export default function Header() {
 						className={classes.menuButton}
 						color="inherit"
 						aria-label="open drawer"
+<<<<<<< HEAD
+=======
+						href="/home"
+>>>>>>> c87d86dc45514f8c462c84ec3e1d69353def016e
 					>
 						<MenuIcon />
 					</IconButton>
@@ -165,6 +180,7 @@ export default function Header() {
 					<div className={classes.grow} />
 					<div className={classes.sectionDesktop}>
 						{userName ? (
+<<<<<<< HEAD
 							<MenuItem>
               <IconButton aria-label="show 17 new notifications" color="inherit">
 							<Badge badgeContent={17} color="secondary">
@@ -177,18 +193,68 @@ export default function Header() {
 									</NavLink>
 								</Typography>
 							</MenuItem>
+=======
+							<>
+								{securityStatus ? (
+									<IconButton color="inherit">
+										<Badge badgeContent={0} color="secondary">
+											<LockIcon />
+										</Badge>
+									</IconButton>
+								) : (
+									<IconButton color="inherit">
+										<Badge badgeContent={0} color="secondary">
+											<NoEncryptionIcon />
+										</Badge>
+									</IconButton>
+								)}
+								<IconButton color="inherit" onClick={handleClickOpen}>
+									<Badge badgeContent={security?.value} color="secondary">
+										<NotificationsIcon />
+									</Badge>
+								</IconButton>
+								<MenuItem>
+									<Typography className={classes.title} variant="h6" noWrap>
+										<NavLink
+											exact
+											to="/auth/signout"
+											className="nav-link"
+											activeClassName="active"
+											style={{ color: "white", textDecoration: "none" }}
+											activeStyle={{ color: "white", textDecoration: "none" }}
+										>
+											Sign Out
+										</NavLink>
+									</Typography>
+								</MenuItem>
+							</>
+>>>>>>> c87d86dc45514f8c462c84ec3e1d69353def016e
 						) : (
 							<>
 								<MenuItem>
 									<Typography className={classes.title} variant="h6" noWrap>
-										<NavLink exact to="/auth/signin" className="nav-link" activeClassName="active">
+										<NavLink
+											exact
+											to="/auth/signin"
+											className="nav-link"
+											activeClassName="active"
+											style={{ color: "white", textDecoration: "none" }}
+											activeStyle={{ color: "white", textDecoration: "none" }}
+										>
 											Sign In
 										</NavLink>
 									</Typography>
 								</MenuItem>
 								<MenuItem>
 									<Typography className={classes.title} variant="h6" noWrap>
-										<NavLink exact to="/auth/signup" className="nav-link" activeClassName="active">
+										<NavLink
+											exact
+											to="/auth/signup"
+											className="nav-link"
+											activeClassName="active"
+											style={{ color: "white", textDecoration: "none" }}
+											activeStyle={{ color: "white", textDecoration: "none" }}
+										>
 											Sign Up
 										</NavLink>
 									</Typography>
