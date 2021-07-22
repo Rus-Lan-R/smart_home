@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { clearCurrentMarker } from '../../../redux/actions/currentMarker.action';
 import MarkerButtons from '../../Buttons/MarkerButtons';
 import { changeStatusOfRoomMarker } from '../../../redux/actions/rooms.action';
+import backgroundPlan from "../../../img/u99.png";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -17,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "lg",
     flexDirection: "row",
     backgroundColor: theme.palette.background.paper,
-    backgroundImage: "url(https://d1icd6shlvmxi6.cloudfront.net/gsc/5AY79P/9f/d4/59/9fd459e0fab74bd6a44674d5a5146f15/images/homecontainer/u99.png?token=8e7f4a44a908645dcadacbf7a11f13f6b1db9d76141d7c9a9937f61e4c61552f)",
+    backgroundImage: "url(" + backgroundPlan + ")",
     width: 700,
     height: 450,
     marginTop: 20,

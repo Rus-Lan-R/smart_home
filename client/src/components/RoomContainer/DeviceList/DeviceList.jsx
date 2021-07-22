@@ -110,7 +110,7 @@ export default function DevicesList() {
 				))}
 			</Grid>
 
-			<Grid spacing={5} item xs justifyContent="flex-end" alignItems="flex-start">
+			<Grid spacing={5} item xs={5} justifyContent="flex-end" alignItems="flex-start">
 				{sensors.map((el) => (
 					<Card key={el._id} className={classes.root}>
 						<CardActionArea>
