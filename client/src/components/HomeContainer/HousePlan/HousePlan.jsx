@@ -7,6 +7,7 @@ import { clearCurrentMarker } from '../../../redux/actions/currentMarker.action'
 import MarkerButtons from '../../Buttons/MarkerButtons';
 import { changeStatusOfRoomMarker } from '../../../redux/actions/rooms.action';
 import backgroundPlan from "../../../img/u99.png";
+import { IconPickerItem } from 'react-fa-icon-picker'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -64,7 +65,8 @@ export default function SimpleContainer() {
         {rooms.items.map((item) => {
           const styleMarker = {position: item.position, color: item.color, left: item.left, top: item.top, width: 0,
           height: 0, visibility: item.visibility};
-        return <div key={item._id} style={styleMarker} onDoubleClick={(e) => handleDblCLick(e, item._id)}>{item.room}</div>})
+        return <div key={item._id} style={styleMarker} onDoubleClick={(e) => handleDblCLick(e, item._id)}><IconPickerItem icon={`${item.picture}`} size={36} color="yellow"/>
+        </div>})
         }
       </Container>  
     </React.Fragment>
