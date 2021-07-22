@@ -77,7 +77,7 @@ const statusScenario = async (req, res) => {
         break;
       case "relax":
         currentStatus ? api = `http://192.168.1.238:80/api/esp/ledStrip/off` : api = `http://192.168.1.238:80/api/esp/ledStrip/sinelon`
-        const responseSwitchLed = await fetch("http://192.168.1.148:3001/api/refetch", {
+        const responseSwitchLedk = await fetch("http://192.168.1.148:3001/api/refetch", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -87,7 +87,7 @@ const statusScenario = async (req, res) => {
         break;
       case "boomboom":
         currentStatus ? api = `http://192.168.1.238:80/api/esp/ledStrip/off` : api = `http://192.168.1.238:80/api/esp/ledStrip/juggle`
-        const responseSwitchLed = await fetch("http://192.168.1.148:3001/api/refetch", {
+        const responseSwitchLedq = await fetch("http://192.168.1.148:3001/api/refetch", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

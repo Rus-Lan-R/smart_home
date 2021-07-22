@@ -32,25 +32,25 @@ export default function ScenarioList() {
 		{
 			name: "Ruslik party",
 			status: false,
-      picture: "1.png",
+      picture: "tenor.gif",
 
 		},
 		{
 			name: "Ptichka v gnezde",
 			status: false,
-      picture: "https://images.unsplash.com/photo-1549396535-c11d5c55b9df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+      picture: "homeGIF.gif",
 
 		},
 		{
 			name: "Sector Clear",
 			status: false,
-      picture: "https://images.unsplash.com/photo-1550133730-695473e544be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      picture: "ghost_gif.gif",
 
 		},
     {
       name: "Order 66",
       status: false,
-      picture: "https://images.unsplash.com/photo-1550167164-1b67c2be3973?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      picture: "tumblr_myv2ooHiJ01tof2yho1_500.gif",
 
     },
     {
