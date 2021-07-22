@@ -19,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     backgroundColor: theme.palette.background.paper,
     backgroundImage: "url(" + backgroundPlan + ")",
-    width: 700,
-    height: 450,
+    width: 900,
+    height: 600,
     marginTop: 20,
     backgroundSize: 'contain',
     marginBottom: 20 ,
@@ -39,10 +39,11 @@ export default function SimpleContainer() {
 
   const handleClick = (e) => {
     let currentTargetRect = e.currentTarget.getBoundingClientRect();
-    const event_offsetX = e.clientX - (currentTargetRect.left+340),
+    console.log(currentTargetRect);
+    const event_offsetX = e.clientX - (currentTargetRect.left+(currentTargetRect.width/2)),
           event_offsetY = e.clientY - currentTargetRect.top;
     let roomMarker = [...rooms.items].find((el) => el._id === currentMarker.item._id);
-    const styleMarker = {position: 'relative', color: 'red', left: `${event_offsetX}px`, top: `${event_offsetY}px`, width: 0,
+    const styleMarker = {position: 'relative', color: 'red', left: `${event_offsetX}px`, top: `${event_offsetY}px`, width:0,
     height: 0, visibility: 'visible'};
     dispatch(changeStatusOfRoomMarker({...roomMarker,...styleMarker}))
     dispatch(clearCurrentMarker())
@@ -63,7 +64,7 @@ export default function SimpleContainer() {
       <Container onClick={(e) => handleClick(e)} className={classes.root} >
         {rooms.items.map((item) => {
           const styleMarker = {position: item.position, color: item.color, left: item.left, top: item.top, width: 0,
-          height: 0, visibility: item.visibility};
+          height: 0, visibility: item.visibility, zIndex: Math.floor(Math.random() * 101)};
         return <div key={item._id} style={styleMarker} onDoubleClick={(e) => handleDblCLick(e, item._id)}>{item.room}</div>})
         }
       </Container>  
