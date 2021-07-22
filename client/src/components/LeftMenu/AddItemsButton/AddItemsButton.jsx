@@ -11,7 +11,7 @@ import { IconPickerItem } from 'react-fa-icon-picker'
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: 15,
-    maxWidth: 270,
+    // maxWidth: 270,
     // height: 68
   },
 }));

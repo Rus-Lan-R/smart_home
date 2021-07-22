@@ -2,7 +2,6 @@
 // import { useSelector, useDispatch } from "react-redux";
 // import { useState, useEffect } from "react";
 import Scenario from "../Scenario/Scenario";
-
 import React from "react";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -33,17 +32,17 @@ export default function ScenarioList() {
 		{
 			name: "Ruslik party",
 			status: false,
-      picture: "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      picture: "1.png",
 
 		},
 		{
-			name: "I'm in home",
+			name: "Ptichka v gnezde",
 			status: false,
       picture: "https://images.unsplash.com/photo-1549396535-c11d5c55b9df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
 
 		},
 		{
-			name: "I'm not home",
+			name: "Sector Clear",
 			status: false,
       picture: "https://images.unsplash.com/photo-1550133730-695473e544be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
 
@@ -53,7 +52,17 @@ export default function ScenarioList() {
       status: false,
       picture: "https://images.unsplash.com/photo-1550167164-1b67c2be3973?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
 
-    }
+    },
+    {
+      name: "Relax",
+      status: false,
+      picture: "https://images.unsplash.com/photo-1550223640-23097fc71cb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+    },
+    {
+      name: "BoomBoom",
+      status: false,
+      picture: "https://images.unsplash.com/photo-1550353175-a3611868086b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+    },
 	];
 
 	// const dispatch = useDispatch();

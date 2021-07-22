@@ -1,7 +1,5 @@
 import React from "react";
-// import Link from "react-dom";
 import Link from "@material-ui/core/Link";
-
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -196,12 +194,11 @@ export default function Header() {
 			aria-labelledby="alert-dialog-slide-title"
 			aria-describedby="alert-dialog-slide-description"
 		>
-			<DialogTitle id="alert-dialog-slide-title">{"Anauthtorized Person"}</DialogTitle>
+			<DialogTitle color="red" id="alert-dialog-slide-title">{"Enemy Spotted"}</DialogTitle>
 			<DialogContent>
-				<img width="100%" height="100%" src="http://localhost:3000/alert.jpeg" alt="..img"></img>
+				<img width="70%" height="70%" src="http://localhost:3000/alert.jpeg" alt="..img"></img>
 				<DialogContentText id="alert-dialog-slide-description">
-					Let Google help apps determine location. This means sending anonymous location data to
-					Google, even when no apps are running.
+          Minus items
 				</DialogContentText>
 			</DialogContent>
 			<DialogActions>

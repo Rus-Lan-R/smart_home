@@ -32,7 +32,7 @@ const statusScenario = async (req, res) => {
           body: JSON.stringify({ api }),
         });
         break;
-      case "i'm in home":
+      case "ptichka v gnezde":
         //включить свет
         await Devices.updateMany({ user: userId, device: "Lamp", status: currentStatus }, { status: !currentStatus }, { new: true })
         const allUserOffLamps = await Devices.find({ user: userId, device: "Lamp" })
@@ -49,7 +49,7 @@ const statusScenario = async (req, res) => {
         })
         //выключить датчик движения
         break;
-      case "i'm not home":
+      case "sector clear":
         //выключить свет
         await Devices.updateMany({ user: userId, device: "Lamp", status: currentStatus }, { status: !currentStatus }, { new: true })
         const allUserOnLamps = await Devices.find({ user: userId, device: "Lamp" })
@@ -67,6 +67,26 @@ const statusScenario = async (req, res) => {
         break;
       case "order 66":
         currentStatus ? api = `http://192.168.1.238:80/api/esp/ledStrip/off` : api = `http://192.168.1.238:80/api/esp/ledStrip/confetti`
+        const responseSwitchLed = await fetch("http://192.168.1.148:3001/api/refetch", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ api }),
+        });
+        break;
+      case "relax":
+        currentStatus ? api = `http://192.168.1.238:80/api/esp/ledStrip/off` : api = `http://192.168.1.238:80/api/esp/ledStrip/sinelon`
+        const responseSwitchLed = await fetch("http://192.168.1.148:3001/api/refetch", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ api }),
+        });
+        break;
+      case "boomboom":
+        currentStatus ? api = `http://192.168.1.238:80/api/esp/ledStrip/off` : api = `http://192.168.1.238:80/api/esp/ledStrip/juggle`
         const responseSwitchLed = await fetch("http://192.168.1.148:3001/api/refetch", {
           method: "POST",
           headers: {
