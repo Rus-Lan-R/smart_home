@@ -17,7 +17,8 @@ const handleClick =(nameScenario, isActive) => {
       <Paper>
             <h2>{item.name}</h2>
             <p>{isActive? 'Started':''}</p>
-            <img src={`/${item.picture}`} alt={item.picture} />
+            {/* <img src={`/${item.picture}`} alt={item.picture} /> */}
+            <img src={`${item.picture}`} alt={item.picture} />
             <Button className="CheckButton" onClick={() => handleClick(item.name, isActive)}>
             {isActive? "Stop" : "Start"}
             </Button>

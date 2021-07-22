@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 // import SendIcon from "@material-ui/icons/Send";
 import AddItemsButton from "../AddItemsButton/AddItemsButton";
 import { makeStyles } from "@material-ui/core/styles";
+import Weather from '../Weather/Weather'
 
 
 
@@ -35,8 +36,7 @@ export default function LeftMenuRoomsList() {
   const classes = useStyles();
 	return (
 		<>
-      <AddItemsButton text="Add Room" link="/home/addRoom" />
-			<AddItemsButton text="Add Device" link="/home/config" />
+
 			{rooms.map((el) => (
 				<Paper className={classes.root}  key={el._id}>
 					<MenuList>
@@ -50,7 +50,10 @@ export default function LeftMenuRoomsList() {
 						</MenuItem>
 					</MenuList>
 				</Paper>
-			))}			
+			))}
+      <AddItemsButton text="Add Room" link="/home/addRoom" />
+			<AddItemsButton text="Add Device" link="/home/config" />
+      <Weather />
 		</>
 	);
 }
