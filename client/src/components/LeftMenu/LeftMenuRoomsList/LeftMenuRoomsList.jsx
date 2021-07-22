@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { IconPickerItem } from 'react-fa-icon-picker'
 import { Link } from "react-router-dom";
 import { getRooms } from "../../../redux/actions/rooms.action";
 import MenuList from "@material-ui/core/MenuList";
 import MenuItem from "@material-ui/core/MenuItem";
 import Paper from "@material-ui/core/Paper";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
+// import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Typography from "@material-ui/core/Typography";
 // import SendIcon from "@material-ui/icons/Send";
 import AddItemsButton from "../AddItemsButton/AddItemsButton";
-import { IconPickerItem } from 'react-fa-icon-picker'
+import { makeStyles } from "@material-ui/core/styles";
+
 
 
 const useStyles = makeStyles((theme) => ({
