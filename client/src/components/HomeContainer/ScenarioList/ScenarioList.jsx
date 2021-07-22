@@ -5,9 +5,20 @@ import Scenario from "../Scenario/Scenario";
 import React from "react";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { makeStyles } from '@material-ui/core/styles';
 
+
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: 250,
+    height: 200
+  },
+}));
 
 export default function ScenarioList() {
+
+  const classes = useStyles();
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -74,8 +85,9 @@ export default function ScenarioList() {
 	return (
 		<Carousel responsive={responsive}>
 			{items.map((item, i) => (
-				<Scenario key={i} item={item} />
+				<Scenario className={classes.root}  key={i} item={item} />
 			))}
 		</Carousel>
 	);
 }
+

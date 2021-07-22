@@ -14,6 +14,7 @@ import * as apiRpiEndPoinst from "../../../../config/apiRpiEndPoinst";
 const useStyles = makeStyles({
 	root: {
 		minWidth: 275,
+    maxWidth: 800
 	},
 	bullet: {
 		display: "inline-block",
@@ -69,9 +70,9 @@ export default function AddDeviceCard() {
 
 	console.log(ports);
 	return (
-		<>
-			<Container width="50%">
-				<Card className={classes.root}>
+		<div  className={classes.root}>
+
+				<Card>
 					<CardContent>
 						<Typography variant="h5" component="h2">
 							{currentDevice.vendor}
@@ -113,12 +114,12 @@ export default function AddDeviceCard() {
 						{}
 					</CardActions>
 				</Card>
-			</Container>
+		
 			{statusConnect ? (
 				<AddDeviceForm vendor={currentDevice.vendor} ip={currentDevice.ip} port={currentPort} />
 			) : (
 				<div>choose device port</div>
 			)}
-		</>
+		</div>
 	);
 }
