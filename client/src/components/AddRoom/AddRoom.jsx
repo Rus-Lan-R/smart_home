@@ -4,10 +4,25 @@ import { addRoom } from "../../redux/actions/rooms.action";
 import * as React from 'react'
 import { IconPicker } from 'react-fa-icon-picker'
 import { useState } from 'react';
+import {Typography} from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+  },
+}));
 
 
 export default function AddRoom() {
-	const input = useInput({ placeholder: "Еnter room's name", type: "text" });
+  const classes = useStyles();
+
+	const input = useInput({ placeholder: "Toilet", type: "text" });
   const [value, setValue] = useState("")
 
 	const dispatch = useDispatch();
@@ -32,12 +47,20 @@ export default function AddRoom() {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<h3> Create new Room</h3>
-      <label>Choose icon</label>
+		<form  className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
+      <Typography variant="h6" component="div">
+       Create new Room
+			</Typography>
+      <Typography variant="subtitle1" component="div">
+        Choose icon 			
+      </Typography>
       <IconPicker value={value} onChange={(v) => setValue(v)} />
-			<input {...input.tagAttrs} />
-			<button type="submit">Create</button>
+      <TextField id="outlined-basic" label="Еnter room's name" variant="outlined" {...input.tagAttrs} />
+       <div> 
+      <Button type="submit" variant="contained" color="secondary">
+        Create
+      </Button>
+     </div>
 		</form>
 	);
 }
