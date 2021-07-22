@@ -26,11 +26,12 @@ const getUserSensorsValue = async (req, res) => {
 };
 const addUserSensors = async (req, res) => {
 	try {
-		const { device: sensorName, currentTypeSensor: sensorType, room } = req.body;
+		const { device: sensorName, currentTypeSensor: sensorType, room, picture } = req.body;
 		const newSensor = await Sensors.create({
 			sensorName,
 			sensorType,
 			room,
+      picture,
 			user: req.session.user.id,
 		});
 		res.json(newSensor);

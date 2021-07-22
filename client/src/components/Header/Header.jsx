@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "react-dom"
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -215,6 +216,7 @@ export default function Header() {
 						className={classes.menuButton}
 						color="inherit"
 						aria-label="open drawer"
+            href="/home"
 					>
 						<HomeIcon />
 					</IconButton>

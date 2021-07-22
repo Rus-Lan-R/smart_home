@@ -22,6 +22,7 @@ import CardContent from "@material-ui/core/CardContent";
 
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import { IconPickerItem } from 'react-fa-icon-picker'
 
 const useStyles = makeStyles({
 	root: {
@@ -82,6 +83,7 @@ export default function DevicesList() {
 						<Card key={el._id} className={classes.root}>
 							<CardActionArea>
 								<CardContent direction="column">
+                <IconPickerItem icon={`${el.picture}`} size={24} color="#000"/>
 									<Typography gutterBottom variant="h5" component="h2">
 										{el.device}
 									</Typography>
@@ -110,7 +112,7 @@ export default function DevicesList() {
 				))}
 			</Grid>
 
-			<Grid spacing={5} item xs justifyContent="flex-end" alignItems="flex-start">
+			<Grid spacing={5} item xs={5} justifyContent="flex-end" alignItems="flex-start">
 				{sensors.map((el) => (
 					<Card key={el._id} className={classes.root}>
 						<CardActionArea>

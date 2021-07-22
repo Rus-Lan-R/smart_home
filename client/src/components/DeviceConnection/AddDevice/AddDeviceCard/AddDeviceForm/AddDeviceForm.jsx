@@ -4,6 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Container, MenuItem, Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import * as devicesEndPoinst from "../../../../../config/devicesEndPoints";
+import { IconPicker } from 'react-fa-icon-picker'
+
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -42,7 +44,7 @@ const deviceSpecific = [
 ];
 export default function AddDeviceForm({ vendor, ip, port }) {
 	const roomsList = useSelector((state) => state.rooms.items);
-
+  const [value, setValue] = useState("")
 	const classes = useStyles();
 
 	const [currentRoom, setCurrentRoom] = useState("");
@@ -62,7 +64,7 @@ export default function AddDeviceForm({ vendor, ip, port }) {
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify({ ...body, room: currentRoomID, currentTypeSensor, ip, port }),
+				body: JSON.stringify({ ...body, room: currentRoomID, currentTypeSensor, ip, port, picture: value }),
 			});
 			if (responseAddDevice.ok) {
 				console.log("sensor added");
@@ -93,6 +95,7 @@ export default function AddDeviceForm({ vendor, ip, port }) {
 			<div className={classes.root}>
 				<form className={classes.root} onSubmit={handleSubmit}>
 					<div>
+          <IconPicker value={value} onChange={(v) => setValue(v)} />
 						<TextField
 							id="standard-select-currency"
 							name="room"
@@ -127,6 +130,7 @@ export default function AddDeviceForm({ vendor, ip, port }) {
 								helperText="Please select room"
 								required
 							>
+                
 								{typesSensors.map((el) => (
 									<MenuItem
 										key={el._id}
