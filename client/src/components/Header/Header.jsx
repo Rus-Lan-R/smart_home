@@ -1,5 +1,7 @@
 import React from "react";
-import Link from "react-dom"
+// import Link from "react-dom";
+import Link from "@material-ui/core/Link";
+
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -28,6 +30,10 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 const useStyles = makeStyles((theme) => ({
+	root: {
+		...theme.typography,
+		color: "white",
+	},
 	grow: {
 		flexGrow: 1,
 	},
@@ -40,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
 		[theme.breakpoints.up("sm")]: {
 			display: "block",
 		},
+		color: "white",
 	},
 	sectionDesktop: {
 		display: "none",
@@ -116,9 +123,9 @@ export default function Header() {
 		>
 			<MenuItem>
 				<Typography className={classes.title} variant="h6" noWrap>
-					<NavLink exact to="/auth/signup" className="nav-link" activeClassName="active">
+					<Link exact to="/auth/signup" className="nav-link" activeClassName="active">
 						Sign Up
-					</NavLink>
+					</Link>
 				</Typography>
 			</MenuItem>
 			<MenuItem>
@@ -216,7 +223,7 @@ export default function Header() {
 						className={classes.menuButton}
 						color="inherit"
 						aria-label="open drawer"
-            href="/home"
+						href="/home"
 					>
 						<HomeIcon />
 					</IconButton>
@@ -247,7 +254,14 @@ export default function Header() {
 								</IconButton>
 								<MenuItem>
 									<Typography className={classes.title} variant="h6" noWrap>
-										<NavLink exact to="/auth/signout" className="nav-link" activeClassName="active">
+										<NavLink
+											exact
+											to="/auth/signout"
+											className="nav-link"
+											activeClassName="active"
+											style={{ color: "white", textDecoration: "none" }}
+											activeStyle={{ color: "white", textDecoration: "none" }}
+										>
 											Sign Out
 										</NavLink>
 									</Typography>
@@ -257,14 +271,28 @@ export default function Header() {
 							<>
 								<MenuItem>
 									<Typography className={classes.title} variant="h6" noWrap>
-										<NavLink exact to="/auth/signin" className="nav-link" activeClassName="active">
+										<NavLink
+											exact
+											to="/auth/signin"
+											className="nav-link"
+											activeClassName="active"
+											style={{ color: "white", textDecoration: "none" }}
+											activeStyle={{ color: "white", textDecoration: "none" }}
+										>
 											Sign In
 										</NavLink>
 									</Typography>
 								</MenuItem>
 								<MenuItem>
 									<Typography className={classes.title} variant="h6" noWrap>
-										<NavLink exact to="/auth/signup" className="nav-link" activeClassName="active">
+										<NavLink
+											exact
+											to="/auth/signup"
+											className="nav-link"
+											activeClassName="active"
+											style={{ color: "white", textDecoration: "none" }}
+											activeStyle={{ color: "white", textDecoration: "none" }}
+										>
 											Sign Up
 										</NavLink>
 									</Typography>
