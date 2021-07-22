@@ -3,7 +3,7 @@ import * as apiRpiEndPoinst from "../../config/apiRpiEndPoinst";
 import { enableLoader, disableLoader } from "./loader.action";
 
 export const getIpDevices =
-	(startIP = 0, scale = 10, stop = false) =>
+	(startIP = 255, scale = 10, stop = false) =>
 	async (dispatch) => {
 		try {
 			if (!stop) {
@@ -26,7 +26,7 @@ export const getIpDevices =
 		}
 		dispatch(disableLoader());
 		if (!stop) {
-			if (260 - scale > startIP + scale) dispatch(getIpDevices(startIP + scale));
+			if (startIP > scale) dispatch(getIpDevices(startIP - scale));
 		}
 	};
 
