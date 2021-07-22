@@ -52,7 +52,7 @@ export default function LeftMenuRoomsList() {
 			))}
       <AddItemsButton text="Add Room" link="/home/addRoom" />
 			<AddItemsButton text="Add Device" link="/home/config" />
-      <div style={{padding: '14px'}}>
+      <div style={{padding: '15px'}}>
       <Weather />
       </div>
 	</>
