@@ -6,10 +6,19 @@ import Paper from "@material-ui/core/Paper";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Typography from "@material-ui/core/Typography";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    margin: 15,
+    maxWidth: 200
+  },
+}));
 
 export default function AddItemsButton({ text, link }) {
+  const classes = useStyles();
 	return (
-		<Paper style={{ margin: "10px", maxWidth: "270px" }}>
+		<Paper className={classes.root}>
 			<MenuList>
 				<MenuItem>
 					<ListItemIcon>

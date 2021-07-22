@@ -13,13 +13,10 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    margin: 10,
+    margin: 15,
+    maxWidth: 270,
+    // backgroundColor: '#fdecec',
   },
-  AddItemsButton : {
-    "& .MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3" : {
-      margin: 100,
-    }
-  }
 }));
 
 export default function LeftMenuRoomsList() {
@@ -35,6 +32,8 @@ export default function LeftMenuRoomsList() {
   const classes = useStyles();
 	return (
 		<>
+      <AddItemsButton text="Add Room" link="/home/addRoom" />
+			<AddItemsButton text="Add Device" link="/home/config" />
 			{rooms.map((el) => (
 				<Paper className={classes.root}  key={el._id}>
 					<MenuList>
@@ -50,9 +49,7 @@ export default function LeftMenuRoomsList() {
 						</MenuItem>
 					</MenuList>
 				</Paper>
-			))}
-			<AddItemsButton className={classes.AddItemsButton} text="Add Room" link="/home/addRoom" />
-			<AddItemsButton className={classes.AddItemsButton} text="Add Device" link="/home/config" />
+			))}			
 		</>
 	);
 }
