@@ -64,7 +64,7 @@ export default function SimpleContainer() {
         {rooms.items.map((item) => {
           const styleMarker = {position: item.position, color: item.color, left: item.left, top: item.top, width: 0,
           height: 0, visibility: item.visibility};
-        return <div key={item._id} style={styleMarker} onDoubleClick={(e) => handleDblCLick(e, item._id)} >{item.room}</div>})
+        return <div key={item._id} style={styleMarker} onDoubleClick={(e) => handleDblCLick(e, item._id)}>{item.room}</div>})
         }
       </Container>  
     </React.Fragment>

@@ -9,7 +9,18 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Typography from "@material-ui/core/Typography";
 import SendIcon from "@material-ui/icons/Send";
 import AddItemsButton from "../AddItemsButton/AddItemsButton";
+import { makeStyles } from "@material-ui/core/styles";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    margin: 10,
+  },
+  AddItemsButton : {
+    "& .MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3" : {
+      margin: 100,
+    }
+  }
+}));
 
 export default function LeftMenuRoomsList() {
 	const rooms = useSelector((state) => state.rooms?.items);
@@ -20,10 +31,12 @@ export default function LeftMenuRoomsList() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+  
+  const classes = useStyles();
 	return (
 		<>
 			{rooms.map((el) => (
-				<Paper style={{ margin: "10px"}} key={el._id}>
+				<Paper className={classes.root}  key={el._id}>
 					<MenuList>
 						<MenuItem>
 							<ListItemIcon>
@@ -38,8 +51,8 @@ export default function LeftMenuRoomsList() {
 					</MenuList>
 				</Paper>
 			))}
-			<AddItemsButton text="Add Room" link="/home/addRoom" />
-			<AddItemsButton text="Add Device" link="/home/config" />
+			<AddItemsButton className={classes.AddItemsButton} text="Add Room" link="/home/addRoom" />
+			<AddItemsButton className={classes.AddItemsButton} text="Add Device" link="/home/config" />
 		</>
 	);
 }
