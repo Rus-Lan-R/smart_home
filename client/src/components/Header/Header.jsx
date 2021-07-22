@@ -30,9 +30,11 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		...theme.typography,
 		color: "white",
+    // backgroundColor: '#fff !important',
 	},
 	grow: {
 		flexGrow: 1,
+    
 	},
 	menuButton: {
 		marginRight: theme.spacing(2),
@@ -120,21 +122,21 @@ export default function Header() {
 		>
 			<MenuItem>
 				<Typography className={classes.title} variant="h6" noWrap>
-					<Link exact to="/auth/signup" className="nav-link" activeClassName="active">
+					<Link exact to="/auth/signup" className="nav-link">
 						Sign Up
 					</Link>
 				</Typography>
 			</MenuItem>
 			<MenuItem>
 				<Typography className={classes.title} variant="h6" noWrap>
-					<NavLink exact to="/auth/signin" className="nav-link" activeClassName="active">
+					<NavLink exact to="/auth/signin" className="nav-link">
 						Sign In
 					</NavLink>
 				</Typography>
 			</MenuItem>
 			<MenuItem>
 				<Typography className={classes.title} variant="h6" noWrap>
-					<NavLink exact to="/auth/signout" className="nav-link" activeClassName="active">
+					<NavLink exact to="/auth/signout" className="nav-link">
 						Sign Out
 					</NavLink>
 				</Typography>
@@ -254,7 +256,6 @@ export default function Header() {
 											exact
 											to="/auth/signout"
 											className="nav-link"
-											activeClassName="active"
 											style={{ color: "white", textDecoration: "none" }}
 											activeStyle={{ color: "white", textDecoration: "none" }}
 										>
@@ -271,7 +272,6 @@ export default function Header() {
 											exact
 											to="/auth/signin"
 											className="nav-link"
-											activeClassName="active"
 											style={{ color: "white", textDecoration: "none" }}
 											activeStyle={{ color: "white", textDecoration: "none" }}
 										>
@@ -285,7 +285,6 @@ export default function Header() {
 											exact
 											to="/auth/signup"
 											className="nav-link"
-											activeClassName="active"
 											style={{ color: "white", textDecoration: "none" }}
 											activeStyle={{ color: "white", textDecoration: "none" }}
 										>
