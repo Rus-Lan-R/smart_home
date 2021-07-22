@@ -21,6 +21,7 @@ import AlertDialog from "./components/Header/AlertDialog/AlertDialog";
 import DevicesList from "./components/RoomContainer/DeviceList/DeviceList";
 import LeftMenuRoomsList from "./components/LeftMenu/LeftMenuRoomsList/LeftMenuRoomsList";
 import HomeContainer from "./components/HomeContainer/HomeContainer";
+import StartPage from "./components/StartPage/StartPage";
 function App() {
 	const dispatch = useDispatch();
 
@@ -32,6 +33,9 @@ function App() {
 	return (
 		<Router>
 			<Header />
+			<Route exact path="/">
+				<StartPage />
+			</Route>
 
 			<Route exact path="/auth/signin">
 				<SignIn />
