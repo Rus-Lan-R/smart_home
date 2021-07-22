@@ -7,8 +7,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Paper from "@material-ui/core/Paper";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Typography from "@material-ui/core/Typography";
-import SendIcon from "@material-ui/icons/Send";
+// import SendIcon from "@material-ui/icons/Send";
 import AddItemsButton from "../AddItemsButton/AddItemsButton";
+import { IconPickerItem } from 'react-fa-icon-picker'
+
 
 
 export default function LeftMenuRoomsList() {
@@ -26,9 +28,7 @@ export default function LeftMenuRoomsList() {
 				<Paper style={{ margin: "10px"}} key={el._id}>
 					<MenuList>
 						<MenuItem>
-							<ListItemIcon>
-								<SendIcon fontSize="small" />
-							</ListItemIcon>
+            <IconPickerItem icon={`${el.picture}`} size={24} color="#000"/>
 							<Typography variant="inherit">
 								<Link style={{ color: "inherit" }} to={`/home/rooms/${el._id}`}>
 									{el.room}
