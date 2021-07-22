@@ -32,7 +32,6 @@ const VoiceRecognitionButton = () => {
           headers: {
           'Content-Type': 'application/json',
           },
-          credentials: "include",
           body: JSON.stringify(
             {api: process.env.REACT_APP_SMART_DEVICE_API+"/lamp/on"}
           ),
@@ -48,7 +47,6 @@ const VoiceRecognitionButton = () => {
           headers: {
           'Content-Type': 'application/json',
           },
-          credentials: "include",
           body: JSON.stringify(
             {api: process.env.REACT_APP_SMART_DEVICE_API+"/lamp/off"}
           ),
@@ -64,7 +62,6 @@ const VoiceRecognitionButton = () => {
           headers: {
           'Content-Type': 'application/json',
           },
-          credentials: "include",
           body: JSON.stringify(
             {api: process.env.REACT_APP_SMART_DEVICE_API+"/led/on"}
           ),
@@ -80,7 +77,6 @@ const VoiceRecognitionButton = () => {
           headers: {
           'Content-Type': 'application/json',
           },
-          credentials: "include",
           body: JSON.stringify(
             {api: process.env.REACT_APP_SMART_DEVICE_API+"/led/off"}
           ),
@@ -96,7 +92,6 @@ const VoiceRecognitionButton = () => {
           headers: {
           'Content-Type': 'application/json',
           },
-          credentials: "include",
           body: JSON.stringify(
             {api: process.env.REACT_APP_SMART_DEVICE_API+"/relay/on"}
           ),
@@ -112,7 +107,6 @@ const VoiceRecognitionButton = () => {
           headers: {
           'Content-Type': 'application/json',
           },
-          credentials: "include",
           body: JSON.stringify(
             {api: process.env.REACT_APP_SMART_DEVICE_API+"/relay/off"}
           ),
@@ -128,7 +122,6 @@ const VoiceRecognitionButton = () => {
           headers: {
           'Content-Type': 'application/json',
           },
-          credentials: "include",
           body: JSON.stringify(
             {api: process.env.REACT_APP_SMART_DEVICE_API+"/strip/on"}
           ),
@@ -144,7 +137,6 @@ const VoiceRecognitionButton = () => {
           headers: {
           'Content-Type': 'application/json',
           },
-          credentials: "include",
           body: JSON.stringify(
             {api: process.env.REACT_APP_SMART_DEVICE_API+"/strip/off"}
           ),
@@ -160,7 +152,6 @@ const VoiceRecognitionButton = () => {
           headers: {
           'Content-Type': 'application/json',
           },
-          credentials: "include",
           body: JSON.stringify(
             {api: process.env.REACT_APP_SMART_DEVICE_API+"/boiler/on"}
           ),
@@ -176,7 +167,6 @@ const VoiceRecognitionButton = () => {
           headers: {
           'Content-Type': 'application/json',
           },
-          credentials: "include",
           body: JSON.stringify(
             {api: process.env.REACT_APP_SMART_DEVICE_API+"/boiler/off"}
           ),
@@ -192,7 +182,6 @@ const VoiceRecognitionButton = () => {
           headers: {
           'Content-Type': 'application/json',
           },
-          credentials: "include",
           body: JSON.stringify(
             {api: process.env.REACT_APP_SMART_DEVICE_API+"/fun/on"}
           ),
@@ -208,7 +197,6 @@ const VoiceRecognitionButton = () => {
           headers: {
           'Content-Type': 'application/json',
           },
-          credentials: "include",
           body: JSON.stringify(
             {api: process.env.REACT_APP_SMART_DEVICE_API+"/fun/off"}
           ),

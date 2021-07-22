@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "lg",
     flexDirection: "row",
     backgroundColor: theme.palette.background.paper,
-    backgroundImage: "url(https://d1icd6shlvmxi6.cloudfront.net/gsc/5AY79P/9f/d4/59/9fd459e0fab74bd6a44674d5a5146f15/images/homecontainer/u99.png?token=0bb9fb73600067da83c0893feeb1163b32a8443e4f1099e2b37e23808ae7b719)",
+    backgroundImage: "url(https://d1icd6shlvmxi6.cloudfront.net/gsc/5AY79P/9f/d4/59/9fd459e0fab74bd6a44674d5a5146f15/images/homecontainer/u99.png?token=8e7f4a44a908645dcadacbf7a11f13f6b1db9d76141d7c9a9937f61e4c61552f)",
     width: 700,
     height: 450,
     marginTop: 20,
