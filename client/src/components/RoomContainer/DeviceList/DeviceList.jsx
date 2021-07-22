@@ -25,11 +25,12 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
 	root: {
-		maxWidth: 200,
-		marginTop: 20,
+		maxWidth: 250,
+		marginTop: 30,
+		maxHeight: 200,
 	},
 	media: {
-		height: 140,
+		height: 100,
 	},
 	pos: {
 		marginBottom: 12,
@@ -50,15 +51,15 @@ export default function DevicesList() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [roomName]);
 
-	useEffect(() => {
-		let interval = setInterval(() => {
-			dispatch(getDevices(roomName));
-			dispatch(getSensors(roomName));
-		}, 10000);
-		return () => {
-			clearInterval(interval);
-		};
-	});
+	// useEffect(() => {
+	// 	let interval = setInterval(() => {
+	// 		dispatch(getDevices(roomName));
+	// 		dispatch(getSensors(roomName));
+	// 	}, 5000);
+	// 	return () => {
+	// 		clearInterval(interval);
+	// 	};
+	// });
 
 	const handleClickDevice = (id, status) => {
 		dispatch(deviceChangeStatus({ id, status }));
@@ -74,40 +75,42 @@ export default function DevicesList() {
 	const classes = useStyles();
 	// justifyContent="space-around"
 	return (
-		<Grid container spacing={3} direction="row" alignItems="center">
-			<Grid item xs>
+		<Grid container spacing={3} direction="row" alignItems="top">
+			<Grid container spacing={5} direction="row" item xs justifyContent="space-evenly">
 				{devices.map((el) => (
-					<Card key={el._id} className={classes.root}>
-						<CardActionArea>
-							<CardContent>
-								<Typography gutterBottom variant="h5" component="h2">
-									{el.device}
-								</Typography>
-								<Typography className={classes.pos} color="textSecondary">
-									Expendet Power - {el.expendedPower} Wt/h
-								</Typography>
-								<Typography className={classes.pos} color="textSecondary">
-									Time Working - {+(el.timeWorking / 3600).toFixed(4)} h
-								</Typography>
-							</CardContent>
-						</CardActionArea>
-						<CardActions>
-							<Button
-								size="small"
-								color="primary"
-								onClick={() => handleClickDevice(el._id, el.status)}
-							>
-								{el.status ? "Off" : "On"}
-							</Button>
-							<Button size="small" color="primary">
-								Remove
-							</Button>
-						</CardActions>
-					</Card>
+					<Grid container spacing={3} direction="row" item xs={4}>
+						<Card key={el._id} className={classes.root}>
+							<CardActionArea>
+								<CardContent direction="column">
+									<Typography gutterBottom variant="h5" component="h2">
+										{el.device}
+									</Typography>
+									<Typography variant="h7" className={classes.pos} color="textSecondary">
+										Expendet Power - {el.expendedPower} Wt
+									</Typography>
+									<Typography variant="h7" className={classes.pos} color="textSecondary">
+										Time Working - {+(el.timeWorking / 3600).toFixed(4)} h
+									</Typography>
+								</CardContent>
+							</CardActionArea>
+							<CardActions>
+								<Button
+									size="small"
+									color="primary"
+									onClick={() => handleClickDevice(el._id, el.status)}
+								>
+									{el.status ? "Off" : "On"}
+								</Button>
+								<Button size="small" color="primary">
+									Remove
+								</Button>
+							</CardActions>
+						</Card>
+					</Grid>
 				))}
 			</Grid>
 
-			<Grid item xs>
+			<Grid spacing={5} item xs justifyContent="flex-end" alignItems="flex-start">
 				{sensors.map((el) => (
 					<Card key={el._id} className={classes.root}>
 						<CardActionArea>
