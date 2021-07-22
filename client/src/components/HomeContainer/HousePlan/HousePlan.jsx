@@ -2,8 +2,11 @@ import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
-import { useState } from 'react';
-
+import { useSelector, useDispatch } from "react-redux";
+import { clearCurrentMarker } from '../../../redux/actions/currentMarker.action';
+import MarkerButtons from '../../Buttons/MarkerButtons';
+import { changeStatusOfRoomMarker } from '../../../redux/actions/rooms.action';
+import backgroundPlan from "../../../img/u99.png";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -15,51 +18,56 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "lg",
     flexDirection: "row",
     backgroundColor: theme.palette.background.paper,
-    backgroundImage: "url(https://d1icd6shlvmxi6.cloudfront.net/gsc/5AY79P/9f/d4/59/9fd459e0fab74bd6a44674d5a5146f15/images/homecontainer/u99.png?token=d8e3ec4504c7324592f7fb307565462d6d3ba1fed012d74505d896b2b11bd51e)",
+    backgroundImage: "url(" + backgroundPlan + ")",
     width: 700,
     height: 450,
-    marginTop: 50,
+    marginTop: 20,
     backgroundSize: 'contain',
-    // position: 'absolute'  
+    marginBottom: 20 ,
   },
 }));
 
 
 
 export default function SimpleContainer() {
-  const [marker, setMarkers] = useState([]);
   const classes = useStyles();
 
+  const dispatch = useDispatch();
+  const currentMarker = useSelector((state) => state.currentMarker);
+  const rooms = useSelector((state) => state.rooms);
+
+
   const handleClick = (e) => {
-    let clientX = e.clientX;
-    let clientY = e.clientY;
-    let screenX = e.screenX;
-    let screenY = e.screenY;
-    let pageX = e.pageX;
-    let pageY = e.pageY;
-    let offX = e.offsetLeft;
-    let offY = e.offsetTop;
     let currentTargetRect = e.currentTarget.getBoundingClientRect();
     const event_offsetX = e.clientX - (currentTargetRect.left+340),
           event_offsetY = e.clientY - currentTargetRect.top;
-          console.log(currentTargetRect.left, currentTargetRect.top);
-    console.log("client",clientX,clientY);
-    console.log("screen",screenX,screenY);
-    console.log("page",pageX,pageY);
-    console.log('container',  offX,offY );
-    console.log(e);
+    let roomMarker = [...rooms.items].find((el) => el._id === currentMarker.item._id);
     const styleMarker = {position: 'relative', color: 'red', left: `${event_offsetX}px`, top: `${event_offsetY}px`, width: 0,
-    height: 0,}
-    setMarkers([...marker, <div style={styleMarker}>Привет</div>])
+    height: 0, visibility: 'visible'};
+    dispatch(changeStatusOfRoomMarker({...roomMarker,...styleMarker}))
+    dispatch(clearCurrentMarker())
+  };
+
+  const handleDblCLick = (e, id) => {
+    let roomMarker = [...rooms.items].find((el) => el._id === id);
+    const styleMarker = {visibility: 'hidden'};
+    dispatch(changeStatusOfRoomMarker({...roomMarker,...styleMarker}))
   };
 
 
   return (
+    <>
     <React.Fragment>
       <CssBaseline />
+        <MarkerButtons/>
       <Container onClick={(e) => handleClick(e)} className={classes.root} >
-        {marker}
+        {rooms.items.map((item) => {
+          const styleMarker = {position: item.position, color: item.color, left: item.left, top: item.top, width: 0,
+          height: 0, visibility: item.visibility};
+        return <div key={item._id} style={styleMarker} onDoubleClick={(e) => handleDblCLick(e, item._id)}>{item.room}</div>})
+        }
       </Container>  
     </React.Fragment>
+    </>
   );
 }

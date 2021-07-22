@@ -4,6 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Container, MenuItem, Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import * as devicesEndPoinst from "../../../../../config/devicesEndPoints";
+import { IconPicker } from 'react-fa-icon-picker'
+
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -32,20 +34,24 @@ const typeDevice = [
 	{ _id: 1001, type: "Device" },
 	{ _id: 1002, type: "Sensor" },
 ];
-
+const deviceSpecific = [
+	{ _id: 1001, type: "Lamp" },
+	{ _id: 1002, type: "Heater" },
+	{ _id: 1003, type: "Socket" },
+	{ _id: 1004, type: "LED Strip" },
+	{ _id: 1005, type: "Boiler" },
+	{ _id: 1006, type: "Fun" },
+];
 export default function AddDeviceForm({ vendor, ip, port }) {
 	const roomsList = useSelector((state) => state.rooms.items);
-
+  const [value, setValue] = useState("")
 	const classes = useStyles();
 
 	const [currentRoom, setCurrentRoom] = useState("");
 	const [currentRoomID, setCurrentRoomID] = useState("");
 	const [currentTypeDevice, setCurrentTypeDevice] = useState("");
 	const [currentTypeSensor, setCurrentTypeSensor] = useState("");
-
-	const handleChange = (event) => {
-		setCurrentRoom(event.target.value);
-	};
+	const [currentDeviceSpecific, setCurrentDeviceSpecific] = useState("");
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -58,7 +64,7 @@ export default function AddDeviceForm({ vendor, ip, port }) {
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify({ ...body, room: currentRoomID, currentTypeSensor, ip, port }),
+				body: JSON.stringify({ ...body, room: currentRoomID, currentTypeSensor, ip, port, picture: value }),
 			});
 			if (responseAddDevice.ok) {
 				console.log("sensor added");
@@ -70,14 +76,18 @@ export default function AddDeviceForm({ vendor, ip, port }) {
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify({ ...body, room: currentRoomID, ip, port }),
+				body: JSON.stringify({
+					...body,
+					room: currentRoomID,
+					ip,
+					port,
+					deviceSpecific: currentDeviceSpecific,
+				}),
 			});
 			if (responseAddDevice.ok) {
 				console.log("device added");
 			}
 		}
-
-		// dispatch();
 	};
 
 	return (
@@ -85,23 +95,16 @@ export default function AddDeviceForm({ vendor, ip, port }) {
 			<div className={classes.root}>
 				<form className={classes.root} onSubmit={handleSubmit}>
 					<div>
-						<TextField
-							id="standard-basic"
-							label="Device name"
-							name="device"
-							className={clsx(classes.margin, classes.textField)}
-							required
-						/>
-
+          <IconPicker value={value} onChange={(v) => setValue(v)} />
 						<TextField
 							id="standard-select-currency"
 							name="room"
 							select
 							label="Select"
 							value={currentTypeDevice}
-							onChange={handleChange}
+							onChange={(event) => setCurrentTypeDevice(event.target.value)}
 							className={clsx(classes.margin, classes.textField)}
-							helperText="Please select room"
+							helperText="Please select device type"
 							required
 						>
 							{typeDevice.map((el) => (
@@ -115,24 +118,6 @@ export default function AddDeviceForm({ vendor, ip, port }) {
 							))}
 						</TextField>
 
-						<TextField
-							id="standard-select-currency"
-							name="room"
-							select
-							label="Select"
-							value={currentRoom}
-							onChange={handleChange}
-							className={clsx(classes.margin, classes.textField)}
-							helperText="Please select room"
-							required
-						>
-							{roomsList.map((el) => (
-								<MenuItem key={el._id} value={el.room} onClick={() => setCurrentRoomID(el._id)}>
-									{el.room}
-								</MenuItem>
-							))}
-						</TextField>
-
 						{currentTypeDevice === "Sensor" ? (
 							<TextField
 								id="standard-select-currency"
@@ -140,11 +125,12 @@ export default function AddDeviceForm({ vendor, ip, port }) {
 								select
 								label="Select"
 								value={currentTypeSensor}
-								onChange={handleChange}
+								onChange={(event) => setCurrentTypeSensor(event.target.value)}
 								className={clsx(classes.margin, classes.textField)}
 								helperText="Please select room"
 								required
 							>
+                
 								{typesSensors.map((el) => (
 									<MenuItem
 										key={el._id}
@@ -156,8 +142,54 @@ export default function AddDeviceForm({ vendor, ip, port }) {
 								))}
 							</TextField>
 						) : (
-							<></>
+							<TextField
+								id="standard-select-currency"
+								name="room"
+								select
+								label="Select"
+								value={currentDeviceSpecific}
+								onChange={(event) => setCurrentDeviceSpecific(event.target.value)}
+								className={clsx(classes.margin, classes.textField)}
+								helperText="Please select room"
+								required
+							>
+								{deviceSpecific.map((el) => (
+									<MenuItem
+										key={el._id}
+										value={el.type}
+										onClick={() => setCurrentTypeSensor(el.type)}
+									>
+										{el.type}
+									</MenuItem>
+								))}
+							</TextField>
 						)}
+
+						<TextField
+							id="standard-basic"
+							label="Device name"
+							name="device"
+							className={clsx(classes.margin, classes.textField)}
+							required
+						/>
+
+						<TextField
+							id="standard-select-currency"
+							name="room"
+							select
+							label="Select"
+							value={currentRoom}
+							onChange={(event) => setCurrentRoom(event.target.value)}
+							className={clsx(classes.margin, classes.textField)}
+							helperText="Please select room"
+							required
+						>
+							{roomsList.map((el) => (
+								<MenuItem key={el._id} value={el.room} onClick={() => setCurrentRoomID(el._id)}>
+									{el.room}
+								</MenuItem>
+							))}
+						</TextField>
 					</div>
 					<Button
 						type="submit"

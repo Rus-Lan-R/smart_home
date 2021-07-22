@@ -21,13 +21,17 @@ const DeviceSchema = Schema({
     type: String,
     required: true,
   },
+  deviceSpecific: {
+    type: String,
+    required: true,
+  },
   status: {
     type: Boolean,
-    default: false
+    default: false,
   },
   picture: {
     type: String,
-    default: "/defaultDevice.png",
+    default: "FaReact",
   },
   room: {
     type: Schema.Types.ObjectId,

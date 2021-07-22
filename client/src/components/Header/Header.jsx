@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "react-dom"
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -14,7 +15,18 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import HomeIcon from "@material-ui/icons/Home";
+import NoEncryptionIcon from "@material-ui/icons/NoEncryption";
+import LockIcon from "@material-ui/icons/Lock";
+// import AlertDialog from "./AlertDialog/AlertDialog";
 
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Slide from "@material-ui/core/Slide";
 const useStyles = makeStyles((theme) => ({
 	grow: {
 		flexGrow: 1,
@@ -48,6 +60,12 @@ export default function Header() {
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+	const security = useSelector((state) =>
+		state.sensors.items.find((el) => el.sensorType === "Motion Sensor"),
+	);
+	console.log("header security", security);
+	const securityStatus = useSelector((state) => state.sensors.items?.status);
 
 	const isMenuOpen = Boolean(anchorEl);
 	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -147,6 +165,48 @@ export default function Header() {
 		</Menu>
 	);
 
+	const Transition = React.forwardRef(function Transition(props, ref) {
+		return <Slide direction="down" ref={ref} {...props} />;
+	});
+
+	const [open, setOpen] = React.useState(false);
+
+	const handleClickOpen = () => {
+		setOpen(true);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
+	};
+
+	const AlertDialog = (
+		<Dialog
+			open={open}
+			TransitionComponent={Transition}
+			keepMounted
+			onClose={handleClose}
+			aria-labelledby="alert-dialog-slide-title"
+			aria-describedby="alert-dialog-slide-description"
+		>
+			<DialogTitle id="alert-dialog-slide-title">{"Anauthtorized Person"}</DialogTitle>
+			<DialogContent>
+				<img width="100%" height="100%" src="http://localhost:3000/alert.jpeg" alt="..img"></img>
+				<DialogContentText id="alert-dialog-slide-description">
+					Let Google help apps determine location. This means sending anonymous location data to
+					Google, even when no apps are running.
+				</DialogContentText>
+			</DialogContent>
+			<DialogActions>
+				<Button onClick={handleClose} color="primary">
+					Disagree
+				</Button>
+				<Button onClick={handleClose} color="primary">
+					Agree
+				</Button>
+			</DialogActions>
+		</Dialog>
+	);
+
 	return (
 		<div className={classes.grow}>
 			<AppBar position="static">
@@ -156,8 +216,9 @@ export default function Header() {
 						className={classes.menuButton}
 						color="inherit"
 						aria-label="open drawer"
+            href="/home"
 					>
-						<MenuIcon />
+						<HomeIcon />
 					</IconButton>
 					<Typography className={classes.title} variant="h6" noWrap>
 						{userName ? userName : "Smart Home"}
@@ -165,18 +226,33 @@ export default function Header() {
 					<div className={classes.grow} />
 					<div className={classes.sectionDesktop}>
 						{userName ? (
-							<MenuItem>
-              <IconButton aria-label="show 17 new notifications" color="inherit">
-							<Badge badgeContent={17} color="secondary">
-								<NotificationsIcon />
-							</Badge>
-						</IconButton>
-								<Typography className={classes.title} variant="h6" noWrap>
-									<NavLink exact to="/auth/signout" className="nav-link" activeClassName="active">
-										Sign Out
-									</NavLink>
-								</Typography>
-							</MenuItem>
+							<>
+								{securityStatus ? (
+									<IconButton color="inherit">
+										<Badge badgeContent={0} color="secondary">
+											<LockIcon />
+										</Badge>
+									</IconButton>
+								) : (
+									<IconButton color="inherit">
+										<Badge badgeContent={0} color="secondary">
+											<NoEncryptionIcon />
+										</Badge>
+									</IconButton>
+								)}
+								<IconButton color="inherit" onClick={handleClickOpen}>
+									<Badge badgeContent={security?.value} color="secondary">
+										<NotificationsIcon />
+									</Badge>
+								</IconButton>
+								<MenuItem>
+									<Typography className={classes.title} variant="h6" noWrap>
+										<NavLink exact to="/auth/signout" className="nav-link" activeClassName="active">
+											Sign Out
+										</NavLink>
+									</Typography>
+								</MenuItem>
+							</>
 						) : (
 							<>
 								<MenuItem>
@@ -194,7 +270,7 @@ export default function Header() {
 									</Typography>
 								</MenuItem>
 							</>
-						)}						
+						)}
 					</div>
 					<div className={classes.sectionMobile}>
 						<IconButton
@@ -211,6 +287,8 @@ export default function Header() {
 			</AppBar>
 			{renderMobileMenu}
 			{renderMenu}
+
+			{open ? AlertDialog : <></>}
 		</div>
 	);
 }

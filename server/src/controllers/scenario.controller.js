@@ -3,13 +3,13 @@ const Devices = require("../models/device.model");
 const fetch = require("node-fetch");
 
 const getScenarios = async (req, res) => {
-  // try {
-  //   const userId = req.session.user.id;
-  //   const allUserScenarios = await Scenarios.find({ user: userId });
-  //   res.json(allUserScenarios);
-  // } catch (error) {
-  //   res.sendStatus(500);
-  // }
+	// try {
+	//   const userId = req.session.user.id;
+	//   const allUserScenarios = await Scenarios.find({ user: userId });
+	//   res.json(allUserScenarios);
+	// } catch (error) {
+	//   res.sendStatus(500);
+	// }
 };
 
 const statusScenario = async (req, res) => {

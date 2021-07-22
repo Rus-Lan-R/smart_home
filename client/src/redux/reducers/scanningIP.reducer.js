@@ -1,12 +1,18 @@
-import { SET_DEVICES_IP } from "../types/scanningIP.types";
+import { SET_DEVICES_IP, CLEAR_SCANNING_DEVICES } from "../types/scanningIP.types";
 
 const scanningIPReducer = (state = [], action) => {
-	switch (action.type) {
+	const { type, payload } = action;
+	switch (type) {
 		case SET_DEVICES_IP:
-			return action.payload;
+			return [...state, ...payload];
 
-		case "DELETE":
+		case CLEAR_SCANNING_DEVICES: {
 			return [];
+		}
+
+		case "DELETE": {
+			return [];
+		}
 
 		default:
 			return state;
