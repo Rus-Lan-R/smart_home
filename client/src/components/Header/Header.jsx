@@ -1,10 +1,5 @@
 import React from "react";
-<<<<<<< HEAD
-=======
-// import Link from "react-dom";
 import Link from "@material-ui/core/Link";
-
->>>>>>> c87d86dc45514f8c462c84ec3e1d69353def016e
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -13,14 +8,24 @@ import Typography from "@material-ui/core/Typography";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import HomeIcon from "@material-ui/icons/Home";
+import NoEncryptionIcon from "@material-ui/icons/NoEncryption";
+import LockIcon from "@material-ui/icons/Lock";
+// import AlertDialog from "./AlertDialog/AlertDialog";
 
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Slide from "@material-ui/core/Slide";
 const useStyles = makeStyles((theme) => ({
 	root: {
 		...theme.typography,
@@ -59,6 +64,12 @@ export default function Header() {
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+	const security = useSelector((state) =>
+		state.sensors.items.find((el) => el.sensorType === "Motion Sensor"),
+	);
+	console.log("header security", security);
+	const securityStatus = useSelector((state) => state.sensors.items?.status);
 
 	const isMenuOpen = Boolean(anchorEl);
 	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -158,6 +169,47 @@ export default function Header() {
 		</Menu>
 	);
 
+	const Transition = React.forwardRef(function Transition(props, ref) {
+		return <Slide direction="down" ref={ref} {...props} />;
+	});
+
+	const [open, setOpen] = React.useState(false);
+
+	const handleClickOpen = () => {
+		setOpen(true);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
+	};
+
+	const AlertDialog = (
+		<Dialog
+			open={open}
+			TransitionComponent={Transition}
+			keepMounted
+			onClose={handleClose}
+			aria-labelledby="alert-dialog-slide-title"
+			aria-describedby="alert-dialog-slide-description"
+		>
+			<DialogTitle color="red" id="alert-dialog-slide-title">{"Enemy Spotted"}</DialogTitle>
+			<DialogContent>
+				<img width="70%" height="70%" src="http://localhost:3000/alert.jpeg" alt="..img"></img>
+				<DialogContentText id="alert-dialog-slide-description">
+          Minus items
+				</DialogContentText>
+			</DialogContent>
+			<DialogActions>
+				<Button onClick={handleClose} color="primary">
+					Disagree
+				</Button>
+				<Button onClick={handleClose} color="primary">
+					Agree
+				</Button>
+			</DialogActions>
+		</Dialog>
+	);
+
 	return (
 		<div className={classes.grow}>
 			<AppBar position="static">
@@ -167,12 +219,9 @@ export default function Header() {
 						className={classes.menuButton}
 						color="inherit"
 						aria-label="open drawer"
-<<<<<<< HEAD
-=======
 						href="/home"
->>>>>>> c87d86dc45514f8c462c84ec3e1d69353def016e
 					>
-						<MenuIcon />
+						<HomeIcon />
 					</IconButton>
 					<Typography className={classes.title} variant="h6" noWrap>
 						{userName ? userName : "Smart Home"}
@@ -180,20 +229,6 @@ export default function Header() {
 					<div className={classes.grow} />
 					<div className={classes.sectionDesktop}>
 						{userName ? (
-<<<<<<< HEAD
-							<MenuItem>
-              <IconButton aria-label="show 17 new notifications" color="inherit">
-							<Badge badgeContent={17} color="secondary">
-								<NotificationsIcon />
-							</Badge>
-						</IconButton>
-								<Typography className={classes.title} variant="h6" noWrap>
-									<NavLink exact to="/auth/signout" className="nav-link" activeClassName="active">
-										Sign Out
-									</NavLink>
-								</Typography>
-							</MenuItem>
-=======
 							<>
 								{securityStatus ? (
 									<IconButton color="inherit">
@@ -228,7 +263,6 @@ export default function Header() {
 									</Typography>
 								</MenuItem>
 							</>
->>>>>>> c87d86dc45514f8c462c84ec3e1d69353def016e
 						) : (
 							<>
 								<MenuItem>
@@ -260,7 +294,7 @@ export default function Header() {
 									</Typography>
 								</MenuItem>
 							</>
-						)}						
+						)}
 					</div>
 					<div className={classes.sectionMobile}>
 						<IconButton
@@ -277,6 +311,8 @@ export default function Header() {
 			</AppBar>
 			{renderMobileMenu}
 			{renderMenu}
+
+			{open ? AlertDialog : <></>}
 		</div>
 	);
 }

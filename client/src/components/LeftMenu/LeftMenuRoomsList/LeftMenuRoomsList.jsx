@@ -18,7 +18,7 @@ import Weather from '../Weather/Weather'
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: 15,
-    maxWidth: 270,
+    // maxWidth: 270,
     // backgroundColor: '#fdecec',
   },
 }));
@@ -36,7 +36,6 @@ export default function LeftMenuRoomsList() {
   const classes = useStyles();
 	return (
 		<>
-
 			{rooms.map((el) => (
 				<Paper className={classes.root}  key={el._id}>
 					<MenuList>
@@ -53,7 +52,9 @@ export default function LeftMenuRoomsList() {
 			))}
       <AddItemsButton text="Add Room" link="/home/addRoom" />
 			<AddItemsButton text="Add Device" link="/home/config" />
+      <div style={{padding: '14px'}}>
       <Weather />
-		</>
+      </div>
+	</>
 	);
 }

@@ -8,6 +8,7 @@ const {
 	resetSensorValue,
 	getUserRoomSensors,
 	switchSensor,
+  getAllUserSensors,
 } = require("../controllers/sensor.controller");
 
 sensorRouter.route("/").patch(getUserSensorsValue).post(addUserSensors).put(switchSensor);
@@ -17,6 +18,8 @@ sensorRouter
 	.post(setSensorValueMovement)
 	.put(resetSensorValue);
 sensorRouter.route("/roomSensors/:roomID").get(getUserRoomSensors);
+sensorRouter.route("/all").get(getAllUserSensors);
+
 // sensorRouter.route("/temperature").get(getSensorValue).post(setSensorValue);
 // sensorRouter.route("/humidity").get(getSensorValue).post(setSensorValue);
 // sensorRouter.route("/pressure").get(getSensorValue).post(setSensorValue);

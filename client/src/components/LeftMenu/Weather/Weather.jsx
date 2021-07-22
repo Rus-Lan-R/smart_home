@@ -14,7 +14,7 @@ export default function Weather() {
       errorMessage={errorMessage}
       data={data}
       lang="en"
-      locationLabel="Elbrus bootcamp"
+      locationLabel="Elbrus Bootcamp"
       unitsLabels={{ temperature: 'C', windSpeed: 'Km/h' }}
       showForecast
     />
