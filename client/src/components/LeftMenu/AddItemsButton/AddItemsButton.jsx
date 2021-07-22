@@ -11,7 +11,8 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: 15,
-    maxWidth: 200
+    maxWidth: 270,
+    // height: 68
   },
 }));
 
@@ -22,7 +23,7 @@ export default function AddItemsButton({ text, link }) {
 			<MenuList>
 				<MenuItem>
 					<ListItemIcon>
-						<AddCircleIcon />
+						<AddCircleIcon size={24}/>
 					</ListItemIcon>
 					<Typography variant="inherit">
 						<Link style={{ color: "inherit" }} to={`${link}`}>

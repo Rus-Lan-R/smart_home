@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 import { useState, useEffect } from 'react';
+import Avatar from '@material-ui/core/Avatar';
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -19,7 +20,8 @@ const VoiceRecognitionButton = () => {
 
   if (isMicOn) {
     buttonColour = 'secondary';
-    buttonLabel = 'Recording...';
+    // buttonLabel = 'Recording...';
+    buttonLabel = '🎙';
   } else {
     buttonColour = 'primary';
     buttonLabel = '🎙';
@@ -273,15 +275,27 @@ const VoiceRecognitionButton = () => {
       };
     };
   };
+  const style= {
+    margin:0,
+    width: 80,
+    height: 80,
+    borderRadius: "50%",
+    top:'auto',
+    right:20,
+    bottom:20,
+    left:'auto',
+    position:'fixed',
+};
   return (
     <Button
+      style={style}
       variant="contained"
       color={buttonColour}
       onClick={() => {
         setIsMicOn(!isMicOn);
       }}
     >
-      {buttonLabel}
+      <Avatar src={'http://www.wpsimplesponsorships.com/wp-content/uploads/2019/05/cropped-icon-256x256.png'} />
     </Button>
   );
 };

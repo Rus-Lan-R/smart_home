@@ -76,10 +76,11 @@ export default function DevicesList() {
 	const classes = useStyles();
 	// justifyContent="space-around"
 	return (
-		<Grid container spacing={3} direction="row" alignItems="top">
-			<Grid container spacing={5} direction="row" item xs justifyContent="space-evenly">
+		<Grid container spacing={1} direction="row" alignItems="top">
+		<Grid container item xs={6} spacing={1} direction="row" alignItems="top">
+      
 				{devices.map((el) => (
-					<Grid container spacing={3} direction="row" item xs={4}>
+					<Grid item xs={4}>
 						<Card key={el._id} className={classes.root}>
 							<CardActionArea>
 								<CardContent direction="column">
@@ -110,10 +111,13 @@ export default function DevicesList() {
 						</Card>
 					</Grid>
 				))}
-			</Grid>
+        </Grid>
+		<Grid container item xs={6} spacing={1} direction="row" alignItems="top">
 
-			<Grid spacing={5} item xs={5} justifyContent="flex-end" alignItems="flex-start">
+
 				{sensors.map((el) => (
+			<Grid item xs={5}>
+
 					<Card key={el._id} className={classes.root}>
 						<CardActionArea>
 							<CardContent>
@@ -148,8 +152,10 @@ export default function DevicesList() {
 							</Button>
 						</CardActions>
 					</Card>
+          </Grid>
+
 				))}
-			</Grid>
+        </Grid>
 		</Grid>
 	);
 }
