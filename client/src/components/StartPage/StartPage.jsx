@@ -8,6 +8,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
 import SignIn from "../Auth/SignIn/SignIn";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -18,10 +19,28 @@ const useStyles = makeStyles((theme) => ({
 		textAlign: "center",
 		color: theme.palette.text.secondary,
 	},
+  mainTitle: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: '#619bd9c7',
+    paddingTop: '40px'
+  },
+  button: {
+    background: "#2d8de2",
+    color: '#fff',
+    padding: '1rem 1.5rem', 
+    textDecoration: 'none',
+    // border: "3px solid #fff"
+  }
 }));
+
+
 
 function StartPage() {
 	const classes = useStyles();
+  
 	return (
 		<div
 			style={{
@@ -32,20 +51,23 @@ function StartPage() {
 				backgroundPosition: "center",
 				backgroundColor: "#dbe2e0",
 
-				height: "93vh",
+				height: "calc(100vh - 64px)",
 			}}
 		>
-			<Grid container xs spacing={3} justifyContent="space-around">
-				<Grid item xs={4} alignItems="center"></Grid>
-				<Grid item xs>
-					<div>SMART HOME</div>
-					<div>OPERATING SYSTEM YOUR HOME</div>
+			<Grid container xs justifyContent="space-around">
+				{/* <Grid item xs={4} alignItems="center">
+						<SignIn />          
+        </Grid>
+				 */}
+
+				<Grid justifyContent="center" item xs className={classes.mainTitle}>
+					<h1 style={{ align: "center" }}>
+          <span>SMART HOME</span><br/>
+					<span>OPERATING SYSTEM YOUR HOME</span>
+					</h1>
+          <Link className={classes.button} to="/home" >SMART YOUR LIFE</Link>
 				</Grid>
-				<Grid container item xs={4} direction="column" justifyContent="flex-end">
-					<Grid>
-						<SignIn />
-					</Grid>
-				</Grid>
+			
 			</Grid>
 
 			{/* <div > */}
@@ -57,15 +79,10 @@ function StartPage() {
 				justifyContent="space-around"
 				padding="20px"
 			>
-				<Grid item xs={4} alignItems="center"></Grid>
-				<Grid justifyContent="center" item xs>
-					<div style={{ align: "center" }}>
-						<p>Normalno delay - Normlno bydet</p>
+				<Grid justifyContent="center" item xs className={classes.mainTitle}>
+					<div style={{ align: "center" , color: "#619bd9c7"}}>
+						<p>Normalno delay - Normalno bydet</p>
 					</div>
-				</Grid>
-				<Grid item xs={2} direction="row" alignItems="flex-end"></Grid>
-				<Grid item xs={2} direction="row" alignItems="flex-end">
-					<img width="100%" src={devicesIcons} alt="pictures devices" />
 				</Grid>
 			</Grid>
 			{/* </div> */}

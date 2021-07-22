@@ -10,3 +10,7 @@ body {
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+
+.MuiAppBar-root{
+  background-color: #2d8de2 !important;
+}

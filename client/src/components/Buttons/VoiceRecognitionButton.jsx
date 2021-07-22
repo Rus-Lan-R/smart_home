@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import { useState, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
-import Microphone from '../../img/kisspng-microphone-cartoon-performance-cartoon-broadcast-microphone-5a80f676da7540.0756230515184011428948.png'
+import Microphone from '../../img/uploads_microphone_microphone_PNG7925.png'
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
