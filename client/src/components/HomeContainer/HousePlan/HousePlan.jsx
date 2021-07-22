@@ -7,6 +7,8 @@ import { clearCurrentMarker } from '../../../redux/actions/currentMarker.action'
 import MarkerButtons from '../../Buttons/MarkerButtons';
 import { changeStatusOfRoomMarker } from '../../../redux/actions/rooms.action';
 import backgroundPlan from "../../../img/u99.png";
+import { IconPickerItem } from 'react-fa-icon-picker';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -43,7 +45,7 @@ export default function SimpleContainer() {
     const event_offsetX = e.clientX - (currentTargetRect.left+(currentTargetRect.width/2)),
           event_offsetY = e.clientY - currentTargetRect.top;
     let roomMarker = [...rooms.items].find((el) => el._id === currentMarker.item._id);
-    const styleMarker = {position: 'relative', color: 'red', left: `${event_offsetX}px`, top: `${event_offsetY}px`, width:0,
+    const styleMarker = {position: 'relative', color: 'yellow', left: `${event_offsetX}px`, top: `${event_offsetY}px`, width:0,
     height: 0, visibility: 'visible'};
     dispatch(changeStatusOfRoomMarker({...roomMarker,...styleMarker}))
     dispatch(clearCurrentMarker())
@@ -65,7 +67,7 @@ export default function SimpleContainer() {
         {rooms.items.map((item) => {
           const styleMarker = {position: item.position, color: item.color, left: item.left, top: item.top, width: 0,
           height: 0, visibility: item.visibility, zIndex: Math.floor(Math.random() * 101)};
-        return <div key={item._id} style={styleMarker} onDoubleClick={(e) => handleDblCLick(e, item._id)}>{item.room}</div>})
+        return <div key={item._id} style={styleMarker} onDoubleClick={(e) => handleDblCLick(e, item._id)}>{item.room}<IconPickerItem icon={`${item.picture}`} size={36} color="yellow"/></div>})
         }
       </Container>  
     </React.Fragment>
