@@ -144,14 +144,14 @@ EnhancedTableToolbar.propTypes = {
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		wipth: "100%",
+		width: "80%",
 	},
 	paper: {
 		wipth: "100%",
 		marginBottom: theme.spacing(2),
 	},
 	table: {
-		minWipth: 750,
+		minWidth: 750,
 	},
 	visuallyHipden: {
 		border: 0,
@@ -177,7 +177,7 @@ export default function DevicesList() {
 	const [selected] = React.useState([]);
 	const [page, setPage] = React.useState(0);
 	const [dense] = React.useState(false);
-	const [rowsPerPage, setRowsPerPage] = React.useState(15);
+	const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === "asc";

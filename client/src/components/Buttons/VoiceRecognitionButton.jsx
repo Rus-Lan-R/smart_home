@@ -115,7 +115,7 @@ const VoiceRecognitionButton = () => {
         console.log(error);    
       }
     }
-    else if (command === 'включитьленту'){
+    else if (command === 'радуга'){
       try {
         await fetch(process.env.REACT_APP_RASPBERRY_API,{
           method: 'POST',
@@ -123,7 +123,37 @@ const VoiceRecognitionButton = () => {
           'Content-Type': 'application/json',
           },
           body: JSON.stringify(
-            {api: process.env.REACT_APP_SMART_DEVICE_API+"/strip/on"}
+            {api: process.env.REACT_APP_SMART_DEVICE_API+"/ledStrip/rainbow"}
+          ),
+        })        
+      } catch (error) {
+        console.log(error);    
+      }
+    }
+    else if (command === 'конфетти'){
+      try {
+        await fetch(process.env.REACT_APP_RASPBERRY_API,{
+          method: 'POST',
+          headers: {
+          'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(
+            {api: process.env.REACT_APP_SMART_DEVICE_API+"/ledStrip/confetti"}
+          ),
+        })        
+      } catch (error) {
+        console.log(error);    
+      }
+    }
+    else if (command === 'барсук'){
+      try {
+        await fetch(process.env.REACT_APP_RASPBERRY_API,{
+          method: 'POST',
+          headers: {
+          'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(
+            {api: process.env.REACT_APP_SMART_DEVICE_API+"/ledStrip/sinelon"}
           ),
         })        
       } catch (error) {
@@ -138,7 +168,7 @@ const VoiceRecognitionButton = () => {
           'Content-Type': 'application/json',
           },
           body: JSON.stringify(
-            {api: process.env.REACT_APP_SMART_DEVICE_API+"/strip/off"}
+            {api: process.env.REACT_APP_SMART_DEVICE_API+"/ledStrip/off"}
           ),
         })        
       } catch (error) {

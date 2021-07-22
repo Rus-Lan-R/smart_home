@@ -12,6 +12,13 @@ import AddItemsButton from "../AddItemsButton/AddItemsButton";
 import { IconPickerItem } from 'react-fa-icon-picker'
 
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    margin: 15,
+    maxWidth: 270,
+    // backgroundColor: '#fdecec',
+  },
+}));
 
 export default function LeftMenuRoomsList() {
 	const rooms = useSelector((state) => state.rooms?.items);
@@ -22,10 +29,14 @@ export default function LeftMenuRoomsList() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+  
+  const classes = useStyles();
 	return (
 		<>
+      <AddItemsButton text="Add Room" link="/home/addRoom" />
+			<AddItemsButton text="Add Device" link="/home/config" />
 			{rooms.map((el) => (
-				<Paper style={{ margin: "10px"}} key={el._id}>
+				<Paper className={classes.root}  key={el._id}>
 					<MenuList>
 						<MenuItem>
             <IconPickerItem icon={`${el.picture}`} size={24} color="#000"/>
@@ -37,9 +48,7 @@ export default function LeftMenuRoomsList() {
 						</MenuItem>
 					</MenuList>
 				</Paper>
-			))}
-			<AddItemsButton text="Add Room" link="/home/addRoom" />
-			<AddItemsButton text="Add Device" link="/home/config" />
+			))}			
 		</>
 	);
 }
