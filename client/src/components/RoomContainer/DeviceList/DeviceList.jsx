@@ -22,7 +22,7 @@ import CardContent from "@material-ui/core/CardContent";
 
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { IconPickerItem } from 'react-fa-icon-picker'
+import { IconPickerItem } from "react-fa-icon-picker";
 
 const useStyles = makeStyles({
 	root: {
@@ -52,15 +52,15 @@ export default function DevicesList() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [roomName]);
 
-	// useEffect(() => {
-	// 	let interval = setInterval(() => {
-	// 		dispatch(getDevices(roomName));
-	// 		dispatch(getSensors(roomName));
-	// 	}, 5000);
-	// 	return () => {
-	// 		clearInterval(interval);
-	// 	};
-	// });
+	useEffect(() => {
+		let interval = setInterval(() => {
+			dispatch(getDevices(roomName));
+			dispatch(getSensors(roomName));
+		}, 2500);
+		return () => {
+			clearInterval(interval);
+		};
+	});
 
 	const handleClickDevice = (id, status) => {
 		dispatch(deviceChangeStatus({ id, status }));
@@ -77,14 +77,13 @@ export default function DevicesList() {
 	// justifyContent="space-around"
 	return (
 		<Grid container spacing={1} direction="row" alignItems="top">
-		<Grid container item xs={6} spacing={1} direction="row" alignItems="top">
-      
+			<Grid container item xs={6} spacing={1} direction="row" alignItems="top">
 				{devices.map((el) => (
 					<Grid item xs={4}>
 						<Card key={el._id} className={classes.root}>
 							<CardActionArea>
 								<CardContent direction="column">
-                <IconPickerItem icon={`${el.picture}`} size={24} color="#000"/>
+									<IconPickerItem icon={`${el.picture}`} size={24} color="#000" />
 									<Typography gutterBottom variant="h5" component="h2">
 										{el.device}
 									</Typography>
@@ -111,51 +110,47 @@ export default function DevicesList() {
 						</Card>
 					</Grid>
 				))}
-        </Grid>
-		<Grid container item xs={6} spacing={1} direction="row" alignItems="top">
-
-
+			</Grid>
+			<Grid container item xs={6} spacing={1} direction="row" alignItems="top">
 				{sensors.map((el) => (
-			<Grid item xs={5}>
-
-					<Card key={el._id} className={classes.root}>
-						<CardActionArea>
-							<CardContent>
-								<Typography gutterBottom variant="h5" component="h2">
-									{el.sensorName}
-								</Typography>
-								<Typography gutterBottom variant="h9" component="h4">
-									{el.sensorType} - {el.status ? "ON" : "OFF"}
-								</Typography>
-								<Typography variant="h2" component="p">
-									{el.value}
-								</Typography>
-							</CardContent>
-						</CardActionArea>
-						<CardActions>
-							<Button
-								size="small"
-								color="primary"
-								onClick={() => handleClickSensor(el._id, el.status)}
-							>
-								{el.status ? "Off" : "On"}
-							</Button>
-							{el.sensorType === "Motion Sensor" ? (
-								<Button size="small" color="primary" onClick={() => resetAlarm(el._id)}>
-									Reset
+					<Grid item xs={5}>
+						<Card key={el._id} className={classes.root}>
+							<CardActionArea>
+								<CardContent>
+									<Typography gutterBottom variant="h5" component="h2">
+										{el.sensorName}
+									</Typography>
+									<Typography gutterBottom variant="h9" component="h4">
+										{el.sensorType} - {el.status ? "ON" : "OFF"}
+									</Typography>
+									<Typography variant="h2" component="p">
+										{el.value}
+									</Typography>
+								</CardContent>
+							</CardActionArea>
+							<CardActions>
+								<Button
+									size="small"
+									color="primary"
+									onClick={() => handleClickSensor(el._id, el.status)}
+								>
+									{el.status ? "Off" : "On"}
 								</Button>
-							) : (
-								<></>
-							)}
-							<Button size="small" color="primary">
-								Remove
-							</Button>
-						</CardActions>
-					</Card>
-          </Grid>
-
+								{el.sensorType === "Motion Sensor" ? (
+									<Button size="small" color="primary" onClick={() => resetAlarm(el._id)}>
+										Reset
+									</Button>
+								) : (
+									<></>
+								)}
+								<Button size="small" color="primary">
+									Remove
+								</Button>
+							</CardActions>
+						</Card>
+					</Grid>
 				))}
-        </Grid>
+			</Grid>
 		</Grid>
 	);
 }
