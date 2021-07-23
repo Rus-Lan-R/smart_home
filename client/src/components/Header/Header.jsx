@@ -14,7 +14,6 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import HomeIcon from "@material-ui/icons/Home";
 import NoEncryptionIcon from "@material-ui/icons/NoEncryption";
 import LockIcon from "@material-ui/icons/Lock";
 // import AlertDialog from "./AlertDialog/AlertDialog";
@@ -33,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
 	},
 	grow: {
 		flexGrow: 1,
-    
 	},
 	menuButton: {
 		marginRight: theme.spacing(2),
@@ -58,10 +56,10 @@ const useStyles = makeStyles((theme) => ({
 			display: "none",
 		},
 	},
-  logo: {
-    width: 36,
-    height: 36
-  }
+	logo: {
+		width: 36,
+		height: 36,
+	},
 }));
 
 export default function Header() {
@@ -73,7 +71,6 @@ export default function Header() {
 	const security = useSelector((state) =>
 		state.sensors.items.find((el) => el.sensorType === "Motion Sensor"),
 	);
-	console.log("header security", security);
 	const securityStatus = useSelector((state) => state.sensors.items?.status);
 
 	const isMenuOpen = Boolean(anchorEl);
@@ -197,12 +194,12 @@ export default function Header() {
 			aria-labelledby="alert-dialog-slide-title"
 			aria-describedby="alert-dialog-slide-description"
 		>
-			<DialogTitle color="red" id="alert-dialog-slide-title">{"Enemy Spotted"}</DialogTitle>
+			<DialogTitle color="red" id="alert-dialog-slide-title">
+				{"Enemy Spotted"}
+			</DialogTitle>
 			<DialogContent>
 				<img width="70%" height="70%" src="http://localhost:3000/alert.jpeg" alt="..img"></img>
-				<DialogContentText id="alert-dialog-slide-description">
-          Minus items
-				</DialogContentText>
+				<DialogContentText id="alert-dialog-slide-description">Minus items</DialogContentText>
 			</DialogContent>
 			<DialogActions>
 				<Button onClick={handleClose} color="primary">
@@ -226,7 +223,7 @@ export default function Header() {
 						aria-label="open drawer"
 						href="/home"
 					>
-						<img className={classes.logo} src='/logo.png' alt='...'/>
+						<img className={classes.logo} src="/logo.png" alt="..." />
 					</IconButton>
 					<Typography className={classes.title} variant="h6" noWrap>
 						{userName ? userName : "Smart Home"}

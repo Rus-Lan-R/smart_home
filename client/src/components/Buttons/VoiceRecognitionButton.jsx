@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 import { useState, useEffect } from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import Microphone from '../../img/IMG_0141.PNG'
 
 const SpeechRecognition =

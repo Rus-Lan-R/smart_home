@@ -17,15 +17,6 @@ const PORT = process.env.PORT ?? 3001;
 
 connect();
 
-// const netList = require("network-list");
-
-// netList.scan({ ip: "192.168.1", min: 1, max: 50 }, (err, arr) => {
-// 	let arrAllDevice = arr.filter((el) => el.alive).sort();
-// 	console.log(arrAllDevice);
-// });
-
-// console.log("finish");
-
 if (process.env.DEV) {
 	const morgan = require("morgan");
 	app.use(morgan("dev"));
