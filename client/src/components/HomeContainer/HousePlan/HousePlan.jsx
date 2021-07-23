@@ -9,7 +9,7 @@ import { changeStatusOfRoomMarker } from '../../../redux/actions/rooms.action';
 import { getAllDevices } from "../../../redux/actions/allDevices.action";
 import backgroundPlan from "../../../img/u99.png";
 import { IconPickerItem } from 'react-fa-icon-picker';
-
+import { NavLink } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,17 +30,27 @@ const useStyles = makeStyles((theme) => ({
   },
   pin: {
     position: 'relative',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    '&:hover .bubble': {
+      opacity: 1
+    }
   },
   bubble: {
     backgroundColor: '#ffffff',
-    padding: '5px',
+    padding: '5px 10px',
+    borderRadius: 5,
+    width: 120,
     position: 'absolute',
-    bottom: 0,
+    bottom: '-70px',
     left: '50%',
-    transform: 'translate(-50%, 100%)',
-    marginTop: 5
-  }
+    transform: 'translate(-38px, 100%)',
+    transition: '.2s',
+    opacity: 0
+    // visibility: 'hidden'
+  }, 
+  "&:hover": {
+    visibility: 'visible'
+  },
 }));
 
 
@@ -75,7 +85,7 @@ export default function SimpleContainer() {
     dispatch(changeStatusOfRoomMarker({...roomMarker,...styleMarker}))
   };
 
-
+  
   return (
     <>
     <React.Fragment>
@@ -85,9 +95,16 @@ export default function SimpleContainer() {
         {rooms.items.map((item) => {
           const styleMarker = {position: item.position, color: item.color, left: item.left, top: item.top, width: 0,
           height: 0, visibility: item.visibility, zIndex: Math.floor(Math.random() * 101)};
-          
-        return <div className={classes.pin} key={item._id} style={styleMarker}  onDoubleClick={(e) => handleDblCLick(e, item._id)}>{item.room}<IconPickerItem icon={`${item.picture}`} size={36} color="yellow"/>
-        <div  className={classes.bubble} >
+        return <div className={classes.pin} key={item._id} style={styleMarker} onDoubleClick={(e) => handleDblCLick(e, item._id)}>
+          <NavLink exact
+            to={`home/rooms/${item._id}`}
+            className="nav-link"
+            style={{ color: "yellow", textDecoration: "none" }}
+            >
+              {item.room}
+              <IconPickerItem icon={`${item.picture}`} size={36} color="yellow"/>
+          </NavLink>
+        <div  className={`${classes.bubble} bubble`}>
         {[...sensors].filter((el) => el.room === item._id).map((el) => {
           return <div>{el.sensorName}: {el.value} </div>
         })}
