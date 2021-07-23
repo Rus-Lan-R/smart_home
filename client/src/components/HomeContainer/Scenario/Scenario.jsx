@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
       width: '25ch',
     },
   },
+  image: {
+    width: '100%'
+  }
 }));
 
 export default function Scenario({item}) {
@@ -26,13 +29,13 @@ const handleClick =(nameScenario, isActive) => {
 }
 
     return (
-      <Paper>
+      <Paper style={{height: '100%', borderRadius: '10px', margin: '0 10px'}}>
               <Typography variant="h5" component="div">
                 {item.name}
               </Typography>
               <div>{isActive? <Typography variant="subtitle1" component="div" style={{color: "lightgreen"}}>Started</Typography> : ""}</div>
             {/* <img src={`/${item.picture}`} alt={item.picture} /> */}
-            <img src={`/${item.picture}`} alt={item.picture} />
+            <img className={classes.image} src={`/${item.picture}`} alt={item.picture}  />
             <Button className="CheckButton" onClick={() => handleClick(item.name, isActive)}>
             {isActive? "Stop" : "Start"}
             </Button>
