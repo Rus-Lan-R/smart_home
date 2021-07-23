@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getDevices } from "../../../redux/actions/devices.action";
 import {
@@ -23,11 +23,14 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { IconPickerItem } from "react-fa-icon-picker";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
 
-const useStyles = makeStyles({
+import Paper from "@material-ui/core/Paper";
+
+const useStyles = makeStyles((theme) => ({
 	root: {
 		maxWidth: 250,
-		marginTop: 30,
 		maxHeight: 200,
 	},
 	media: {
@@ -36,7 +39,11 @@ const useStyles = makeStyles({
 	pos: {
 		marginBottom: 12,
 	},
-});
+	paper: {
+		margin: `${theme.spacing(1)}px auto`,
+		padding: theme.spacing(2),
+	},
+}));
 
 export default function DevicesList() {
 	const devices = useSelector((state) => state.devices.items);
@@ -76,44 +83,14 @@ export default function DevicesList() {
 	const classes = useStyles();
 	// justifyContent="space-around"
 	return (
-		<Grid container spacing={1} direction="row" alignItems="top">
-			<Grid container item xs={6} spacing={1} direction="row" alignItems="top">
-				{devices.map((el) => (
-					<Grid item xs={4}>
-						<Card key={el._id} className={classes.root}>
-							<CardActionArea>
-								<CardContent direction="column">
-									<IconPickerItem icon={`${el.picture}`} size={24} color="#000" />
-									<Typography gutterBottom variant="h5" component="h2">
-										{el.device}
-									</Typography>
-									<Typography variant="h7" className={classes.pos} color="textSecondary">
-										Expendet Power - {el.expendedPower} Wt
-									</Typography>
-									<Typography variant="h7" className={classes.pos} color="textSecondary">
-										Time Working - {+(el.timeWorking / 3600).toFixed(4)} h
-									</Typography>
-								</CardContent>
-							</CardActionArea>
-							<CardActions>
-								<Button
-									size="small"
-									color="primary"
-									onClick={() => handleClickDevice(el._id, el.status)}
-								>
-									{el.status ? "Off" : "On"}
-								</Button>
-								<Button size="small" color="primary">
-									Remove
-								</Button>
-							</CardActions>
-						</Card>
-					</Grid>
-				))}
-			</Grid>
-			<Grid container item xs={6} spacing={1} direction="row" alignItems="top">
+		<>
+			<Typography variant="h5" component="h2">
+				Sensors
+			</Typography>
+
+			<Grid container item xs spacing={1} direction="row" justifyContent="space-between">
 				{sensors.map((el) => (
-					<Grid item xs={5}>
+					<Grid item xs={3}>
 						<Card key={el._id} className={classes.root}>
 							<CardActionArea>
 								<CardContent>
@@ -151,6 +128,90 @@ export default function DevicesList() {
 					</Grid>
 				))}
 			</Grid>
-		</Grid>
+
+			<Typography variant="h5" component="h2">
+				Devices
+			</Typography>
+
+			<Grid container item xs direction="column">
+				{devices.map((el) => (
+					<Grid item xs>
+						<Paper className={classes.paper}>
+							<div
+								style={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}
+							>
+								<IconPickerItem icon={`${el.picture}`} size={24} color="#000" />
+								<Typography gutterBottom variant="h5" component="h2">
+									{el.device}
+								</Typography>
+								<Typography variant="h7" className={classes.pos} color="textSecondary">
+									Expendet Power - {el.expendedPower} Wt
+								</Typography>
+								<Typography variant="h7" className={classes.pos} color="textSecondary">
+									Time Working - {+(el.timeWorking / 3600).toFixed(4)} h
+								</Typography>
+
+								<CardActions>
+									<Switch
+										checked={el.status}
+										onChange={() => {
+											handleClickDevice(el._id, el.status);
+										}}
+										name="checkedB"
+										color="primary"
+									/>
+									<Button
+										size="small"
+										color="primary"
+										onClick={() => handleClickDevice(el._id, el.status)}
+									>
+										{el.status ? "Off" : "On"}
+									</Button>
+									<Button size="small" color="primary">
+										Remove
+									</Button>
+								</CardActions>
+							</div>
+						</Paper>
+					</Grid>
+				))}
+			</Grid>
+		</>
 	);
+}
+
+{
+	/* {devices.map((el) => (
+  <Grid item xs>
+    <Card key={el._id} className={classes.root}>
+      <CardActionArea>
+        <CardContent direction="row">
+          <IconPickerItem icon={`${el.picture}`} size={24} color="#000" />
+          <Typography gutterBottom variant="h5" component="h2">
+            {el.device}
+          </Typography>
+          <Typography variant="h7" className={classes.pos} color="textSecondary">
+            Expendet Power - {el.expendedPower} Wt
+          </Typography>
+          <Typography variant="h7" className={classes.pos} color="textSecondary">
+            Time Working - {+(el.timeWorking / 3600).toFixed(4)} h
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => handleClickDevice(el._id, el.status)}
+        >
+          {el.status ? "Off" : "On"}
+        </Button>
+        <Button size="small" color="primary">
+          Remove
+        </Button>
+      </CardActions>
+    </Card>
+  </Grid>
+))}
+</Grid> */
 }
