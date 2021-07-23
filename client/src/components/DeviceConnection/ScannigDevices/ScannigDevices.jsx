@@ -2,8 +2,11 @@ import Button from "@material-ui/core/Button";
 import { useDispatch, useSelector } from "react-redux";
 import DevicesList from "../DevicesList/DevicesList";
 import { getIpDevices, clearScaningDevices } from "../../../redux/actions/scanningIP.action";
-import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+
+import LinearProgressBar from "../LinearProgressBar/LinearProgressBar";
+
+import { useState, useEffect } from "react";
 
 const useStyles = makeStyles({
 	root: {
@@ -18,6 +21,7 @@ const ScannigDevices = () => {
 	const handleStart = () => {
 		dispatch(getIpDevices());
 		dispatch(clearScaningDevices());
+		setProgress(0);
 	};
 
 	const handleStop = () => {
@@ -25,7 +29,12 @@ const ScannigDevices = () => {
 	};
 
 	const loader = useSelector((state) => state.loader);
-  const classes = useStyles();
+	const [progress, setProgress] = useState(0);
+
+	useEffect(() => {
+		setProgress((prev) => setProgress(prev + 5));
+	}, [loader]);
+	const classes = useStyles();
 	return (
 		<>
 			{loader ? (
@@ -37,6 +46,8 @@ const ScannigDevices = () => {
 					Start Devices Scanning
 				</Button>
 			)}
+
+			{loader ? <LinearProgressBar progress={progress} /> : <></>}
 
 			<DevicesList />
 		</>

@@ -17,12 +17,12 @@ import {
 
 import React from "react";
 import { useSelector } from "react-redux";
-import Loader from "../../Loader/Loader";
+
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { lighten, makeStyles } from "@material-ui/core/styles";
 import FilterListIcon from "@material-ui/icons/FilterList";
-import LinearProgressBar from "../LinearProgressBar/LinearProgressBar";
+
 function descendingComparator(a, b, orderBy) {
 	if (b[orderBy] < a[orderBy]) {
 		return -1;
@@ -200,7 +200,7 @@ export default function DevicesList() {
 
 	return (
 		<>
-			{loader ? <LinearProgressBar /> : <></>}
+			{/* {loader ? <LinearProgressBar progress={progress} /> : <></>} */}
 			<Container width="75%">
 				<div className={classes.root}>
 					<Paper className={classes.paper}>
