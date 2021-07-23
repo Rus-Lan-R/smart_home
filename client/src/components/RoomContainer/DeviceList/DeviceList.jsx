@@ -31,7 +31,6 @@ import Paper from "@material-ui/core/Paper";
 const useStyles = makeStyles((theme) => ({
 	root: {
 		maxWidth: 250,
-		maxHeight: 200,
 	},
 	media: {
 		height: 100,
@@ -42,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
 	paper: {
 		margin: `${theme.spacing(1)}px auto`,
 		padding: theme.spacing(2),
+	},
+	description: {
+		margin: "15px",
 	},
 }));
 
@@ -84,19 +86,22 @@ export default function DevicesList() {
 	// justifyContent="space-around"
 	return (
 		<>
-			<Typography variant="h5" component="h2">
+			<Typography variant="h5" component="h2" className={classes.description}>
 				Sensors
 			</Typography>
 
-			<Grid container item xs spacing={1} direction="row" justifyContent="space-between">
+			<Grid container xs direction="row" justifyContent="space-between">
 				{sensors.map((el) => (
-					<Grid item xs={3}>
+					<Grid item xs={3} alignItems="center">
 						<Card key={el._id} className={classes.root}>
 							<CardActionArea>
 								<CardContent>
-									<Typography gutterBottom variant="h5" component="h2">
-										{el.sensorName}
-									</Typography>
+									<div style={{ dispaly: "flex" }}>
+										<IconPickerItem icon={`${el.picture}`} size={24} color="#000" />
+										<Typography gutterBottom variant="h5" component="h2">
+											{el.sensorName}
+										</Typography>
+									</div>
 									<Typography gutterBottom variant="h9" component="h4">
 										{el.sensorType} - {el.status ? "ON" : "OFF"}
 									</Typography>
@@ -129,11 +134,11 @@ export default function DevicesList() {
 				))}
 			</Grid>
 
-			<Typography variant="h5" component="h2">
+			<Typography variant="h5" component="h2" className={classes.description}>
 				Devices
 			</Typography>
 
-			<Grid container item xs direction="column">
+			<Grid container item xs direction="column" justifyContent="center">
 				{devices.map((el) => (
 					<Grid item xs>
 						<Paper className={classes.paper}>
@@ -178,40 +183,4 @@ export default function DevicesList() {
 			</Grid>
 		</>
 	);
-}
-
-{
-	/* {devices.map((el) => (
-  <Grid item xs>
-    <Card key={el._id} className={classes.root}>
-      <CardActionArea>
-        <CardContent direction="row">
-          <IconPickerItem icon={`${el.picture}`} size={24} color="#000" />
-          <Typography gutterBottom variant="h5" component="h2">
-            {el.device}
-          </Typography>
-          <Typography variant="h7" className={classes.pos} color="textSecondary">
-            Expendet Power - {el.expendedPower} Wt
-          </Typography>
-          <Typography variant="h7" className={classes.pos} color="textSecondary">
-            Time Working - {+(el.timeWorking / 3600).toFixed(4)} h
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button
-          size="small"
-          color="primary"
-          onClick={() => handleClickDevice(el._id, el.status)}
-        >
-          {el.status ? "Off" : "On"}
-        </Button>
-        <Button size="small" color="primary">
-          Remove
-        </Button>
-      </CardActions>
-    </Card>
-  </Grid>
-))}
-</Grid> */
 }
