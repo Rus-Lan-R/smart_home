@@ -53,7 +53,7 @@ function App() {
               <LeftMenuRoomsList />
             </Grid>
             <Grid item xs={9}>
-              <div style={{ padding: '14px' }}>
+              <div style={{ padding: '15px' }}>
                 <PrivateRoute exact path="/home">
                   <HomeContainer />
                 </PrivateRoute>

@@ -40,7 +40,7 @@ export default function MarkerButtons() {
         {rooms.map((el) => (<Button
                 variant="contained"
                 // backgroundColor="#4c8de1"
-                style={{backgroundColor: "#4c8de1", color: 'light'}}
+                style={{backgroundColor: "#4c8de1", color: 'white'}}
                 className={classes.button}
                 startIcon={<AddLocationIcon />}
                 size="small"

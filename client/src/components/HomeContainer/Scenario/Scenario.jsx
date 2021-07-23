@@ -31,7 +31,7 @@ const handleClick =(nameScenario, isActive) => {
     return (
       <Paper style={{height: '100%', borderRadius: '10px', margin: '0 10px'}}>
               <Typography variant="h5" component="div">
-                {item.name}
+                <div style={{padding: '10px'}} >{item.name}</div>
               </Typography>
               <div>{isActive? <Typography variant="subtitle1" component="div" style={{color: "lightgreen"}}>Started</Typography> : ""}</div>
             {/* <img src={`/${item.picture}`} alt={item.picture} /> */}
