@@ -21,14 +21,14 @@ export default function AddItemsButton({ text, link }) {
 	return (
 		<Paper className={classes.root}>
 			<MenuList>
+						<Link style={{ textDecoration: 'none', color: "inherit" }} to={`${link}`}>
 				<MenuItem>
         <IconPickerItem icon="FaRegPlusSquare" size={24} color="#000"/>
-					<Typography variant="inherit">
-						<Link style={{ color: "inherit" }} to={`${link}`}>
+					<Typography style={{marginLeft: 15}} variant="inherit">
 							{text}
-						</Link>
 					</Typography>
 				</MenuItem>
+						</Link>
 			</MenuList>
 		</Paper>
 	);
