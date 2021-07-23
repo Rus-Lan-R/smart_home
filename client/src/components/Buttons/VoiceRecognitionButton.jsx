@@ -33,7 +33,7 @@ const VoiceRecognitionButton = () => {
           'Content-Type': 'application/json',
           },
           body: JSON.stringify(
-            {api: process.env.REACT_APP_SMART_DEVICE_API+"/lamp/off"}
+            {api: process.env.REACT_APP_SMART_DEVICE_API+"/lamp/on"}
           ),
         })
       } catch (error) {
@@ -48,7 +48,7 @@ const VoiceRecognitionButton = () => {
           'Content-Type': 'application/json',
           },
           body: JSON.stringify(
-            {api: process.env.REACT_APP_SMART_DEVICE_API+"/lamp/on"}
+            {api: process.env.REACT_APP_SMART_DEVICE_API+"/lamp/off"}
           ),
         })        
       } catch (error) {
