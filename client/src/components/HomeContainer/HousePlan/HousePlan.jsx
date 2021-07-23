@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
     maxWidth: "lg",
     flexDirection: "row",
-    backgroundColor: theme.palette.background.paper,
+    // backgroundColor: theme.palette.background.paper,
     backgroundImage: "url(" + backgroundPlan + ")",
     backgroundRepeat  : 'no-repeat',
     width: 800,
@@ -42,15 +42,13 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 5,
     width: 120,
     position: 'absolute',
-    bottom: '-70px',
+    bottom: '-90px',
     left: '50%',
     transform: 'translate(-38px, 100%)',
     transition: '.2s',
-    opacity: 0
+    opacity: 0,
+    fontSize: '12pt'
     // visibility: 'hidden'
-  }, 
-  "&:hover": {
-    visibility: 'visible'
   },
 }));
 
@@ -74,7 +72,7 @@ export default function SimpleContainer() {
     const event_offsetX = e.clientX - (currentTargetRect.left+(currentTargetRect.width/2)),
           event_offsetY = e.clientY - currentTargetRect.top;
     let roomMarker = [...rooms.items].find((el) => el._id === currentMarker.item._id);
-    const styleMarker = {position: 'relative', color: 'black', left: `${event_offsetX}px`, top: `${event_offsetY}px`, width:0,
+    const styleMarker = {position: 'relative', color: '#010a37', left: `${event_offsetX}px`, top: `${event_offsetY}px`, width:0,
     height: 0, visibility: 'visible'};
     dispatch(changeStatusOfRoomMarker({...roomMarker,...styleMarker}))
     dispatch(clearCurrentMarker())
@@ -95,16 +93,16 @@ export default function SimpleContainer() {
       <Container onClick={(e) => handleClick(e)} className={classes.root} >
         {rooms.items.map((item) => {
           const styleMarker = {position: item.position, color: item.color, left: item.left, top: item.top, width: 0,
-          height: 0, visibility: item.visibility, zIndex: Math.floor(Math.random() * 101)};
+          height: 0, visibility: item.visibility, zIndex: Math.floor(Math.random() * 101), fontSize: '20pt'};
         return <div className={classes.pin} key={item._id} style={styleMarker} onDoubleClick={(e) => handleDblCLick(e, item._id)}>
-          <NavLink exact
+          {/* <NavLink exact
             to={`home/rooms/${item._id}`}
             className="nav-link"
             style={{ color: "yellow", textDecoration: "none" }}
-            >
+            > */}
               {item.room}
-              <IconPickerItem icon={`${item.picture}`} size={36} color="yellow"/>
-          </NavLink>
+              <IconPickerItem icon={`${item.picture}`} size={36} color="#010a37"/>
+          {/* </NavLink> */}
         <div  className={`${classes.bubble} bubble`}>
         {[...sensors].filter((el) => el.room === item._id).map((el) => {
           return <div>{el.sensorName}: {el.value} </div>
