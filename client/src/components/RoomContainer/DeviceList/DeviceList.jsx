@@ -23,14 +23,15 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { IconPickerItem } from "react-fa-icon-picker";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 
 import Paper from "@material-ui/core/Paper";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		maxWidth: 250,
+		dispaly: "flex",
+		alignItems: "center",
+		justifyContent: "space-between",
 	},
 	media: {
 		height: 100,
@@ -44,6 +45,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 	description: {
 		margin: "15px",
+	},
+	card: {
+		marginBottom: "8px",
 	},
 }));
 
@@ -90,10 +94,17 @@ export default function DevicesList() {
 				Sensors
 			</Typography>
 
-			<Grid container xs direction="row" justifyContent="space-between">
+			<Grid
+				container
+				xs={12}
+				direction="row"
+				spacing={3}
+				alignItems="center"
+				justifyContent="space-between"
+			>
 				{sensors.map((el) => (
 					<Grid item xs={3} alignItems="center">
-						<Card key={el._id} className={classes.root}>
+						<Card key={el._id} className={classes.card}>
 							<CardActionArea>
 								<CardContent>
 									<div style={{ dispaly: "flex" }}>
@@ -105,8 +116,11 @@ export default function DevicesList() {
 									<Typography gutterBottom variant="h9" component="h4">
 										{el.sensorType} - {el.status ? "ON" : "OFF"}
 									</Typography>
-									<Typography variant="h2" component="p">
+									<Typography variant="h4" component="p">
 										{el.value}
+										{el.sensorType === "Temperature" ? "°C" : <></>}
+										{el.sensorType === "Humidity" ? "%" : <></>}
+										{el.sensorType === "Pressure" ? "mmHg" : <></>}
 									</Typography>
 								</CardContent>
 							</CardActionArea>
@@ -146,12 +160,15 @@ export default function DevicesList() {
 								style={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}
 							>
 								<IconPickerItem icon={`${el.picture}`} size={24} color="#000" />
+
 								<Typography gutterBottom variant="h5" component="h2">
 									{el.device}
 								</Typography>
+
 								<Typography variant="h7" className={classes.pos} color="textSecondary">
 									Expendet Power - {el.expendedPower} Wt
 								</Typography>
+
 								<Typography variant="h7" className={classes.pos} color="textSecondary">
 									Time Working - {+(el.timeWorking / 3600).toFixed(4)} h
 								</Typography>
