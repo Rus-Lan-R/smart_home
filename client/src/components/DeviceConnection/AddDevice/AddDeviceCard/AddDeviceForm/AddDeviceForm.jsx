@@ -46,7 +46,7 @@ const deviceSpecific = [
 ];
 export default function AddDeviceForm({ vendor, ip, port }) {
 	const roomsList = useSelector((state) => state.rooms.items);
-	const [value, setValue] = useState("");
+	const [value, setValue] = useState("FaGithub");
 	const classes = useStyles();
 
 	const [currentRoom, setCurrentRoom] = useState("");
@@ -92,6 +92,7 @@ export default function AddDeviceForm({ vendor, ip, port }) {
 					ip,
 					port,
 					deviceSpecific: currentDeviceSpecific,
+					picture: value,
 				}),
 			});
 			if (responseAddDevice.ok) {
