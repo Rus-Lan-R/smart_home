@@ -67,7 +67,7 @@ export default function SimpleContainer() {
     <>
     <React.Fragment>
       <CssBaseline />
-        <MarkerButtons/>
+        <MarkerButtons />
       <Container onClick={(e) => handleClick(e)} className={classes.root} >
         {rooms.items.map((item) => {
           const styleMarker = {position: item.position, color: item.color, left: item.left, top: item.top, width: 0,
