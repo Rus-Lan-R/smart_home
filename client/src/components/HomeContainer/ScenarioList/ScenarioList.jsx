@@ -70,9 +70,9 @@ export default function ScenarioList() {
       picture: "5.gif",
     },
     {
-      name: "BoomBoom",
+      name: "Goodbye Elbrus",
       status: false,
-      picture: "https://images.unsplash.com/photo-1550353175-a3611868086b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+      picture: "6.gif"
     },
 	];
 

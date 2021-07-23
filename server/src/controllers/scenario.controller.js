@@ -85,7 +85,7 @@ const statusScenario = async (req, res) => {
           body: JSON.stringify({ api }),
         });
         break;
-      case "boomboom":
+      case "goodbye elbrus":
         currentStatus ? api = `http://192.168.1.238:80/api/esp/ledStrip/off` : api = `http://192.168.1.238:80/api/esp/ledStrip/juggle`
         const responseSwitchLedq = await fetch("http://192.168.1.148:3001/api/refetch", {
           method: "POST",
