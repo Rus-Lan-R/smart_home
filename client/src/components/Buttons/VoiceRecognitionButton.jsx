@@ -17,15 +17,12 @@ const VoiceRecognitionButton = () => {
   const [text, setText] = useState();
 
   var buttonColour;
-  var buttonLabel;
 
   if (isMicOn) {
-    buttonColour = 'secondary';
+    buttonColour = '#f50057';
     // buttonLabel = 'Recording...';
-    buttonLabel = '🎙';
   } else {
-    buttonColour = 'primary';
-    buttonLabel = '🎙';
+    buttonColour = '#2d8de2';
   }
   async function fetchToSmartDevice(command){
     if(command === 'включитьлампу'){
@@ -286,12 +283,13 @@ const VoiceRecognitionButton = () => {
     bottom:20,
     left:'auto',
     position:'fixed',
+    backgroundColor: buttonColour
 };
   return (
     <Button
       style={style}
       variant="contained"
-      color={buttonColour}
+      // backgroundColor={buttonColour}
       onClick={() => {
         setIsMicOn(!isMicOn);
       }}

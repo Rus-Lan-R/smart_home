@@ -11,6 +11,8 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		display: "flex",
 		flexWrap: "wrap",
+    width: '100%',
+    paddingTop: '20px'
 	},
 	margin: {
 		margin: theme.spacing(1),
@@ -91,7 +93,7 @@ export default function AddDeviceForm({ vendor, ip, port }) {
 	};
 
 	return (
-		<Container width="75%">
+		
 			<div className={classes.root}>
 				<form className={classes.root} onSubmit={handleSubmit}>
 					<div>
@@ -201,6 +203,6 @@ export default function AddDeviceForm({ vendor, ip, port }) {
 					</Button>
 				</form>
 			</div>
-		</Container>
+
 	);
 }
