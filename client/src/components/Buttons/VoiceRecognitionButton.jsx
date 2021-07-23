@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import { useState, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
-import Microphone from '../../img/uploads_microphone_microphone_PNG7925.png'
+import Microphone from '../../img/IMG_0141.PNG'
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -283,7 +283,8 @@ const VoiceRecognitionButton = () => {
     bottom:20,
     left:'auto',
     position:'fixed',
-    backgroundColor: buttonColour
+    backgroundColor: buttonColour,
+    overflow: "hidden"
 };
   return (
     <Button
@@ -294,7 +295,7 @@ const VoiceRecognitionButton = () => {
         setIsMicOn(!isMicOn);
       }}
     >
-      <img src={Microphone} style={{width: 40}} alt="logo" />
+      <img src={Microphone} style={{width: '130%'}} alt="logo" />
     </Button>
   );
 };

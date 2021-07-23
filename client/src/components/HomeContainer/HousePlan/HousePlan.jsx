@@ -28,6 +28,19 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: 'contain',
     marginBottom: 20 ,
   },
+  pin: {
+    position: 'relative',
+    cursor: 'pointer'
+  },
+  bubble: {
+    backgroundColor: '#ffffff',
+    padding: '5px',
+    position: 'absolute',
+    bottom: 0,
+    left: '50%',
+    transform: 'translate(-50%, 100%)',
+    marginTop: 5
+  }
 }));
 
 
@@ -50,7 +63,7 @@ export default function SimpleContainer() {
     const event_offsetX = e.clientX - (currentTargetRect.left+(currentTargetRect.width/2)),
           event_offsetY = e.clientY - currentTargetRect.top;
     let roomMarker = [...rooms.items].find((el) => el._id === currentMarker.item._id);
-    const styleMarker = {position: 'relative', color: 'yellow', left: `${event_offsetX}px`, top: `${event_offsetY}px`, width:0,
+    const styleMarker = {position: 'relative', color: 'black', left: `${event_offsetX}px`, top: `${event_offsetY}px`, width:0,
     height: 0, visibility: 'visible'};
     dispatch(changeStatusOfRoomMarker({...roomMarker,...styleMarker}))
     dispatch(clearCurrentMarker())
@@ -72,8 +85,13 @@ export default function SimpleContainer() {
         {rooms.items.map((item) => {
           const styleMarker = {position: item.position, color: item.color, left: item.left, top: item.top, width: 0,
           height: 0, visibility: item.visibility, zIndex: Math.floor(Math.random() * 101)};
-        return <div key={item._id} style={styleMarker} onDoubleClick={(e) => handleDblCLick(e, item._id)}>{item.room}<IconPickerItem icon={`${item.picture}`} size={36} color="yellow"/>
-        {/* {sensors.items.map((el) => )} */}
+          
+        return <div className={classes.pin} key={item._id} style={styleMarker}  onDoubleClick={(e) => handleDblCLick(e, item._id)}>{item.room}<IconPickerItem icon={`${item.picture}`} size={36} color="yellow"/>
+        <div  className={classes.bubble} >
+        {[...sensors].filter((el) => el.room === item._id).map((el) => {
+          return <div>{el.sensorName}: {el.value} </div>
+        })}
+        </div>
         </div>})
         }
       </Container>  
