@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		...theme.typography,
 		color: "white",
-    // backgroundColor: '#fff !important',
 	},
 	grow: {
 		flexGrow: 1,
@@ -59,6 +58,10 @@ const useStyles = makeStyles((theme) => ({
 			display: "none",
 		},
 	},
+  logo: {
+    width: 36,
+    height: 36
+  }
 }));
 
 export default function Header() {
@@ -223,7 +226,7 @@ export default function Header() {
 						aria-label="open drawer"
 						href="/home"
 					>
-						<HomeIcon />
+						<img className={classes.logo} src='/logo.png' alt='...'/>
 					</IconButton>
 					<Typography className={classes.title} variant="h6" noWrap>
 						{userName ? userName : "Smart Home"}

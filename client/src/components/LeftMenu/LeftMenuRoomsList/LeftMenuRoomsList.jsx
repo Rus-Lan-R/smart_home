@@ -38,15 +38,15 @@ export default function LeftMenuRoomsList() {
 		<>
 			{rooms.map((el) => (
 				<Paper className={classes.root}  key={el._id}>
-					<MenuList>
+					<MenuList >
+								<Link  style={{ textDecoration: 'none', color: "inherit" }} to={`/home/rooms/${el._id}`}>
 						<MenuItem>
             <IconPickerItem icon={`${el.picture}`} size={24} color="#000"/>
-							<Typography variant="inherit">
-								<Link style={{ color: "inherit" }} to={`/home/rooms/${el._id}`}>
+							<Typography style={{marginLeft: 15}} variant="inherit">
 									{el.room}
-								</Link>
 							</Typography>
 						</MenuItem>
+								</Link>
 					</MenuList>
 				</Paper>
 			))}

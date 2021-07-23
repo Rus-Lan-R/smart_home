@@ -30,14 +30,14 @@ const handleClick =(nameScenario, isActive) => {
 
     return (
       <Paper style={{height: '100%', borderRadius: '10px', margin: '0 10px'}}>
-              <Typography variant="h5" component="div">
-                {item.name}
-              </Typography>
-              <div>{isActive? <Typography variant="subtitle1" component="div" style={{color: "lightgreen"}}>Started</Typography> : ""}</div>
             {/* <img src={`/${item.picture}`} alt={item.picture} /> */}
             <img className={classes.image} src={`/${item.picture}`} alt={item.picture}  />
+              <Typography variant="h5" component="div">
+                <div style={{ padding: '10px', color: "#ff8e56"}} >"{item.name}"</div>
+              </Typography>
             <Button className="CheckButton" onClick={() => handleClick(item.name, isActive)}>
             {isActive? "Stop" : "Start"}
+              {/* <div>{isActive? <Typography variant="subtitle1" component="div" style={{color: "lightgreen"}}>Started</Typography> : ""}</div> */}
             </Button>
         </Paper>
     )

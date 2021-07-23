@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
+    marginTop: 20
   }
 }));
 
@@ -35,10 +36,11 @@ export default function MarkerButtons() {
 
 	return (
 		<>
-      <ButtonGroup className={classes.root} variant="text" color="primary" aria-label="text primary button group">
+      <ButtonGroup className={classes.root} variant="text"   aria-label="text primary button group">
         {rooms.map((el) => (<Button
                 variant="contained"
-                color="secondary"
+                // backgroundColor="#4c8de1"
+                style={{backgroundColor: "#4c8de1", color: 'white'}}
                 className={classes.button}
                 startIcon={<AddLocationIcon />}
                 size="small"

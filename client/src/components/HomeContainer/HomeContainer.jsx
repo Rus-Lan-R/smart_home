@@ -4,7 +4,7 @@ import VoiceRecognitionButton from '../Buttons/VoiceRecognitionButton';
 // import ElectricityConsumption from '../HomeContainer/ElectricityConsumption/ElectricityConsumption'
 export default function HomeContainer() {
   return (
-  <div style={{padding: '15px'}}> 
+  <div > 
 <ScenarioList />
 <VoiceRecognitionButton/>
 <HousePlan />
