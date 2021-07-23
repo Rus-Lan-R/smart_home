@@ -153,7 +153,6 @@ export default function DevicesList() {
 						</CardActions>
 					</Card>
           </Grid>
-
 				))}
         </Grid>
 		</Grid>
