@@ -167,8 +167,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function DevicesList() {
-	const loader = useSelector((state) => state.loader);
-
 	const devices = useSelector((state) => state.scanningIP);
 
 	const classes = useStyles();

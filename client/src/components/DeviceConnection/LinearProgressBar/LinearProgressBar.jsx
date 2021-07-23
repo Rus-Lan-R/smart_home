@@ -35,7 +35,6 @@ const useStyles = makeStyles({
 });
 
 export default function LinearProgressBar({ progress }) {
-	console.log(progress);
 	const classes = useStyles();
 
 	let percent = Math.round((progress * 100) / 260);
