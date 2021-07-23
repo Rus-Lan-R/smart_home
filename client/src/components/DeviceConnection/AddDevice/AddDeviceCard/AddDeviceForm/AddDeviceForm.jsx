@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-import { TextField, Container, MenuItem, Button } from "@material-ui/core";
+import { TextField, MenuItem, Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import * as devicesEndPoinst from "../../../../../config/devicesEndPoints";
 import { IconPicker } from "react-fa-icon-picker";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -53,6 +54,7 @@ export default function AddDeviceForm({ vendor, ip, port }) {
 	const [currentTypeDevice, setCurrentTypeDevice] = useState("");
 	const [currentTypeSensor, setCurrentTypeSensor] = useState("");
 	const [currentDeviceSpecific, setCurrentDeviceSpecific] = useState("");
+	const [deviceAddStatus, setDeviceAddStatus] = useState(false);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -75,7 +77,7 @@ export default function AddDeviceForm({ vendor, ip, port }) {
 				}),
 			});
 			if (responseAddDevice.ok) {
-				console.log("sensor added");
+				setDeviceAddStatus(true);
 			}
 		} else {
 			const responseAddDevice = await fetch(devicesEndPoinst.userDevices(), {
@@ -93,10 +95,16 @@ export default function AddDeviceForm({ vendor, ip, port }) {
 				}),
 			});
 			if (responseAddDevice.ok) {
-				console.log("device added");
+				setDeviceAddStatus(true);
 			}
 		}
 	};
+
+	if (deviceAddStatus) {
+		setTimeout(() => {
+			setDeviceAddStatus(false);
+		}, 2000);
+	}
 
 	return (
 		<div className={classes.root}>
@@ -202,6 +210,13 @@ export default function AddDeviceForm({ vendor, ip, port }) {
 					Add
 				</Button>
 			</form>
+			{deviceAddStatus ? (
+				<Typography variant="h5" component="h2">
+					{currentTypeDevice === "Sensor" ? "Sensor " : "Device "}added ✅
+				</Typography>
+			) : (
+				<></>
+			)}
 		</div>
 	);
 }
