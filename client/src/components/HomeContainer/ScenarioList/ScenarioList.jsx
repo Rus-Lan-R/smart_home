@@ -43,13 +43,13 @@ export default function ScenarioList() {
 		{
 			name: "Ruslik party",
 			status: false,
-      picture: "tenor.gif",
+      picture: "1.png",
 
 		},
 		{
 			name: "Ptichka v gnezde",
 			status: false,
-      picture: "homeGIF.gif",
+      picture: "2.png",
 
 		},
 		{
@@ -61,7 +61,7 @@ export default function ScenarioList() {
     {
       name: "Order 66",
       status: false,
-      picture: "tumblr_myv2ooHiJ01tof2yho1_500.gif",
+      picture: "4.png",
 
     },
     {

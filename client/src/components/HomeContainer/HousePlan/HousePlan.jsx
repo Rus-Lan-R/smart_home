@@ -22,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     backgroundColor: theme.palette.background.paper,
     backgroundImage: "url(" + backgroundPlan + ")",
-    width: 900,
+    backgroundRepeat  : 'no-repeat',
+    width: 800,
     height: 600,
     marginTop: 20,
     backgroundSize: 'contain',
@@ -87,8 +88,8 @@ export default function SimpleContainer() {
 
   
   return (
-    <>
     <React.Fragment>
+      <div style={{ borderTop: "2px solid #fff ", marginTop: 30, marginLeft: 20, marginRight: 20 }}></div>
       <CssBaseline />
         <MarkerButtons />
       <Container onClick={(e) => handleClick(e)} className={classes.root} >
@@ -113,6 +114,5 @@ export default function SimpleContainer() {
         }
       </Container>  
     </React.Fragment>
-    </>
   );
 }
