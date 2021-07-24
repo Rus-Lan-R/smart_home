@@ -8,7 +8,7 @@ import Box from "@material-ui/core/Box";
 function LinearProgressWithLabel(props) {
 	return (
 		<Box display="flex" alignItems="center">
-			<Box width="80%" mr={1} marginBottom='20px'>
+			<Box width="80%" mr={1} marginBottom="20px">
 				<LinearProgress variant="determinate" {...props} />
 			</Box>
 			<Box minWidth={35}>
@@ -34,22 +34,14 @@ const useStyles = makeStyles({
 	},
 });
 
-export default function LinearProgressBar() {
+export default function LinearProgressBar({ progress }) {
 	const classes = useStyles();
-	const [progress, setProgress] = React.useState(10);
 
-	React.useEffect(() => {
-		const timer = setInterval(() => {
-			setProgress((prevProgress) => (prevProgress >= 100 ? 10 : prevProgress + 10));
-		}, 800);
-		return () => {
-			clearInterval(timer);
-		};
-	}, []);
+	let percent = Math.round((progress * 100) / 260);
 
 	return (
 		<div className={classes.root}>
-			<LinearProgressWithLabel value={progress} />
+			<LinearProgressWithLabel value={percent} />
 		</div>
 	);
 }

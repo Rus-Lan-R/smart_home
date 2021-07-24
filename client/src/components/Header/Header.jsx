@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "react-dom"
+import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -8,14 +8,12 @@ import Typography from "@material-ui/core/Typography";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import HomeIcon from "@material-ui/icons/Home";
 import NoEncryptionIcon from "@material-ui/icons/NoEncryption";
 import LockIcon from "@material-ui/icons/Lock";
 // import AlertDialog from "./AlertDialog/AlertDialog";
@@ -28,6 +26,10 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 const useStyles = makeStyles((theme) => ({
+	root: {
+		...theme.typography,
+		color: "white",
+	},
 	grow: {
 		flexGrow: 1,
 	},
@@ -40,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
 		[theme.breakpoints.up("sm")]: {
 			display: "block",
 		},
+		color: "white",
 	},
 	sectionDesktop: {
 		display: "none",
@@ -53,6 +56,10 @@ const useStyles = makeStyles((theme) => ({
 			display: "none",
 		},
 	},
+	logo: {
+		width: 36,
+		height: 36,
+	},
 }));
 
 export default function Header() {
@@ -64,7 +71,6 @@ export default function Header() {
 	const security = useSelector((state) =>
 		state.sensors.items.find((el) => el.sensorType === "Motion Sensor"),
 	);
-	console.log("header security", security);
 	const securityStatus = useSelector((state) => state.sensors.items?.status);
 
 	const isMenuOpen = Boolean(anchorEl);
@@ -116,21 +122,21 @@ export default function Header() {
 		>
 			<MenuItem>
 				<Typography className={classes.title} variant="h6" noWrap>
-					<NavLink exact to="/auth/signup" className="nav-link" activeClassName="active">
+					<Link exact to="/auth/signup" className="nav-link">
 						Sign Up
-					</NavLink>
+					</Link>
 				</Typography>
 			</MenuItem>
 			<MenuItem>
 				<Typography className={classes.title} variant="h6" noWrap>
-					<NavLink exact to="/auth/signin" className="nav-link" activeClassName="active">
+					<NavLink exact to="/auth/signin" className="nav-link">
 						Sign In
 					</NavLink>
 				</Typography>
 			</MenuItem>
 			<MenuItem>
 				<Typography className={classes.title} variant="h6" noWrap>
-					<NavLink exact to="/auth/signout" className="nav-link" activeClassName="active">
+					<NavLink exact to="/auth/signout" className="nav-link">
 						Sign Out
 					</NavLink>
 				</Typography>
@@ -188,13 +194,12 @@ export default function Header() {
 			aria-labelledby="alert-dialog-slide-title"
 			aria-describedby="alert-dialog-slide-description"
 		>
-			<DialogTitle id="alert-dialog-slide-title">{"Anauthtorized Person"}</DialogTitle>
+			<DialogTitle color="red" id="alert-dialog-slide-title">
+				{"Enemy Spotted"}
+			</DialogTitle>
 			<DialogContent>
-				<img width="100%" height="100%" src="http://localhost:3000/alert.jpeg" alt="..img"></img>
-				<DialogContentText id="alert-dialog-slide-description">
-					Let Google help apps determine location. This means sending anonymous location data to
-					Google, even when no apps are running.
-				</DialogContentText>
+				<img width="70%" height="70%" src="http://localhost:3000/alert.jpeg" alt="..img"></img>
+				<DialogContentText id="alert-dialog-slide-description">Minus items</DialogContentText>
 			</DialogContent>
 			<DialogActions>
 				<Button onClick={handleClose} color="primary">
@@ -216,9 +221,9 @@ export default function Header() {
 						className={classes.menuButton}
 						color="inherit"
 						aria-label="open drawer"
-            href="/home"
+						href="/home"
 					>
-						<HomeIcon />
+						<img className={classes.logo} src="/logo.png" alt="..." />
 					</IconButton>
 					<Typography className={classes.title} variant="h6" noWrap>
 						{userName ? userName : "Smart Home"}
@@ -247,7 +252,13 @@ export default function Header() {
 								</IconButton>
 								<MenuItem>
 									<Typography className={classes.title} variant="h6" noWrap>
-										<NavLink exact to="/auth/signout" className="nav-link" activeClassName="active">
+										<NavLink
+											exact
+											to="/auth/signout"
+											className="nav-link"
+											style={{ color: "white", textDecoration: "none" }}
+											activeStyle={{ color: "white", textDecoration: "none" }}
+										>
 											Sign Out
 										</NavLink>
 									</Typography>
@@ -257,14 +268,26 @@ export default function Header() {
 							<>
 								<MenuItem>
 									<Typography className={classes.title} variant="h6" noWrap>
-										<NavLink exact to="/auth/signin" className="nav-link" activeClassName="active">
+										<NavLink
+											exact
+											to="/auth/signin"
+											className="nav-link"
+											style={{ color: "white", textDecoration: "none" }}
+											activeStyle={{ color: "white", textDecoration: "none" }}
+										>
 											Sign In
 										</NavLink>
 									</Typography>
 								</MenuItem>
 								<MenuItem>
 									<Typography className={classes.title} variant="h6" noWrap>
-										<NavLink exact to="/auth/signup" className="nav-link" activeClassName="active">
+										<NavLink
+											exact
+											to="/auth/signup"
+											className="nav-link"
+											style={{ color: "white", textDecoration: "none" }}
+											activeStyle={{ color: "white", textDecoration: "none" }}
+										>
 											Sign Up
 										</NavLink>
 									</Typography>

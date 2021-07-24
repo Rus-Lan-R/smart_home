@@ -7,13 +7,13 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
 import AddDeviceForm from "./AddDeviceForm/AddDeviceForm";
 import * as apiRpiEndPoinst from "../../../../config/apiRpiEndPoinst";
 
 const useStyles = makeStyles({
 	root: {
 		minWidth: 275,
+		maxWidth: 800,
 	},
 	bullet: {
 		display: "inline-block",
@@ -46,8 +46,6 @@ export default function AddDeviceCard() {
 			},
 			body: JSON.stringify({ ip, port }),
 		});
-
-		console.log(responseConnect.ok);
 		if (responseConnect.ok) {
 			setStatusConnect(true);
 			setCurrentPort(port);
@@ -69,56 +67,55 @@ export default function AddDeviceCard() {
 
 	console.log(ports);
 	return (
-		<>
-			<Container width="50%">
-				<Card className={classes.root}>
-					<CardContent>
-						<Typography variant="h5" component="h2">
-							{currentDevice.vendor}
-						</Typography>
-						<Typography className={classes.title} color="textSecondary" gutterBottom>
-							{currentDevice.ip}
-						</Typography>
-						<Typography className={classes.title} color="textSecondary" gutterBottom>
-							{currentDevice.mac}
-						</Typography>
-						<Typography className={classes.title} color="textSecondary" gutterBottom>
-							Open Ports
-						</Typography>
-					</CardContent>
-					<CardActions>
-						{statusConnect ? (
+		<div className={classes.root}>
+			<Card>
+				<CardContent>
+					<Typography variant="h5" component="h2">
+						{currentDevice.vendor}
+					</Typography>
+					<Typography className={classes.title} color="textSecondary" gutterBottom>
+						{currentDevice.ip}
+					</Typography>
+					<Typography className={classes.title} color="textSecondary" gutterBottom>
+						{currentDevice.mac}
+					</Typography>
+					<Typography className={classes.title} color="textSecondary" gutterBottom>
+						Open Ports
+					</Typography>
+				</CardContent>
+				<CardActions>
+					{statusConnect ? (
+						<Button
+							key="{index}"
+							variant="outlined"
+							// size="small"
+							onClick={() => connecttoDevice(currentDevice.ip, currentPort)}
+							color="primary"
+						>
+							Connected to PORT:{currentPort}
+						</Button>
+					) : (
+						ports.map((el, index) => (
 							<Button
 								key="{index}"
 								variant="outlined"
 								// size="small"
-								onClick={() => connecttoDevice(currentDevice.ip, currentPort)}
-								color="primary"
+								onClick={() => connecttoDevice(currentDevice.ip, el)}
+								color={statusConnect ? "primary" : "secondary"}
 							>
-								Connected to PORT:{currentPort}
+								Connect to PORT:{el}
 							</Button>
-						) : (
-							ports.map((el, index) => (
-								<Button
-									key="{index}"
-									variant="outlined"
-									// size="small"
-									onClick={() => connecttoDevice(currentDevice.ip, el)}
-									color={statusConnect ? "primary" : "secondary"}
-								>
-									Connect to PORT:{el}
-								</Button>
-							))
-						)}
-						{}
-					</CardActions>
-				</Card>
-			</Container>
+						))
+					)}
+					{}
+				</CardActions>
+			</Card>
+
 			{statusConnect ? (
 				<AddDeviceForm vendor={currentDevice.vendor} ip={currentDevice.ip} port={currentPort} />
 			) : (
 				<div>choose device port</div>
 			)}
-		</>
+		</div>
 	);
 }

@@ -3,15 +3,16 @@ import { Link } from "react-router-dom";
 import MenuList from "@material-ui/core/MenuList";
 import MenuItem from "@material-ui/core/MenuItem";
 import Paper from "@material-ui/core/Paper";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Typography from "@material-ui/core/Typography";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
 import { makeStyles } from "@material-ui/core/styles";
+import { IconPickerItem } from 'react-fa-icon-picker'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: 15,
-    maxWidth: 200
+    // maxWidth: 270,
+    // height: 68
   },
 }));
 
@@ -20,16 +21,14 @@ export default function AddItemsButton({ text, link }) {
 	return (
 		<Paper className={classes.root}>
 			<MenuList>
+						<Link style={{ textDecoration: 'none', color: "inherit" }} to={`${link}`}>
 				<MenuItem>
-					<ListItemIcon>
-						<AddCircleIcon />
-					</ListItemIcon>
-					<Typography variant="inherit">
-						<Link style={{ color: "inherit" }} to={`${link}`}>
+        <IconPickerItem icon="FaRegPlusSquare" size={24} color="#000"/>
+					<Typography style={{marginLeft: 15}} variant="inherit">
 							{text}
-						</Link>
 					</Typography>
 				</MenuItem>
+						</Link>
 			</MenuList>
 		</Paper>
 	);

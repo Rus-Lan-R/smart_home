@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 import { useState, useEffect } from 'react';
+import Microphone from '../../img/IMG_0141.PNG'
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -15,14 +16,12 @@ const VoiceRecognitionButton = () => {
   const [text, setText] = useState();
 
   var buttonColour;
-  var buttonLabel;
 
   if (isMicOn) {
-    buttonColour = 'secondary';
-    buttonLabel = 'Recording...';
+    buttonColour = '#f50057';
+    // buttonLabel = 'Recording...';
   } else {
-    buttonColour = 'primary';
-    buttonLabel = '🎙';
+    buttonColour = '#2d8de2';
   }
   async function fetchToSmartDevice(command){
     if(command === 'включитьлампу'){
@@ -273,15 +272,29 @@ const VoiceRecognitionButton = () => {
       };
     };
   };
+  const style= {
+    margin:0,
+    width: 80,
+    height: 80,
+    borderRadius: "50%",
+    top:'auto',
+    right:20,
+    bottom:20,
+    left:'auto',
+    position:'fixed',
+    backgroundColor: buttonColour,
+    overflow: "hidden"
+};
   return (
     <Button
+      style={style}
       variant="contained"
-      color={buttonColour}
+      // backgroundColor={buttonColour}
       onClick={() => {
         setIsMicOn(!isMicOn);
       }}
     >
-      {buttonLabel}
+      <img src={Microphone} style={{width: '130%'}} alt="logo" />
     </Button>
   );
 };

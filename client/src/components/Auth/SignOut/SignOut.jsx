@@ -4,7 +4,6 @@ import { useHistory } from "react-router";
 import { signOut } from "../../../redux/actions/user.action";
 
 const SignOut = () => {
-	console.log("signout");
 	const dispatch = useDispatch();
 	const history = useHistory();
 	useEffect(() => {
