@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 20,
     backgroundSize: 'contain',
     marginBottom: 20 ,
+    borderRadius: "10px" 
   },
   pin: {
     position: 'relative',
@@ -85,7 +86,7 @@ export default function SimpleContainer() {
   
   return (
     <React.Fragment>
-      <div style={{ borderTop: "2px solid #fff ", marginTop: 30, marginLeft: 20, marginRight: 20 }}></div>
+      <div style={{ borderTop: "2px solid #fff ", marginTop: 30, marginLeft: 20, marginRight: 20}}></div>
       <CssBaseline />
         <MarkerButtons />
       <Container onClick={(e) => handleClick(e)} className={classes.root} >

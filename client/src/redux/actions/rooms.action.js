@@ -36,7 +36,7 @@ export const changeStatusOfRoomMarker = (updatedMarker) => async (dispatch) =>{
     ),
   });
   const result = await response.json();
-  console.log(result);
+
 };
 
 

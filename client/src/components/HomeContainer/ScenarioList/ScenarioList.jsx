@@ -67,12 +67,12 @@ export default function ScenarioList() {
     {
       name: "Relax",
       status: false,
-      picture: "https://images.unsplash.com/photo-1550223640-23097fc71cb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+      picture: "5.gif",
     },
     {
-      name: "BoomBoom",
+      name: "Goodbye Elbrus",
       status: false,
-      picture: "https://images.unsplash.com/photo-1550353175-a3611868086b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+      picture: "6.gif"
     },
 	];
 

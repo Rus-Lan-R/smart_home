@@ -15,12 +15,20 @@ const getScenarios = async (req, res) => {
 const statusScenario = async (req, res) => {
   try {
     const userId = req.session.user.id
-    console.log("req.body====>>>", req.body)
-    console.log("userId", userId)
     let action = null;
     const currentStatus = req.body.isActive
-    currentStatus ? action = "off" : action = "on";
+    action = currentStatus ? "off" : "on"
     switch (req.body.nameScenario.toLowerCase()) {
+      case "goodbye elbrus":
+        currentStatus ? api = `http://192.168.1.238:80/api/esp/ledStrip/off` : api = `http://192.168.1.238:80/api/esp/ledStrip/juggle`
+        const responseSwitchLedq = await fetch("http://192.168.1.148:3001/api/refetch", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ api }),
+        });
+        break;
       case "ruslik party":
         //включить ленту
         currentStatus ? api = `http://192.168.1.238:80/api/esp/ledStrip/off` : api = `http://192.168.1.238:80/api/esp/ledStrip/rainbow`
@@ -38,7 +46,6 @@ const statusScenario = async (req, res) => {
         const allUserOffLamps = await Devices.find({ user: userId, device: "Lamp" })
         allUserOffLamps.forEach(async (device) => {
           const api = `${device.apiURL}${action}`
-          console.log(api)
           const responseSwitch = await fetch("http://192.168.1.148:3001/api/refetch", {
             method: "POST",
             headers: {
@@ -78,16 +85,6 @@ const statusScenario = async (req, res) => {
       case "relax":
         currentStatus ? api = `http://192.168.1.238:80/api/esp/ledStrip/off` : api = `http://192.168.1.238:80/api/esp/ledStrip/sinelon`
         const responseSwitchLedk = await fetch("http://192.168.1.148:3001/api/refetch", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ api }),
-        });
-        break;
-      case "boomboom":
-        currentStatus ? api = `http://192.168.1.238:80/api/esp/ledStrip/off` : api = `http://192.168.1.238:80/api/esp/ledStrip/juggle`
-        const responseSwitchLedq = await fetch("http://192.168.1.148:3001/api/refetch", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
