@@ -65,7 +65,6 @@ export default function AddDeviceCard() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	console.log(ports);
 	return (
 		<div className={classes.root}>
 			<Card>

@@ -4,7 +4,6 @@ const Rooms = require("../models/room.model");
 const addUserRoom = async (req, res) => {
   try {
     const userId = req.session.user.id;
-    console.log(req.body)
     const newRoom = await Rooms.create({ room: req.body.room, picture: req.body.picture, user: userId });
     res.json(newRoom);
   } catch (error) {
